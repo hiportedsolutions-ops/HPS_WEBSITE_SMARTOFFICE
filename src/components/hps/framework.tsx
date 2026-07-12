@@ -9,7 +9,6 @@ import { cn } from "@/lib/utils";
  * 5D Business Growth Framework — HPS's signature interactive element.
  * Five stages: Discover → Design → Deploy → Develop → Dominate.
  * Auto-advances every 4.5s; user can click any stage to focus it.
- * Replaces the guarded stepper logic in the original js/main.js.
  */
 export function Framework() {
   const [active, setActive] = useState(0);
@@ -30,7 +29,6 @@ export function Framework() {
       () => setActive((prev) => (prev + 1) % FRAMEWORK_STEPS.length),
       4500
     );
-    // Note: `from` is captured by setActive closure above; kept for API parity.
     void from;
   };
 
@@ -57,8 +55,8 @@ export function Framework() {
 
         <Reveal>
           <div
-            className="grid lg:grid-cols-5 border"
-            style={{ borderColor: "rgba(201,161,59,0.22)" }}
+            className="grid lg:grid-cols-5 border rounded-lg overflow-hidden"
+            style={{ borderColor: "#E2E8F0", background: "#FFFFFF" }}
           >
             {FRAMEWORK_STEPS.map((step, i) => {
               const isActive = i === active;
@@ -71,13 +69,13 @@ export function Framework() {
                   className={cn(
                     "relative text-left p-7 sm:p-9 transition-colors cursor-pointer",
                     "border-b lg:border-b-0 lg:border-r last:border-r-0 last:border-b-0",
-                    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-gold)]"
+                    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-blue)]"
                   )}
                   style={{
-                    borderColor: "rgba(201,161,59,0.22)",
+                    borderColor: "#E2E8F0",
                     background: isActive
-                      ? "rgba(201,161,59,0.06)"
-                      : "transparent",
+                      ? "rgba(0, 87, 184, 0.05)"
+                      : "#FFFFFF",
                   }}
                 >
                   <span
@@ -95,8 +93,8 @@ export function Framework() {
                     className="text-[1.35rem] font-extrabold mb-2.5 transition-colors"
                     style={{
                       color: isActive
-                        ? "var(--color-gold-bright)"
-                        : "#DFE4E8",
+                        ? "var(--color-blue)"
+                        : "#0A2540",
                     }}
                   >
                     {step.title}
@@ -112,13 +110,12 @@ export function Framework() {
                       {step.desc}
                     </p>
                   </div>
-                  {/* progress bar */}
+                  {/* progress bar — subtle gold highlight on active stage */}
                   <span
                     className="absolute bottom-0 left-0 h-[3px]"
                     style={{
                       width: isActive ? "100%" : "0%",
-                      background:
-                        "linear-gradient(90deg,#B08A2E,#E6BE55)",
+                      background: "linear-gradient(90deg,#B8902E,#E6C466)",
                       transition: isActive
                         ? "width 4.5s linear"
                         : "width 0.2s ease",

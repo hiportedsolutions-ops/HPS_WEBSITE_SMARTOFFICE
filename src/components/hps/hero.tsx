@@ -7,7 +7,7 @@ export function Hero() {
       className="relative overflow-hidden pt-[150px] pb-[90px] sm:pt-[180px] sm:pb-[110px]"
       style={{
         background:
-          "radial-gradient(900px 500px at 82% -10%, rgba(201,161,59,0.13), transparent 60%), radial-gradient(700px 460px at -10% 110%, rgba(50,70,92,0.35), transparent 60%), linear-gradient(165deg,#131B24 0%,#0F151C 70%)",
+          "radial-gradient(900px 500px at 82% -10%, rgba(0,87,184,0.08), transparent 60%), radial-gradient(700px 460px at -10% 110%, rgba(212,175,55,0.06), transparent 60%), #FFFFFF",
       }}
     >
       <div className="hero-grid-bg" aria-hidden />
@@ -41,7 +41,7 @@ export function Hero() {
           fontFamily: "var(--font-ibm-plex-mono)",
           fontSize: "0.72rem",
           letterSpacing: "0.14em",
-          color: "rgba(147,161,176,0.55)",
+          color: "rgba(90,101,114,0.6)",
         }}
       >
         RC — {HPS_CONTACT.bn} · GARKI, ABUJA

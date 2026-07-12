@@ -5,11 +5,11 @@ export function Trustbar() {
     <div
       className="border-y"
       style={{
-        background: "var(--color-slate-hps)",
-        borderColor: "rgba(138,151,165,0.18)",
+        background: "#F6F8FB",
+        borderColor: "#E2E8F0",
       }}
     >
-      <div className="hps-wrap flex flex-wrap justify-center gap-x-9 gap-y-2.5 py-4.5 px-6 py-[18px]">
+      <div className="hps-wrap flex flex-wrap justify-center gap-x-9 gap-y-2.5 px-6 py-[18px]">
         {TRUST_ITEMS.map((t) => (
           <span
             key={t}

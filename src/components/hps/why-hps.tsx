@@ -18,16 +18,16 @@ export function WhyHPS() {
             <Reveal
               key={w.title}
               delay={(i % 3) * 80}
-              className="border p-7 sm:p-8"
+              className="border p-7 sm:p-8 transition-colors hover:border-[rgba(0,87,184,0.3)]"
               style={{
-                borderColor: "rgba(138,151,165,0.18)",
-                background: "var(--color-slate-hps)",
+                borderColor: "#E2E8F0",
+                background: "#FFFFFF",
               }}
             >
-              <h3 className="flex items-center gap-2.5 text-[1.05rem] font-bold mb-2.5">
+              <h3 className="flex items-center gap-2.5 text-[1.05rem] font-bold mb-2.5 text-[#0A2540]">
                 <Check
                   className="size-4 flex-shrink-0"
-                  style={{ color: "var(--color-gold)" }}
+                  style={{ color: "var(--color-blue)" }}
                 />
                 {w.title}
               </h3>

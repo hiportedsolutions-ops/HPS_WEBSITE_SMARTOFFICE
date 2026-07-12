@@ -5,11 +5,9 @@ import { Reveal } from "./reveal";
 
 /**
  * Industries strip — duplicates the list to allow a seamless CSS marquee.
- * Pauses on hover. Falls back to static wrap on prefers-reduced-motion
- * (handled via CSS .marquee-track rule).
+ * Pauses on hover. Falls back to static wrap on prefers-reduced-motion.
  */
 export function Industries() {
-  // One copy for static layout, two copies for the marquee track.
   const items = [...INDUSTRIES, ...INDUSTRIES];
 
   return (
@@ -32,8 +30,8 @@ export function Industries() {
               {items.map((ind, i) => (
                 <span
                   key={`${ind}-${i}`}
-                  className="whitespace-nowrap border bg-white px-5 py-2.5 text-[0.92rem] font-medium transition-all hover:border-[#9A7A25] hover:text-[#9A7A25]"
-                  style={{ borderColor: "rgba(26,34,43,0.2)" }}
+                  className="whitespace-nowrap border bg-white px-5 py-2.5 text-[0.92rem] font-medium transition-all hover:border-[var(--color-blue)] hover:text-[var(--color-blue)]"
+                  style={{ borderColor: "#E2E8F0" }}
                 >
                   {ind}
                 </span>

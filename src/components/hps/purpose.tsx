@@ -26,15 +26,15 @@ export function Purpose() {
           <div
             className="border-b last:border-b-0 px-7 py-6"
             style={{
-              borderColor: "rgba(138,151,165,0.18)",
-              background: "var(--color-slate-hps)",
+              borderColor: "#E2E8F0",
+              background: "#F6F8FB",
             }}
           >
             <strong
               className="block text-[1.6rem] mb-1"
               style={{
                 fontFamily: "var(--font-archivo)",
-                color: "var(--color-gold-bright)",
+                color: "var(--color-blue)",
               }}
             >
               12
@@ -47,15 +47,15 @@ export function Purpose() {
           <div
             className="border-b last:border-b-0 px-7 py-6"
             style={{
-              borderColor: "rgba(138,151,165,0.18)",
-              background: "var(--color-slate-hps)",
+              borderColor: "#E2E8F0",
+              background: "#F6F8FB",
             }}
           >
             <strong
               className="block text-[1.6rem] mb-1"
               style={{
                 fontFamily: "var(--font-archivo)",
-                color: "var(--color-gold-bright)",
+                color: "var(--color-blue)",
               }}
             >
               3
@@ -67,13 +67,13 @@ export function Purpose() {
           </div>
           <div
             className="px-7 py-6"
-            style={{ background: "var(--color-slate-hps)" }}
+            style={{ background: "#F6F8FB" }}
           >
             <strong
               className="block text-[1.6rem] mb-1"
               style={{
                 fontFamily: "var(--font-archivo)",
-                color: "var(--color-gold-bright)",
+                color: "var(--color-blue)",
               }}
             >
               1

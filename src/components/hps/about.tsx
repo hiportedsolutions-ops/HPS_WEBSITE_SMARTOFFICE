@@ -22,7 +22,7 @@ export function About() {
         className="relative pt-[120px] pb-16 sm:pt-[150px] sm:pb-16"
         style={{
           background:
-            "radial-gradient(700px 380px at 85% -20%, rgba(201,161,59,0.12), transparent 60%), linear-gradient(165deg,#131B24 0%,#0F151C 70%)",
+            "radial-gradient(700px 380px at 85% -20%, rgba(0,87,184,0.08), transparent 60%), radial-gradient(700px 380px at -10% 120%, rgba(212,175,55,0.06), transparent 60%), #FFFFFF",
         }}
       >
         <div className="hps-wrap">
@@ -32,11 +32,11 @@ export function About() {
               fontFamily: "var(--font-ibm-plex-mono)",
               fontSize: "0.72rem",
               letterSpacing: "0.14em",
-              color: "rgba(147,161,176,0.6)",
+              color: "rgba(90,101,114,0.7)",
               textTransform: "uppercase",
             }}
           >
-            <a href="#top" className="hover:text-[var(--color-gold-bright)]">
+            <a href="#top" className="hover:text-[var(--color-blue)]">
               HOME
             </a>{" "}
             / ABOUT HPS
@@ -79,19 +79,19 @@ export function About() {
               profitability, and position them for long-term success.
             </p>
           </Reveal>
-          <Reveal className="grid gap-0 border" delay={120}>
+          <Reveal className="grid gap-0 border rounded-lg overflow-hidden" delay={120}>
             <div
               className="px-7 py-6 border-b"
               style={{
-                borderColor: "rgba(138,151,165,0.18)",
-                background: "var(--color-slate-hps)",
+                borderColor: "#E2E8F0",
+                background: "#F6F8FB",
               }}
             >
               <strong
                 className="block text-[1.6rem] mb-1"
                 style={{
                   fontFamily: "var(--font-archivo)",
-                  color: "var(--color-gold-bright)",
+                  color: "var(--color-blue)",
                 }}
               >
                 Vision
@@ -104,13 +104,13 @@ export function About() {
             </div>
             <div
               className="px-7 py-6"
-              style={{ background: "var(--color-slate-hps)" }}
+              style={{ background: "#F6F8FB" }}
             >
               <strong
                 className="block text-[1.6rem] mb-1"
                 style={{
                   fontFamily: "var(--font-archivo)",
-                  color: "var(--color-gold-bright)",
+                  color: "var(--color-blue)",
                 }}
               >
                 Mission
@@ -136,18 +136,18 @@ export function About() {
           </Reveal>
           <Reveal>
             <div
-              className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px border"
-              style={{ background: "rgba(138,151,165,0.18)" }}
+              className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px border rounded-lg overflow-hidden"
+              style={{ background: "#E2E8F0" }}
             >
               {VALUES.map((v) => (
                 <div
                   key={v.title}
-                  className="p-7"
-                  style={{ background: "var(--color-slate-hps)" }}
+                  className="p-7 transition-colors hover:bg-[#F6F8FB]"
+                  style={{ background: "#FFFFFF" }}
                 >
                   <h3
                     className="text-[1rem] font-bold mb-2"
-                    style={{ color: "var(--color-gold-bright)" }}
+                    style={{ color: "var(--color-blue)" }}
                   >
                     {v.title}
                   </h3>
@@ -179,8 +179,8 @@ export function About() {
               {IDEAL_CLIENTS.map((c) => (
                 <span
                   key={c}
-                  className="border bg-white px-5 py-2.5 text-[0.92rem] font-medium transition-all hover:border-[#9A7A25] hover:text-[#9A7A25]"
-                  style={{ borderColor: "rgba(26,34,43,0.2)" }}
+                  className="border bg-white px-5 py-2.5 text-[0.92rem] font-medium transition-all hover:border-[var(--color-blue)] hover:text-[var(--color-blue)]"
+                  style={{ borderColor: "#E2E8F0" }}
                 >
                   {c}
                 </span>

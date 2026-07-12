@@ -24,11 +24,11 @@ export function CACSection() {
               fontFamily: "var(--font-ibm-plex-mono)",
               fontSize: "0.72rem",
               letterSpacing: "0.14em",
-              color: "rgba(147,161,176,0.6)",
+              color: "rgba(90,101,114,0.7)",
               textTransform: "uppercase",
             }}
           >
-            <a href="#top" className="hover:text-[var(--color-gold-bright)]">
+            <a href="#top" className="hover:text-[var(--color-blue)]">
               HOME
             </a>{" "}
             / CAC REGISTRATIONS
@@ -78,25 +78,26 @@ export function CACSection() {
               key={p.name}
               delay={(i % 3) * 80}
               className={cn(
-                "border p-8 sm:p-9 flex flex-col relative",
-                p.featured &&
-                  "border-[var(--color-gold)]"
+                "border p-8 sm:p-9 flex flex-col relative rounded-lg transition-all",
+                p.featured
+                  ? "shadow-[0_12px_40px_-12px_rgba(0,87,184,0.25)]"
+                  : "hover:border-[rgba(0,87,184,0.3)]"
               )}
               style={{
                 background: p.featured
-                  ? "linear-gradient(180deg,rgba(201,161,59,0.07),var(--color-slate-hps) 45%)"
-                  : "var(--color-slate-hps)",
+                  ? "linear-gradient(180deg,rgba(0,87,184,0.06),#FFFFFF 45%)"
+                  : "#FFFFFF",
                 borderColor: p.featured
-                  ? "var(--color-gold)"
-                  : "rgba(138,151,165,0.18)",
+                  ? "var(--color-blue)"
+                  : "#E2E8F0",
               }}
             >
               {p.featured && (
                 <span
-                  className="absolute top-0 right-0 px-3 py-1.5"
+                  className="absolute top-0 right-0 px-3 py-1.5 rounded-bl-lg"
                   style={{
-                    background: "linear-gradient(120deg,#B08A2E,#E0B64C)",
-                    color: "#12181F",
+                    background: "linear-gradient(120deg,#B8902E,#E6C466)",
+                    color: "#FFFFFF",
                     fontFamily: "var(--font-ibm-plex-mono)",
                     fontSize: "0.66rem",
                     letterSpacing: "0.12em",
@@ -105,7 +106,9 @@ export function CACSection() {
                   MOST POPULAR
                 </span>
               )}
-              <h3 className="text-[1.25rem] font-extrabold mb-1.5">{p.name}</h3>
+              <h3 className="text-[1.25rem] font-extrabold mb-1.5 text-[#0A2540]">
+                {p.name}
+              </h3>
               <p className="text-[0.88rem] text-[var(--color-steel)] mb-5">
                 {p.who}
               </p>
@@ -113,12 +116,12 @@ export function CACSection() {
                 {p.features.map((f) => (
                   <li
                     key={f}
-                    className="flex gap-2.5 py-2.5 border-b text-[0.92rem] text-[#C9D0D7]"
-                    style={{ borderColor: "rgba(138,151,165,0.18)" }}
+                    className="flex gap-2.5 py-2.5 border-b text-[0.92rem] text-[#3D4854]"
+                    style={{ borderColor: "#EEF2F7" }}
                   >
                     <Check
                       className="size-4 flex-shrink-0 mt-0.5"
-                      style={{ color: "var(--color-gold)" }}
+                      style={{ color: "var(--color-blue)" }}
                     />
                     <span>{f}</span>
                   </li>
@@ -151,7 +154,7 @@ export function CACSection() {
         </div>
         <p className="text-[0.9rem] text-[var(--color-steel)]">
           Also available:{" "}
-          <strong style={{ color: "var(--color-gold-bright)" }}>
+          <strong style={{ color: "var(--color-blue)" }}>
             Annual Returns Filing · Change of Directors · Increase in Share
             Capital · Change of Company Name/Address · Certified True Copies ·
             UK &amp; US Company Registration.
@@ -168,26 +171,26 @@ export function CACSection() {
           </div>
           <div
             className="border-l pl-0"
-            style={{ borderColor: "rgba(201,161,59,0.22)" }}
+            style={{ borderColor: "rgba(0, 87, 184, 0.3)" }}
           >
             {CAC_STEPS.map((s, i) => (
               <div
                 key={s.title}
                 className="relative pl-16 sm:pl-[66px] py-5 border-b last:border-b-0"
-                style={{ borderColor: "rgba(138,151,165,0.18)" }}
+                style={{ borderColor: "#EEF2F7" }}
               >
                 <span
-                  className="absolute left-5 top-6"
+                  className="absolute left-5 top-6 grid place-items-center size-7 rounded-full text-[0.78rem] font-bold"
                   style={{
                     fontFamily: "var(--font-ibm-plex-mono)",
-                    fontSize: "0.78rem",
-                    color: "var(--color-gold)",
+                    color: "#FFFFFF",
+                    background: "linear-gradient(120deg,#0057B8,#0066CC)",
                   }}
                 >
-                  {String(i + 1).padStart(2, "0")}
+                  {i + 1}
                 </span>
                 <strong
-                  className="block text-[1.05rem] mb-1"
+                  className="block text-[1.05rem] mb-1 text-[#0A2540]"
                   style={{ fontFamily: "var(--font-archivo)" }}
                 >
                   {s.title}
@@ -201,7 +204,7 @@ export function CACSection() {
         </Reveal>
 
         {/* Checklists */}
-        <div className="mt-20 section-paper -mx-6 px-6 py-20 sm:py-24">
+        <div className="mt-20 section-paper -mx-6 px-6 py-20 sm:py-24 rounded-none">
           <div className="hps-wrap max-w-[1180px]">
             <Reveal className="max-w-[680px] mb-12">
               <div className="hps-eyebrow">What You&apos;ll Need</div>
@@ -214,20 +217,22 @@ export function CACSection() {
                 <Reveal
                   key={c.title}
                   delay={(i % 2) * 100}
-                  className="border bg-white p-7 sm:p-8"
-                  style={{ borderColor: "rgba(26,34,43,0.15)" }}
+                  className="border bg-white p-7 sm:p-8 rounded-lg"
+                  style={{ borderColor: "#E2E8F0" }}
                 >
-                  <h3 className="text-[1.05rem] font-bold mb-4">{c.title}</h3>
+                  <h3 className="text-[1.05rem] font-bold mb-4 text-[#0A2540]">
+                    {c.title}
+                  </h3>
                   <ul>
                     {c.items.map((it) => (
                       <li
                         key={it}
                         className="flex gap-2.5 py-2 text-[0.94rem] text-[#3D4854] border-b last:border-b-0"
-                        style={{ borderColor: "rgba(26,34,43,0.08)" }}
+                        style={{ borderColor: "#EEF2F7" }}
                       >
                         <span
                           className="text-[0.6rem] mt-[7px] flex-shrink-0"
-                          style={{ color: "#9A7A25" }}
+                          style={{ color: "var(--color-gold)" }}
                         >
                           ◆
                         </span>
@@ -251,8 +256,8 @@ export function CACSection() {
           </Reveal>
           <Reveal>
             <div
-              className="border"
-              style={{ borderColor: "rgba(138,151,165,0.18)" }}
+              className="border rounded-lg overflow-hidden"
+              style={{ borderColor: "#E2E8F0" }}
             >
               {CAC_FAQS.map((f, i) => (
                 <FaqItem
@@ -312,23 +317,23 @@ function FaqItem({
     <div
       className={cn(!isLast && "border-b")}
       style={{
-        borderColor: "rgba(138,151,165,0.18)",
-        background: "var(--color-slate-hps)",
+        borderColor: "#E2E8F0",
+        background: "#FFFFFF",
       }}
     >
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
-        className="w-full flex items-center justify-between gap-4 p-5 sm:p-6 text-left cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-gold)]"
+        className="w-full flex items-center justify-between gap-4 p-5 sm:p-6 text-left cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-blue)]"
       >
         <span
-          className="font-semibold text-[1rem]"
+          className="font-semibold text-[1rem] text-[#0A2540]"
           style={{ fontFamily: "var(--font-archivo)" }}
         >
           {q}
         </span>
-        <span style={{ color: "var(--color-gold)" }} aria-hidden>
+        <span style={{ color: "var(--color-blue)" }} aria-hidden>
           {open ? (
             <Minus className="size-5" />
           ) : (

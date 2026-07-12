@@ -146,3 +146,56 @@ Stage Summary:
 - Signature 5D Business Growth Framework preserved as interactive element.
 - BN:3301544 visible in hero, contact, chat footer, and page footer.
 - Zero lint errors, zero console errors, all core flows verified end-to-end in the browser.
+
+---
+Task ID: 8
+Agent: main
+Task: Re-theme entire HPS site from dark ink/gold-on-slate to WHITE background + ROYAL BLUE primary (#0057B8) + METALLIC GOLD (#D4AF37) secondary, per client's official corporate colours.
+
+Work Log:
+- Rewrote `src/app/globals.css` with new light-first token set:
+  - Page background → #FFFFFF (white); cards → #F6F8FB (light blue-gray); card hover → #EEF2F7
+  - Primary accent → Royal Blue #0057B8 (hover #0066CC); introduced --color-blue-deep #0A2540 for footer
+  - Secondary accent → Metallic Gold #D4AF37 (bright #E6C466) — used sparingly for highlights
+  - Borders → #E2E8F0 (light); muted text → #5A6572
+  - Updated all shadcn theme tokens (--background, --primary, --border, etc.) to match
+  - `.btn-gold` now renders a Royal Blue gradient button with white text (kept class name to minimize churn)
+  - `.btn-ghost` now a blue outline button
+  - `.gold-text` gradient re-tuned to metallic gold (#B8902E→#E6C466→#F0D980→#C49B2F→#9A7A25)
+  - `.hps-logo-mark` now gold gradient with WHITE "HPS" text (signature brand element)
+  - `.hero-grid-bg` now faint blue lines on white
+- Updated all 16 section components to remove dark-theme hardcoded colors:
+  - `nav.tsx` — white/translucent bg, blue links, navy wordmark, gold logo mark
+  - `hero.tsx` — white bg with subtle blue + gold radial glows, gold-text headline, blue CTAs
+  - `trustbar.tsx` — light blue-gray strip, gold diamonds
+  - `purpose.tsx` — white bg, blue stat numbers, blue eyebrow
+  - `solutions.tsx` — light blue-gray bg, white cards, blue icons + tag chips, gold hover accent bar, rounded corners
+  - `framework.tsx` — white cards, blue active heading, gold progress bar, light borders
+  - `industries.tsx` — light bg, white chips, blue hover
+  - `why-hps.tsx` — white cards, blue check icons, blue hover border
+  - `stories.tsx` — light bg, white cards, blue labels, gold "Result" label
+  - `school-marketplace.tsx` — white duo cards, light divider
+  - `cac-section.tsx` — white package cards, blue featured border + shadow, gold MOST POPULAR tag, blue numbered step badges, blue FAQ +/- icons, blue "Also available" text, rounded cards
+  - `services.tsx` — white bg, gold ◈ group icons, white service cells with light hover
+  - `about.tsx` — white hero with blue/gold radials, blue values headings, light ideal-client chips
+  - `contact-section.tsx` — white form on light blue-gray card, blue focus rings, blue contact icons, white inputs
+  - `cta.tsx` — Royal Blue → navy gradient bg, white + gold headline, GOLD "Book a Consultation" button (striking focal point)
+  - `footer.tsx` — deep navy (#0A2540) bg, white wordmark, gold column headings + diamonds, light blue-gray links
+  - `chat-widget.tsx` — Royal Blue FAB with gold notification dot, blue→navy header with gold sparkles icon, white assistant bubbles, blue user bubbles, white panel on light bg
+- `bun run lint` → clean (0 errors, 0 warnings)
+- Dev server HMR recompiled every file save with no errors; homepage returns HTTP 200.
+- Agent Browser + VLM visual verification (all PASS):
+  - Desktop hero: white bg ✓, gold hex logo mark with white text ✓, navy wordmark ✓, dark-gray nav links ✓, gold gradient on "Creating Opportunities." ✓, Royal Blue primary button ✓, blue ghost button ✓, subtle blue grid ✓
+  - CTA section: Royal Blue→navy gradient bg ✓, white+gold headline ✓, gold button ✓, premium look ✓
+  - Footer: deep navy bg ✓, gold logo + white wordmark ✓, gold column headings ✓, readable links ✓, BN:3301544 present ✓
+  - Mobile (375px): white bg, no overflow ✓, gold logo + navy wordmark ✓, blue MENU button ✓, readable gold-gradient headline ✓, blue primary button ✓
+  - Solutions section: light blue-gray bg ✓, white rounded cards ✓, blue icons ✓, blue tag chips ✓, navy heading ✓
+  - Chat widget: Royal Blue FAB with gold dot ✓, blue→navy header with gold sparkles ✓, white greeting bubble ✓, blue-bordered suggestion chips ✓, blue send button ✓
+- Functional re-test: opened chat, clicked "How do I register a business with CAC?" suggestion → POST /api/chat 200 in 3.3s, LLM returned on-brand answer mentioning the 3 CAC packages, 6-step process, and WhatsApp link with BN:3301544.
+
+Stage Summary:
+- Full theme transformation complete and verified. Site is now WHITE background with ROYAL BLUE (#0057B8) as the primary brand color and METALLIC GOLD (#D4AF37) as subtle highlights — exactly matching HPS's official corporate colour palette.
+- Gold is reserved for: logo mark, gold-text headline phrases, decorative ◆ diamonds, "MOST POPULAR" tag, framework progress bar, card hover accent bars, footer column headings, CTA button (on blue), and chat widget sparkles/notification dot.
+- Blue is the primary interactive color: all buttons (solid + ghost), eyebrows, icons, links, active states, focus rings, form accents, numbered step badges, user chat bubbles, CTA background, footer deep-navy.
+- All previously-built functionality preserved: contact form (Prisma-backed), AI chatbot (LLM-backed), 5D framework stepper, FAQ accordion, CAC package→contact-form pre-select, mobile menu, sticky nav, sticky footer, responsive design.
+- Zero lint errors, zero console errors, all VLM visual checks PASS on desktop + mobile + all key sections.

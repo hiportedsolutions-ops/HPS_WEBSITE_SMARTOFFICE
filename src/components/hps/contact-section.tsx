@@ -28,7 +28,6 @@ export function ContactSection() {
   const [done, setDone] = useState(false);
   const { toast } = useToast();
 
-  // Pre-select service from ?service= query (mirrors original contact.html logic)
   useEffect(() => {
     if (typeof window === "undefined") return;
     const params = new URLSearchParams(window.location.search);
@@ -36,7 +35,6 @@ export function ContactSection() {
     if (p && SERVICE_PARAM_MAP[p]) {
       setForm((f) => ({ ...f, service: SERVICE_PARAM_MAP[p] }));
     }
-    // Also support hash like #contact?service=ltd (set by CAC package buttons)
     const hash = window.location.hash;
     if (hash.includes("?service=")) {
       const q = hash.split("?")[1];
@@ -47,7 +45,6 @@ export function ContactSection() {
     }
   }, []);
 
-  // Listen for custom "selectService" events fired by CAC package buttons
   useEffect(() => {
     const handler = (e: Event) => {
       const detail = (e as CustomEvent<string>).detail;
@@ -118,11 +115,11 @@ export function ContactSection() {
               fontFamily: "var(--font-ibm-plex-mono)",
               fontSize: "0.72rem",
               letterSpacing: "0.14em",
-              color: "rgba(147,161,176,0.6)",
+              color: "rgba(90,101,114,0.7)",
               textTransform: "uppercase",
             }}
           >
-            <a href="#top" className="hover:text-[var(--color-gold-bright)]">
+            <a href="#top" className="hover:text-[var(--color-blue)]">
               HOME
             </a>{" "}
             / CONTACT
@@ -152,14 +149,14 @@ export function ContactSection() {
                 <>
                   <a
                     href={`tel:${HPS_CONTACT.phoneTels[0]}`}
-                    className="hover:text-[var(--color-gold-bright)]"
+                    className="hover:text-[var(--color-blue)]"
                   >
                     {HPS_CONTACT.phones[0]}
                   </a>{" "}
                   ·{" "}
                   <a
                     href={`tel:${HPS_CONTACT.phoneTels[1]}`}
-                    className="hover:text-[var(--color-gold-bright)]"
+                    className="hover:text-[var(--color-blue)]"
                   >
                     {HPS_CONTACT.phones[1]}
                   </a>
@@ -172,7 +169,7 @@ export function ContactSection() {
               value={
                 <a
                   href={`mailto:${HPS_CONTACT.email}`}
-                  className="hover:text-[var(--color-gold-bright)]"
+                  className="hover:text-[var(--color-blue)]"
                 >
                   {HPS_CONTACT.email}
                 </a>
@@ -180,12 +177,12 @@ export function ContactSection() {
             />
             <div
               className="flex gap-4 pt-5 pb-5"
-              style={{ borderBottom: "1px solid rgba(138,151,165,0.18)" }}
+              style={{ borderBottom: "1px solid #E2E8F0" }}
             >
-              <MessageCircle className="size-4 mt-1" style={{ color: "var(--color-gold)" }} />
+              <MessageCircle className="size-4 mt-1" style={{ color: "var(--color-blue)" }} />
               <div>
                 <strong
-                  className="block text-[0.95rem] mb-0.5"
+                  className="block text-[0.95rem] mb-0.5 text-[#0A2540]"
                   style={{ fontFamily: "var(--font-archivo)" }}
                 >
                   WhatsApp
@@ -212,7 +209,7 @@ export function ContactSection() {
                 fontFamily: "var(--font-ibm-plex-mono)",
                 fontSize: "0.72rem",
                 letterSpacing: "0.12em",
-                color: "rgba(147,161,176,0.6)",
+                color: "rgba(90,101,114,0.7)",
                 lineHeight: 1.8,
               }}
             >
@@ -226,19 +223,19 @@ export function ContactSection() {
           <Reveal delay={120}>
             <form
               onSubmit={onSubmit}
-              className="border p-8 sm:p-9"
+              className="border p-8 sm:p-9 rounded-lg"
               style={{
-                borderColor: "rgba(138,151,165,0.18)",
-                background: "var(--color-slate-hps)",
+                borderColor: "#E2E8F0",
+                background: "#F6F8FB",
               }}
             >
               {done ? (
                 <div className="text-center py-10">
                   <CheckCircle2
                     className="size-14 mx-auto mb-4"
-                    style={{ color: "var(--color-gold-bright)" }}
+                    style={{ color: "var(--color-blue)" }}
                   />
-                  <h3 className="text-[1.4rem] font-extrabold mb-2">
+                  <h3 className="text-[1.4rem] font-extrabold mb-2 text-[#0A2540]">
                     Thank you — message received.
                   </h3>
                   <p className="text-[var(--color-steel)] mb-6">
@@ -275,7 +272,7 @@ export function ContactSection() {
                       autoComplete="name"
                       value={form.name}
                       onChange={onChange}
-                      className="w-full px-4 py-3 text-[0.95rem]"
+                      className="w-full px-4 py-3 text-[0.95rem] rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--color-blue)]"
                       style={inputStyle}
                     />
                   </Field>
@@ -288,7 +285,7 @@ export function ContactSection() {
                       autoComplete="email"
                       value={form.email}
                       onChange={onChange}
-                      className="w-full px-4 py-3 text-[0.95rem]"
+                      className="w-full px-4 py-3 text-[0.95rem] rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--color-blue)]"
                       style={inputStyle}
                     />
                   </Field>
@@ -301,7 +298,7 @@ export function ContactSection() {
                       autoComplete="tel"
                       value={form.phone}
                       onChange={onChange}
-                      className="w-full px-4 py-3 text-[0.95rem]"
+                      className="w-full px-4 py-3 text-[0.95rem] rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--color-blue)]"
                       style={inputStyle}
                     />
                   </Field>
@@ -315,7 +312,7 @@ export function ContactSection() {
                       required
                       value={form.service}
                       onChange={onChange}
-                      className="w-full px-4 py-3 text-[0.95rem]"
+                      className="w-full px-4 py-3 text-[0.95rem] rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--color-blue)]"
                       style={inputStyle}
                     >
                       <option value="">Select a service…</option>
@@ -337,7 +334,7 @@ export function ContactSection() {
                       required
                       value={form.message}
                       onChange={onChange}
-                      className="w-full px-4 py-3 text-[0.95rem] resize-y min-h-[120px]"
+                      className="w-full px-4 py-3 text-[0.95rem] rounded-md resize-y min-h-[120px] focus:outline-none focus:ring-2 focus:ring-[var(--color-blue)]"
                       style={inputStyle}
                     />
                   </Field>
@@ -373,9 +370,9 @@ export function ContactSection() {
 }
 
 const inputStyle: React.CSSProperties = {
-  background: "#10161D",
-  border: "1px solid rgba(138,151,165,0.18)",
-  color: "#E9ECEF",
+  background: "#FFFFFF",
+  border: "1px solid #E2E8F0",
+  color: "#1A222B",
   fontFamily: "var(--font-public-sans)",
 };
 
@@ -420,12 +417,12 @@ function ContactItem({
   return (
     <div
       className="flex gap-4 py-5"
-      style={{ borderBottom: "1px solid rgba(138,151,165,0.18)" }}
+      style={{ borderBottom: "1px solid #E2E8F0" }}
     >
-      <span style={{ color: "var(--color-gold)" }}>{icon}</span>
+      <span style={{ color: "var(--color-blue)" }}>{icon}</span>
       <div>
         <strong
-          className="block text-[0.95rem] mb-0.5"
+          className="block text-[0.95rem] mb-0.5 text-[#0A2540]"
           style={{ fontFamily: "var(--font-archivo)" }}
         >
           {title}

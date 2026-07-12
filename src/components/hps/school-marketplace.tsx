@@ -6,15 +6,15 @@ export function SchoolMarketplace() {
       <div className="hps-wrap">
         <Reveal>
           <div
-            className="grid md:grid-cols-2 gap-px border"
+            className="grid md:grid-cols-2 gap-px border rounded-lg overflow-hidden"
             style={{
-              background: "rgba(201,161,59,0.22)",
-              borderColor: "rgba(201,161,59,0.22)",
+              background: "#E2E8F0",
+              borderColor: "#E2E8F0",
             }}
           >
-            <div className="p-9 sm:p-12" style={{ background: "var(--color-slate-hps)" }}>
+            <div className="p-9 sm:p-12" style={{ background: "#FFFFFF" }}>
               <div className="hps-eyebrow">Hi&apos;ported Business School</div>
-              <h3 className="text-[1.5rem] font-extrabold mb-3.5">
+              <h3 className="text-[1.5rem] font-extrabold mb-3.5 text-[#0A2540]">
                 Learn the business of business
               </h3>
               <p className="text-[var(--color-steel)] text-[0.98rem] mb-6">
@@ -27,9 +27,9 @@ export function SchoolMarketplace() {
                 Explore Programmes
               </a>
             </div>
-            <div className="p-9 sm:p-12" style={{ background: "var(--color-slate-hps)" }}>
+            <div className="p-9 sm:p-12" style={{ background: "#FFFFFF" }}>
               <div className="hps-eyebrow">HPS Marketplace</div>
-              <h3 className="text-[1.5rem] font-extrabold mb-3.5">
+              <h3 className="text-[1.5rem] font-extrabold mb-3.5 text-[#0A2540]">
                 Tools that work as hard as you do
               </h3>
               <p className="text-[var(--color-steel)] text-[0.98rem] mb-6">

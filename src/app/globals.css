@@ -43,86 +43,93 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
 
-  /* HPS brand tokens */
-  --color-ink: #0F151C;
-  --color-slate-hps: #18212B;
-  --color-slate-2: #202C38;
-  --color-gold: #C9A13B;
-  --color-gold-bright: #E6BE55;
-  --color-steel: #93A1B0;
-  --color-paper: #F5F3EE;
+  /* HPS brand tokens — White + Royal Blue + Metallic Gold */
+  --color-ink: #FFFFFF;            /* page background (white) */
+  --color-slate-hps: #F6F8FB;      /* cards / panels (light blue-gray) */
+  --color-slate-2: #EEF2F7;        /* card hover */
+  --color-blue: #0057B8;           /* PRIMARY — Royal Blue */
+  --color-blue-bright: #0066CC;    /* hover/emphasis blue */
+  --color-blue-deep: #0A2540;      /* footer / deep navy */
+  --color-gold: #D4AF37;           /* SECONDARY — Metallic Gold */
+  --color-gold-bright: #E6C466;    /* hover/emphasis gold */
+  --color-steel: #5A6572;          /* muted body text */
+  --color-text: #1A222B;           /* primary text */
+  --color-paper: #FFFFFF;          /* (kept for compatibility) */
   --color-paper-ink: #1A222B;
+  --color-line: rgba(0, 87, 184, 0.18);
+  --color-line-soft: #E2E8F0;
 }
 
 :root {
   --radius: 0.625rem;
 
-  /* HPS dark theme as the default (brand is dark-first) */
-  --background: #0F151C;
-  --foreground: #E9ECEF;
-  --card: #18212B;
-  --card-foreground: #E9ECEF;
-  --popover: #18212B;
-  --popover-foreground: #E9ECEF;
-  --primary: #C9A13B;
-  --primary-foreground: #12181F;
-  --secondary: #202C38;
-  --secondary-foreground: #E9ECEF;
-  --muted: #18212B;
-  --muted-foreground: #93A1B0;
-  --accent: #202C38;
-  --accent-foreground: #E6BE55;
+  /* Light-first HPS theme (white + royal blue + gold) */
+  --background: #FFFFFF;
+  --foreground: #1A222B;
+  --card: #F6F8FB;
+  --card-foreground: #1A222B;
+  --popover: #FFFFFF;
+  --popover-foreground: #1A222B;
+  --primary: #0057B8;
+  --primary-foreground: #FFFFFF;
+  --secondary: #EEF2F7;
+  --secondary-foreground: #1A222B;
+  --muted: #F6F8FB;
+  --muted-foreground: #5A6572;
+  --accent: #EEF2F7;
+  --accent-foreground: #0057B8;
   --destructive: oklch(0.577 0.245 27.325);
-  --border: rgba(138, 151, 165, 0.18);
-  --input: rgba(138, 151, 165, 0.18);
-  --ring: #C9A13B;
-  --chart-1: #C9A13B;
-  --chart-2: #202C38;
-  --chart-3: #93A1B0;
-  --chart-4: #E6BE55;
+  --border: #E2E8F0;
+  --input: #E2E8F0;
+  --ring: #0057B8;
+  --chart-1: #0057B8;
+  --chart-2: #D4AF37;
+  --chart-3: #5A6572;
+  --chart-4: #0066CC;
   --chart-5: #2E7D46;
-  --sidebar: #18212B;
-  --sidebar-foreground: #E9ECEF;
-  --sidebar-primary: #C9A13B;
-  --sidebar-primary-foreground: #12181F;
-  --sidebar-accent: #202C38;
-  --sidebar-accent-foreground: #E9ECEF;
-  --sidebar-border: rgba(138, 151, 165, 0.18);
-  --sidebar-ring: #C9A13B;
+  --sidebar: #FFFFFF;
+  --sidebar-foreground: #1A222B;
+  --sidebar-primary: #0057B8;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #EEF2F7;
+  --sidebar-accent-foreground: #0057B8;
+  --sidebar-border: #E2E8F0;
+  --sidebar-ring: #0057B8;
 }
 
 .dark {
-  --background: #0F151C;
-  --foreground: #E9ECEF;
-  --card: #18212B;
-  --card-foreground: #E9ECEF;
-  --popover: #18212B;
-  --popover-foreground: #E9ECEF;
-  --primary: #C9A13B;
-  --primary-foreground: #12181F;
-  --secondary: #202C38;
-  --secondary-foreground: #E9ECEF;
-  --muted: #18212B;
-  --muted-foreground: #93A1B0;
-  --accent: #202C38;
-  --accent-foreground: #E6BE55;
+  /* Kept for completeness — site is light-first by brand decision */
+  --background: #FFFFFF;
+  --foreground: #1A222B;
+  --card: #F6F8FB;
+  --card-foreground: #1A222B;
+  --popover: #FFFFFF;
+  --popover-foreground: #1A222B;
+  --primary: #0057B8;
+  --primary-foreground: #FFFFFF;
+  --secondary: #EEF2F7;
+  --secondary-foreground: #1A222B;
+  --muted: #F6F8FB;
+  --muted-foreground: #5A6572;
+  --accent: #EEF2F7;
+  --accent-foreground: #0057B8;
   --destructive: oklch(0.704 0.191 22.216);
-  --border: rgba(138, 151, 165, 0.18);
-  --input: rgba(138, 151, 165, 0.18);
-  --ring: #C9A13B;
-  --chart-1: #C9A13B;
-  --chart-2: #202C38;
-  --chart-3: #93A1B0;
-  --chart-4: #E6BE55;
+  --border: #E2E8F0;
+  --input: #E2E8F0;
+  --ring: #0057B8;
+  --chart-1: #0057B8;
+  --chart-2: #D4AF37;
+  --chart-3: #5A6572;
+  --chart-4: #0066CC;
   --chart-5: #2E7D46;
-  --sidebar: #18212B;
-  --sidebar-foreground: #E9ECEF;
-  --sidebar-primary: #C9A13B;
-  --sidebar-primary-foreground: #12181F;
-  --sidebar-accent: #202C38;
-  --sidebar-accent-foreground: #E9ECEF;
-  --sidebar-border: rgba(138, 151, 165, 0.18);
-  --sidebar-ring: #C9A13B;
+  --sidebar: #FFFFFF;
+  --sidebar-foreground: #1A222B;
+  --sidebar-primary: #0057B8;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #EEF2F7;
+  --sidebar-accent-foreground: #0057B8;
+  --sidebar-border: #E2E8F0;
+  --sidebar-ring: #0057B8;
 }
 
 @layer base {
@@ -144,6 +151,7 @@
     font-family: var(--font-archivo), sans-serif;
     line-height: 1.1;
     letter-spacing: -0.015em;
+    color: #1A222B;
   }
 }
 
@@ -158,7 +166,7 @@
     font-size: 0.78rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--color-gold);
+    color: var(--color-blue);
     display: inline-flex;
     align-items: center;
     gap: 12px;
@@ -168,26 +176,28 @@
     content: "";
     width: 34px;
     height: 1px;
-    background: var(--color-gold);
+    background: var(--color-blue);
   }
   .hps-eyebrow-center {
     justify-content: center;
   }
 
+  /* Subtle gold gradient text — used sparingly for key phrases */
   .gold-text {
-    background: linear-gradient(105deg, #B08A2E 0%, #E6BE55 38%, #F4DB8F 50%, #D5A93F 65%, #A87F26 100%);
+    background: linear-gradient(105deg, #B8902E 0%, #D4AF37 38%, #F0D980 50%, #C49B2F 65%, #9A7A25 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
 
+  /* Gold hexagonal logo mark — signature brand element */
   .hps-logo-mark {
     width: 40px;
     height: 40px;
     display: grid;
     place-items: center;
-    background: linear-gradient(135deg, #B08A2E, #E6BE55 55%, #A87F26);
-    color: #141B22;
+    background: linear-gradient(135deg, #B8902E, #E6C466 55%, #9A7A25);
+    color: #FFFFFF;
     font-weight: 800;
     font-size: 0.9rem;
     font-family: var(--font-archivo), sans-serif;
@@ -196,6 +206,7 @@
     flex-shrink: 0;
   }
 
+  /* Primary button — Royal Blue solid */
   .btn-gold {
     display: inline-flex;
     align-items: center;
@@ -206,23 +217,26 @@
     font-weight: 700;
     font-size: 0.92rem;
     letter-spacing: 0.02em;
-    background: linear-gradient(120deg, #B08A2E, #E0B64C);
-    color: #12181F;
+    background: linear-gradient(120deg, #0057B8, #0066CC);
+    color: #FFFFFF;
     border: 1px solid transparent;
     cursor: pointer;
     transition: all 0.22s ease;
     text-decoration: none;
   }
   .btn-gold:hover {
-    filter: brightness(1.1);
+    filter: brightness(1.08);
     transform: translateY(-1px);
+    box-shadow: 0 8px 20px -8px rgba(0, 87, 184, 0.5);
   }
   .btn-gold:disabled {
     opacity: 0.6;
     cursor: not-allowed;
     transform: none;
+    box-shadow: none;
   }
 
+  /* Ghost button — blue outline */
   .btn-ghost {
     display: inline-flex;
     align-items: center;
@@ -233,17 +247,19 @@
     font-weight: 700;
     font-size: 0.92rem;
     letter-spacing: 0.02em;
-    border: 1px solid rgba(201, 161, 59, 0.35);
-    color: var(--color-gold-bright);
+    border: 1px solid rgba(0, 87, 184, 0.4);
+    color: var(--color-blue);
     background: transparent;
     cursor: pointer;
     transition: all 0.22s ease;
     text-decoration: none;
   }
   .btn-ghost:hover {
-    background: rgba(201, 161, 59, 0.08);
+    background: rgba(0, 87, 184, 0.06);
+    border-color: var(--color-blue);
   }
 
+  /* WhatsApp button — keeps green brand convention */
   .btn-wa {
     display: inline-flex;
     align-items: center;
@@ -254,41 +270,41 @@
     font-weight: 700;
     font-size: 0.92rem;
     border: 1px solid #2E7D46;
-    color: #7BD99A;
+    color: #2E7D46;
     background: transparent;
     cursor: pointer;
     transition: all 0.2s ease;
     text-decoration: none;
   }
   .btn-wa:hover {
-    background: rgba(46, 125, 70, 0.12);
+    background: rgba(46, 125, 70, 0.08);
   }
 
   /* Section backgrounds */
   .section-dark {
-    background: var(--color-ink);
+    background: #FFFFFF;
   }
   .section-slate {
-    background: linear-gradient(180deg, #12191F, #0F151C);
+    background: #F6F8FB;
   }
   .section-paper {
-    background: var(--color-paper);
+    background: #F6F8FB;
     color: var(--color-paper-ink);
   }
   .section-paper .hps-eyebrow {
-    color: #9A7A25;
+    color: var(--color-blue);
   }
   .section-paper .hps-eyebrow::before {
-    background: #9A7A25;
+    background: var(--color-blue);
   }
 
-  /* Grid backdrop for hero */
+  /* Subtle grid backdrop for hero (light blue lines on white) */
   .hero-grid-bg {
     position: absolute;
     inset: 0;
     background-image:
-      linear-gradient(rgba(138, 151, 165, 0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(138, 151, 165, 0.05) 1px, transparent 1px);
+      linear-gradient(rgba(0, 87, 184, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 87, 184, 0.04) 1px, transparent 1px);
     background-size: 56px 56px;
     pointer-events: none;
     mask-image: radial-gradient(ellipse at 70% 30%, black 30%, transparent 75%);
@@ -298,7 +314,7 @@
   /* Custom scrollbar for long scrollable lists */
   .hps-scroll {
     scrollbar-width: thin;
-    scrollbar-color: rgba(201, 161, 59, 0.4) transparent;
+    scrollbar-color: rgba(0, 87, 184, 0.35) transparent;
   }
   .hps-scroll::-webkit-scrollbar {
     width: 8px;
@@ -308,11 +324,11 @@
     background: transparent;
   }
   .hps-scroll::-webkit-scrollbar-thumb {
-    background: rgba(201, 161, 59, 0.4);
+    background: rgba(0, 87, 184, 0.35);
     border-radius: 4px;
   }
   .hps-scroll::-webkit-scrollbar-thumb:hover {
-    background: rgba(201, 161, 59, 0.6);
+    background: rgba(0, 87, 184, 0.55);
   }
 }
 
@@ -327,7 +343,7 @@
   transform: none;
 }
 
-/* Framework progress bar */
+/* Framework progress bar — subtle gold highlight */
 .fw-bar-active {
   animation: fwbar 4.5s linear forwards;
 }

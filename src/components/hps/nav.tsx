@@ -28,12 +28,12 @@ export function Nav() {
     <nav
       className="fixed top-0 left-0 right-0 z-50 border-b transition-colors"
       style={{
-        background: scrolled ? "rgba(15,21,28,0.92)" : "rgba(15,21,28,0.86)",
+        background: scrolled ? "rgba(255,255,255,0.94)" : "rgba(255,255,255,0.88)",
         backdropFilter: "blur(12px)",
         WebkitBackdropFilter: "blur(12px)",
         borderColor: scrolled
-          ? "rgba(201,161,59,0.22)"
-          : "rgba(138,151,165,0.18)",
+          ? "rgba(0, 87, 184, 0.18)"
+          : "#E2E8F0",
       }}
     >
       <div className="hps-wrap flex h-[70px] items-center justify-between">
@@ -41,7 +41,7 @@ export function Nav() {
           <span className="hps-logo-mark">HPS</span>
           <span
             className="font-extrabold tracking-tight text-base sm:text-lg"
-            style={{ fontFamily: "var(--font-archivo)" }}
+            style={{ fontFamily: "var(--font-archivo)", color: "#0A2540" }}
           >
             HI&apos;PORTED
           </span>
@@ -52,7 +52,7 @@ export function Nav() {
             <a
               key={l.href}
               href={l.href}
-              className="text-sm font-medium text-[#C6CDD4] transition-colors hover:text-[var(--color-gold-bright)]"
+              className="text-sm font-medium text-[#3D4854] transition-colors hover:text-[var(--color-blue)]"
             >
               {l.label}
             </a>
@@ -65,8 +65,10 @@ export function Nav() {
         <button
           className="lg:hidden inline-flex items-center gap-2 border px-3 py-2 text-xs"
           style={{
-            borderColor: "rgba(138,151,165,0.25)",
+            borderColor: "#E2E8F0",
+            color: "var(--color-blue)",
             fontFamily: "var(--font-ibm-plex-mono)",
+            background: "#FFFFFF",
           }}
           aria-label="Toggle menu"
           aria-expanded={open}
@@ -84,8 +86,8 @@ export function Nav() {
           open ? "max-h-[420px] opacity-100" : "max-h-0 opacity-0"
         )}
         style={{
-          background: "#10161D",
-          borderColor: "rgba(138,151,165,0.18)",
+          background: "#FFFFFF",
+          borderColor: "#E2E8F0",
         }}
       >
         <div className="hps-wrap flex flex-col gap-1 py-4">
@@ -94,7 +96,7 @@ export function Nav() {
               key={l.href}
               href={l.href}
               onClick={() => setOpen(false)}
-              className="py-3 text-sm font-medium text-[#C6CDD4] hover:text-[var(--color-gold-bright)] transition-colors border-b border-[rgba(138,151,165,0.1)] last:border-0"
+              className="py-3 text-sm font-medium text-[#3D4854] hover:text-[var(--color-blue)] transition-colors border-b border-[#EEF2F7] last:border-0"
             >
               {l.label}
             </a>

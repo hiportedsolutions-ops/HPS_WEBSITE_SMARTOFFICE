@@ -21,7 +21,7 @@ export function Stories() {
               key={i}
               delay={(i % 3) * 80}
               className="bg-white border p-8 sm:p-9"
-              style={{ borderColor: "rgba(26,34,43,0.12)" }}
+              style={{ borderColor: "#E2E8F0" }}
             >
               <p
                 className="uppercase mb-1.5 mt-4 first:mt-0"
@@ -29,7 +29,7 @@ export function Stories() {
                   fontFamily: "var(--font-ibm-plex-mono)",
                   fontSize: "0.68rem",
                   letterSpacing: "0.15em",
-                  color: "#9A7A25",
+                  color: "var(--color-blue)",
                 }}
               >
                 Challenge
@@ -42,7 +42,7 @@ export function Stories() {
                   fontFamily: "var(--font-ibm-plex-mono)",
                   fontSize: "0.68rem",
                   letterSpacing: "0.15em",
-                  color: "#9A7A25",
+                  color: "var(--color-blue)",
                 }}
               >
                 HPS Solution
@@ -55,12 +55,12 @@ export function Stories() {
                   fontFamily: "var(--font-ibm-plex-mono)",
                   fontSize: "0.68rem",
                   letterSpacing: "0.15em",
-                  color: "#9A7A25",
+                  color: "var(--color-gold)",
                 }}
               >
                 Result
               </p>
-              <p className="text-[0.94rem] font-semibold text-[#1A222B]">
+              <p className="text-[0.94rem] font-semibold text-[#0A2540]">
                 {s.result}
               </p>
             </Reveal>

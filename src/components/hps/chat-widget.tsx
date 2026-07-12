@@ -32,13 +32,11 @@ export function ChatWidget() {
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLTextAreaElement | null>(null);
 
-  // Auto-scroll to bottom on new messages
   useEffect(() => {
     const el = scrollRef.current;
     if (el) el.scrollTop = el.scrollHeight;
   }, [messages, loading]);
 
-  // Focus input when opened
   useEffect(() => {
     if (open) {
       const t = setTimeout(() => inputRef.current?.focus(), 200);
@@ -62,7 +60,7 @@ export function ChatWidget() {
           message: trimmed,
           history: next
             .filter((m) => m !== GREETING)
-            .slice(-9, -1) // send up to last 8 prior messages, excluding the new one
+            .slice(-9, -1)
             .map((m) => ({ role: m.role, content: m.content })),
         }),
       });
@@ -101,7 +99,7 @@ export function ChatWidget() {
 
   return (
     <>
-      {/* Floating toggle button */}
+      {/* Floating toggle button — Royal Blue */}
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
@@ -109,15 +107,16 @@ export function ChatWidget() {
         aria-expanded={open}
         className="fixed bottom-5 right-5 z-50 size-14 rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-105"
         style={{
-          background: "linear-gradient(135deg,#B08A2E,#E6BE55 55%,#A87F26)",
-          color: "#12181F",
+          background: "linear-gradient(135deg, #0057B8, #0066CC)",
+          color: "#FFFFFF",
+          boxShadow: "0 8px 24px -6px rgba(0, 87, 184, 0.5)",
         }}
       >
         {open ? <X className="size-6" /> : <MessageCircle className="size-6" />}
         {!open && (
           <span
             className="absolute -top-1 -right-1 size-3.5 rounded-full"
-            style={{ background: "#2E7D46", border: "2px solid #0F151C" }}
+            style={{ background: "#D4AF37", border: "2px solid #FFFFFF" }}
           />
         )}
       </button>
@@ -134,41 +133,39 @@ export function ChatWidget() {
         <div
           className="flex flex-col rounded-lg overflow-hidden shadow-2xl"
           style={{
-            background: "var(--color-slate-hps)",
-            border: "1px solid rgba(201,161,59,0.35)",
+            background: "#FFFFFF",
+            border: "1px solid #E2E8F0",
             height: "min(70vh, 560px)",
           }}
         >
-          {/* Header */}
+          {/* Header — Royal Blue */}
           <div
             className="flex items-center gap-3 px-4 py-3.5 border-b"
             style={{
-              background:
-                "linear-gradient(120deg,rgba(201,161,59,0.12),transparent)",
-              borderColor: "rgba(138,151,165,0.18)",
+              background: "linear-gradient(120deg, #0057B8, #0A2540)",
+              borderColor: "rgba(255,255,255,0.1)",
             }}
           >
             <span
               className="grid place-items-center size-9 rounded-full flex-shrink-0"
               style={{
-                background:
-                  "linear-gradient(135deg,#B08A2E,#E6BE55 55%,#A87F26)",
-                color: "#12181F",
+                background: "linear-gradient(135deg, #B8902E, #E6C466 55%, #9A7A25)",
+                color: "#0A2540",
               }}
             >
               <Sparkles className="size-4" />
             </span>
             <div className="flex-1 min-w-0">
               <div
-                className="font-extrabold text-[0.95rem] leading-tight"
+                className="font-extrabold text-[0.95rem] leading-tight text-white"
                 style={{ fontFamily: "var(--font-archivo)" }}
               >
                 HPS Assistant
               </div>
-              <div className="text-[0.72rem] text-[var(--color-steel)] flex items-center gap-1.5">
+              <div className="text-[0.72rem] text-[#C9D6E5] flex items-center gap-1.5">
                 <span
                   className="size-1.5 rounded-full"
-                  style={{ background: "#2E7D46" }}
+                  style={{ background: "#4ADE80" }}
                 />
                 Online · typically replies instantly
               </div>
@@ -177,7 +174,7 @@ export function ChatWidget() {
               type="button"
               onClick={() => setOpen(false)}
               aria-label="Close"
-              className="text-[var(--color-steel)] hover:text-white transition-colors"
+              className="text-[#C9D6E5] hover:text-white transition-colors"
             >
               <X className="size-4" />
             </button>
@@ -187,13 +184,14 @@ export function ChatWidget() {
           <div
             ref={scrollRef}
             className="flex-1 overflow-y-auto hps-scroll p-4 space-y-3"
+            style={{ background: "#F6F8FB" }}
           >
             {messages.map((m, i) => (
               <MessageBubble key={i} msg={m} />
             ))}
             {loading && (
               <div className="flex items-center gap-2 text-[0.85rem] text-[var(--color-steel)] pl-1">
-                <Loader2 className="size-3.5 animate-spin" />
+                <Loader2 className="size-3.5 animate-spin" style={{ color: "var(--color-blue)" }} />
                 HPS Assistant is typing…
               </div>
             )}
@@ -202,9 +200,9 @@ export function ChatWidget() {
                 <div
                   className="text-[0.85rem] p-3 rounded"
                   style={{
-                    background: "rgba(220,80,80,0.1)",
+                    background: "rgba(220,80,80,0.08)",
                     border: "1px solid rgba(220,80,80,0.3)",
-                    color: "#F4B4B4",
+                    color: "#B91C1C",
                   }}
                 >
                   {error}
@@ -220,7 +218,6 @@ export function ChatWidget() {
               </div>
             )}
 
-            {/* Suggestion chips — only show before user has sent anything */}
             {messages.length === 1 && !loading && !error && (
               <div className="pt-2 space-y-2">
                 <p
@@ -235,10 +232,11 @@ export function ChatWidget() {
                       key={s}
                       type="button"
                       onClick={() => void send(s)}
-                      className="text-left text-[0.8rem] px-3 py-2 rounded transition-colors hover:bg-[rgba(201,161,59,0.1)]"
+                      className="text-left text-[0.8rem] px-3 py-2 rounded transition-colors hover:bg-[rgba(0,87,184,0.08)]"
                       style={{
-                        border: "1px solid rgba(201,161,59,0.3)",
-                        color: "var(--color-gold-bright)",
+                        border: "1px solid rgba(0, 87, 184, 0.25)",
+                        color: "var(--color-blue)",
+                        background: "#FFFFFF",
                       }}
                     >
                       {s}
@@ -253,7 +251,7 @@ export function ChatWidget() {
           <form
             onSubmit={onSubmit}
             className="p-3 border-t"
-            style={{ borderColor: "rgba(138,151,165,0.18)" }}
+            style={{ borderColor: "#E2E8F0", background: "#FFFFFF" }}
           >
             <div className="flex items-end gap-2">
               <textarea
@@ -263,11 +261,11 @@ export function ChatWidget() {
                 onKeyDown={onKeyDown}
                 rows={1}
                 placeholder="Ask about our services, packages, process…"
-                className="flex-1 resize-none max-h-32 px-3 py-2 text-[0.9rem] rounded"
+                className="flex-1 resize-none max-h-32 px-3 py-2 text-[0.9rem] rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--color-blue)]"
                 style={{
-                  background: "#10161D",
-                  border: "1px solid rgba(138,151,165,0.18)",
-                  color: "#E9ECEF",
+                  background: "#F6F8FB",
+                  border: "1px solid #E2E8F0",
+                  color: "#1A222B",
                   fontFamily: "var(--font-public-sans)",
                 }}
                 disabled={loading}
@@ -278,9 +276,8 @@ export function ChatWidget() {
                 aria-label="Send message"
                 className="size-9 rounded flex items-center justify-center flex-shrink-0 transition-transform hover:scale-105 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100"
                 style={{
-                  background:
-                    "linear-gradient(135deg,#B08A2E,#E6BE55 55%,#A87F26)",
-                  color: "#12181F",
+                  background: "linear-gradient(135deg, #0057B8, #0066CC)",
+                  color: "#FFFFFF",
                 }}
               >
                 <Send className="size-4" />
@@ -311,13 +308,13 @@ function MessageBubble({ msg }: { msg: Msg }) {
         style={
           isUser
             ? {
-                background: "linear-gradient(120deg,#B08A2E,#E0B64C)",
-                color: "#12181F",
+                background: "linear-gradient(120deg, #0057B8, #0066CC)",
+                color: "#FFFFFF",
               }
             : {
-                background: "#202C38",
-                color: "#E9ECEF",
-                border: "1px solid rgba(138,151,165,0.18)",
+                background: "#FFFFFF",
+                color: "#1A222B",
+                border: "1px solid #E2E8F0",
               }
         }
       >

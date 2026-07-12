@@ -24,7 +24,7 @@ export function Solutions() {
     <section
       id="solutions"
       className="py-20 sm:py-24"
-      style={{ background: "var(--color-slate-hps)" }}
+      style={{ background: "#F6F8FB" }}
     >
       <div className="hps-wrap">
         <Reveal className="max-w-[680px] mb-12">
@@ -40,8 +40,8 @@ export function Solutions() {
         </Reveal>
 
         <div
-          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px border"
-          style={{ background: "rgba(138,151,165,0.18)" }}
+          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px border rounded-lg overflow-hidden"
+          style={{ background: "#E2E8F0" }}
         >
           {SOLUTIONS.map((s, i) => {
             const Icon = ICONS[s.icon] ?? Compass;
@@ -51,14 +51,14 @@ export function Solutions() {
               <Reveal
                 key={s.title}
                 delay={(i % 3) * 80}
-                className="group relative p-8 sm:p-9 transition-colors hover:bg-[var(--color-slate-2)]"
-                style={{ background: "var(--color-slate-hps)" } as React.CSSProperties}
+                className="group relative p-8 sm:p-9 transition-colors hover:bg-white"
+                style={{ background: "#FFFFFF" } as React.CSSProperties}
               >
-                {/* gold top accent on hover */}
+                {/* gold top accent on hover — subtle highlight */}
                 <span
                   className="absolute top-0 left-0 h-[3px] w-0 group-hover:w-full transition-[width] duration-300"
                   style={{
-                    background: "linear-gradient(90deg,#B08A2E,#E6BE55)",
+                    background: "linear-gradient(90deg,#B8902E,#E6C466)",
                   }}
                 />
                 {anchor ? (
@@ -70,9 +70,9 @@ export function Solutions() {
                 ) : null}
                 <Icon
                   className="size-6 mb-4"
-                  style={{ color: "var(--color-gold)" }}
+                  style={{ color: "var(--color-blue)" }}
                 />
-                <h3 className="text-[1.18rem] font-bold mb-3 text-[#F2F4F6]">
+                <h3 className="text-[1.18rem] font-bold mb-3 text-[#0A2540]">
                   {s.title}
                 </h3>
                 <p className="text-[0.95rem] text-[var(--color-steel)] mb-4">
@@ -87,8 +87,9 @@ export function Solutions() {
                         fontFamily: "var(--font-ibm-plex-mono)",
                         fontSize: "0.7rem",
                         letterSpacing: "0.06em",
-                        color: "#BFC8D0",
-                        borderColor: "rgba(138,151,165,0.18)",
+                        color: "var(--color-blue)",
+                        borderColor: "rgba(0, 87, 184, 0.18)",
+                        background: "rgba(0, 87, 184, 0.04)",
                       }}
                     >
                       {t}

@@ -12,11 +12,11 @@ export function Services() {
               fontFamily: "var(--font-ibm-plex-mono)",
               fontSize: "0.72rem",
               letterSpacing: "0.14em",
-              color: "rgba(147,161,176,0.6)",
+              color: "rgba(90,101,114,0.7)",
               textTransform: "uppercase",
             }}
           >
-            <a href="#top" className="hover:text-[var(--color-gold-bright)]">
+            <a href="#top" className="hover:text-[var(--color-blue)]">
               HOME
             </a>{" "}
             / SERVICES
@@ -36,7 +36,7 @@ export function Services() {
           {SERVICE_GROUPS.map((g) => (
             <div key={g.id} id={g.id} className="scroll-mt-24">
               <Reveal>
-                <h2 className="flex items-center gap-3.5 text-[1.6rem] font-extrabold mb-2">
+                <h2 className="flex items-center gap-3.5 text-[1.6rem] font-extrabold mb-2 text-[#0A2540]">
                   <span style={{ color: "var(--color-gold)" }}>◈</span>
                   {g.title}
                 </h2>
@@ -44,14 +44,14 @@ export function Services() {
                   {g.desc}
                 </p>
                 <div
-                  className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px border"
-                  style={{ background: "rgba(138,151,165,0.18)" }}
+                  className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px border rounded-lg overflow-hidden"
+                  style={{ background: "#E2E8F0" }}
                 >
                   {g.services.map((s) => (
                     <div
                       key={s}
-                      className="p-5 text-[0.94rem] text-[#D7DDE2] transition-colors hover:bg-[var(--color-slate-2)]"
-                      style={{ background: "var(--color-slate-hps)" }}
+                      className="p-5 text-[0.94rem] text-[#3D4854] transition-colors hover:bg-[#F6F8FB]"
+                      style={{ background: "#FFFFFF" }}
                     >
                       {s}
                     </div>

@@ -28,8 +28,8 @@ export function Footer() {
     <footer
       className="border-t"
       style={{
-        background: "#0C1117",
-        borderColor: "rgba(138,151,165,0.18)",
+        background: "#0A2540",
+        borderColor: "rgba(255,255,255,0.1)",
       }}
     >
       <div className="hps-wrap py-14 sm:py-[70px]">
@@ -43,50 +43,41 @@ export function Footer() {
             >
               <span className="hps-logo-mark">HPS</span>
               <span
-                className="font-extrabold tracking-tight text-base sm:text-lg"
+                className="font-extrabold tracking-tight text-base sm:text-lg text-white"
                 style={{ fontFamily: "var(--font-archivo)" }}
               >
                 HI&apos;PORTED
               </span>
             </a>
-            <p className="text-[var(--color-steel)] text-[0.92rem] mt-4 mb-4 max-w-[300px]">
+            <p className="text-[#9FB2C9] text-[0.92rem] mt-4 mb-4 max-w-[300px]">
               A business growth and enterprise solutions company helping
               organizations start, grow and sustain profitable businesses.
             </p>
             <ul className="space-y-2.5">
               <li className="flex gap-2.5 items-baseline">
-                <span
-                  className="text-[0.8rem]"
-                  style={{ color: "var(--color-gold)" }}
-                >
+                <span className="text-[0.8rem]" style={{ color: "#E6C466" }}>
                   ◆
                 </span>
-                <span className="text-[0.92rem] text-[var(--color-steel)]">
+                <span className="text-[0.92rem] text-[#9FB2C9]">
                   {HPS_CONTACT.address}
                 </span>
               </li>
               <li className="flex gap-2.5 items-baseline">
-                <span
-                  className="text-[0.8rem]"
-                  style={{ color: "var(--color-gold)" }}
-                >
+                <span className="text-[0.8rem]" style={{ color: "#E6C466" }}>
                   ◆
                 </span>
                 <a
                   href={`mailto:${HPS_CONTACT.email}`}
-                  className="text-[0.92rem] text-[var(--color-steel)] hover:text-[var(--color-gold-bright)]"
+                  className="text-[0.92rem] text-[#9FB2C9] hover:text-[#E6C466] transition-colors"
                 >
                   {HPS_CONTACT.email}
                 </a>
               </li>
               <li className="flex gap-2.5 items-baseline">
-                <span
-                  className="text-[0.8rem]"
-                  style={{ color: "var(--color-gold)" }}
-                >
+                <span className="text-[0.8rem]" style={{ color: "#E6C466" }}>
                   ◆
                 </span>
-                <span className="text-[0.92rem] text-[var(--color-steel)]">
+                <span className="text-[0.92rem] text-[#9FB2C9]">
                   {HPS_CONTACT.phones.join(" · ")}
                 </span>
               </li>
@@ -97,8 +88,8 @@ export function Footer() {
           {Object.entries(FOOTER_LINKS).map(([title, links]) => (
             <div key={title}>
               <h4
-                className="mb-4.5 mb-[18px] text-[0.88rem] uppercase tracking-[0.1em]"
-                style={{ color: "var(--color-gold)" }}
+                className="mb-[18px] text-[0.88rem] uppercase tracking-[0.1em]"
+                style={{ color: "#E6C466" }}
               >
                 {title}
               </h4>
@@ -107,7 +98,7 @@ export function Footer() {
                   <li key={l.label}>
                     <a
                       href={l.href}
-                      className="text-[0.92rem] text-[var(--color-steel)] hover:text-[var(--color-gold-bright)] transition-colors"
+                      className="text-[0.92rem] text-[#9FB2C9] hover:text-white transition-colors"
                     >
                       {l.label}
                     </a>
@@ -120,14 +111,14 @@ export function Footer() {
 
         <div
           className="border-t pt-6 flex flex-wrap justify-between gap-3"
-          style={{ borderColor: "rgba(138,151,165,0.18)" }}
+          style={{ borderColor: "rgba(255,255,255,0.1)" }}
         >
           <span
             style={{
               fontFamily: "var(--font-ibm-plex-mono)",
               fontSize: "0.72rem",
               letterSpacing: "0.1em",
-              color: "rgba(147,161,176,0.6)",
+              color: "rgba(159,178,201,0.7)",
             }}
           >
             © 2026 HI&apos;PORTED PROFESSIONAL SERVICES · {HPS_CONTACT.bn} ·
@@ -138,7 +129,7 @@ export function Footer() {
               fontFamily: "var(--font-ibm-plex-mono)",
               fontSize: "0.72rem",
               letterSpacing: "0.1em",
-              color: "rgba(147,161,176,0.6)",
+              color: "rgba(159,178,201,0.7)",
             }}
           >
             BUILDING BUSINESSES · CREATING OPPORTUNITIES · SUSTAINING SUCCESS
