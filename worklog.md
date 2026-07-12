@@ -1,0 +1,148 @@
+# HPS Website — Work Log
+
+Project: Convert HPS static HTML/CSS/JS site (5 pages) into a fully functional, deploy-ready Next.js 16 single-page application at `/`.
+
+Brand: Hi'ported Professional Services (HPS) — BN:3301544
+Tagline: Building Businesses. Creating Opportunities. Sustaining Success.
+Theme: Dark ink (#0F151C) + slate (#18212B) + gold (#C9A13B) accents
+Fonts: Archivo (headings), Public Sans (body), IBM Plex Mono (labels)
+
+---
+Task ID: 1
+Agent: main
+Task: Initialize worklog, set up HPS brand theme in globals.css, update root layout with brand fonts (Archivo, Public Sans, IBM Plex Mono) and SEO metadata.
+
+Work Log:
+- Read CLAUDE.md and all 5 source HTML files + css/style.css + js/main.js to fully understand the brand system, content, and signature interactions (5D framework stepper, mobile menu, scroll reveal).
+- Confirmed project stack: Next.js 16 + TS 5 + Tailwind 4 + shadcn/ui + Prisma (SQLite) + z-ai-web-dev-sdk available.
+- Will convert 5 pages into one rich, anchor-navigable page at `/` (per env constraint: user only sees /).
+- Adding genuine functionality beyond static source: (a) functional contact form via Prisma-backed API route (replaces Formspree placeholder), (b) AI-powered HPS Assistant chat widget using LLM skill, (c) sticky footer, (d) accessible responsive design.
+
+Stage Summary:
+- Brand tokens, fonts, and metadata being applied next.
+
+---
+Task ID: 2-a
+Agent: general-purpose (contact-api)
+Task: Build Prisma schema for contact inquiries + POST /api/contact route
+
+Work Log:
+- Read worklog.md to absorb project context (HPS single-page app, Next.js 16 + TS5 + Tailwind 4 + Prisma SQLite, replaces Formspree placeholder with real backend).
+- Reviewed existing prisma/schema.prisma (User, Post), src/lib/db.ts (singleton PrismaClient, import path @/lib/db), package.json (zod ^4.0.2, no nodemailer).
+- Added `ContactInquiry` model to prisma/schema.prisma with fields: id (cuid), name, email, phone, service, message, status (default "new"), createdAt, updatedAt. Existing User/Post models left intact.
+- Added `@@index([createdAt])` and `@@index([status])` for efficient admin queries.
+- Ran `bun run db:push` from /home/z/my-project — succeeded: "Your database is now in sync with your Prisma schema. Done in 23ms" + Prisma Client v6.19.2 regenerated.
+- Verified schema materialized in SQLite: ContactInquiry table has all 9 columns and both indexes (ContactInquiry_createdAt_idx, ContactInquiry_status_idx).
+- Created src/app/api/contact/route.ts with:
+  - POST handler: JSON body {name,email,phone,service,message}, zod validation (name 2-120, email format, phone 7-25, service enum against 12 exact HPS service categories, message 10-2000), 400 with {error, field?} on failure, 201 with {success:true, id} on success, 500 on unexpected error with brand-friendly fallback message.
+  - GET handler: returns {count} only — never exposes inquiry contents (admin/health check).
+  - In-memory rate limiting: module-level Map keyed by client IP (from x-forwarded-for, first entry), max 5 submissions per 60s window, 429 with friendly message when exceeded; opportunistic stale-bucket cleanup.
+  - Imports { db } from '@/lib/db' as instructed; no email library used.
+- Fixed zod v4 syntax issue: `z.enum(values, { errorMap })` -> `z.enum(values, { message })` (errorMap was removed in zod 4).
+- Verified TypeScript: `bunx tsc --noEmit` reports zero errors in src/app/api/contact/route.ts (remaining tsc errors are pre-existing in examples/ and skills/ folders, outside this task's scope).
+- Verified ESLint: `bunx eslint src/app/api/contact/route.ts` passes clean.
+- End-to-end smoke test (direct Prisma + zod invocation): valid input parses and persists; invalid email, short message, and bad service are all rejected with correct messages; create() returns a cuid; count() works; test row cleaned up so DB is left empty for production.
+
+Stage Summary:
+- prisma/schema.prisma: ContactInquiry model added with both indexes; User/Post untouched.
+- src/app/api/contact/route.ts: full POST (validate + rate-limit + persist) + GET (count-only) handlers, ready to receive the front-end contact form.
+- `bun run db:push` succeeded; Prisma Client regenerated; table + indexes verified in SQLite.
+- TypeScript + ESLint clean for the new file.
+- Replaces the original Formspree placeholder (YOUR_FORM_ID) with a genuinely functional, deploy-ready backend. No external email dependency; persistence to SQLite is sufficient.
+- Front-end integration note for the next agent: the contact form should POST JSON to `/api/contact` with the exact field names above and the 12 service values exactly as listed; expect 201 {success, id} on success, 400 {error, field?} on validation failure, 429 {error} on rate limit, 500 {error} on server error.
+
+---
+Task ID: 2-b
+Agent: general-purpose (chat-api)
+Task: Build AI chatbot API route using z-ai-web-dev-sdk LLM
+
+Work Log:
+- Read worklog.md to absorb project context (HPS single-page Next.js 16 app; Task 1 set up brand theme/layout; Task 2-a built the Prisma-backed /api/contact route with zod validation + in-memory rate limiting; same patterns to mirror here).
+- Reviewed src/app/api/contact/route.ts (existing rate-limit + IP-extraction pattern), package.json (z-ai-web-dev-sdk ^0.0.18 already installed; no install needed), and the LLM skill (z-ai-web-dev-sdk must be server-only; system prompt sent as first message with role 'assistant'; `thinking: { type: 'disabled' }`; read `completion.choices[0]?.message?.content`).
+- Inspected node_modules/z-ai-web-dev-sdk/dist/index.d.ts to confirm the SDK API surface: `default export ZAI`, `static create(): Promise<ZAI>`, `zai.chat.completions.create(body) => Promise<any>`, ChatMessage role union `'system' | 'user' | 'assistant'`. Confirmed `ReturnType<typeof ZAI.create>` = `Promise<ZAI>` for safe memoization typing.
+- Created src/app/api/chat/route.ts (mkdir -p the chat/ dir first). Implemented:
+  - GET handler: returns 200 { ok: true, service: 'HPS Assistant' } — pure health check, no SDK import side-effects at module init (SDK lazily initialized on first POST).
+  - POST handler: JSON body { message, history? }.
+    * In-memory rate limiting: max 20 req/min/IP via module-level Map keyed by x-forwarded-for[0]; 429 on excess with friendly message; opportunistic stale-bucket cleanup.
+    * message validation: must be a non-empty string ≤ 1500 chars; 400 { error: 'Message must be 1–1500 characters.' } otherwise (also 400 on non-JSON body / non-object body).
+    * history sanitization: if provided, must be an array of { role, content } with role in ['user','assistant'] and content a non-empty string ≤ 1500 chars. ANY structural invalidity => silently ignore the whole history (per spec, do NOT 400). Truncates to the last 8 entries to bound tokens.
+    * Builds messages array: system prompt as first message with role 'assistant' (per SDK convention), then up to 8 history messages, then the new user message.
+    * Calls `await getZai()` (memoized `ZAI.create()` promise — initialize once per process, reuse across requests) then `zai.chat.completions.create({ messages, thinking: { type: 'disabled' } })`.
+    * Reads `completion.choices[0]?.message?.content?.trim()`; treats empty/null reply as a failure.
+    * Returns 200 { reply } on success.
+    * try/catch around the entire LLM call: logs `console.error('[chat API]', error)` and returns 500 { error: 'The assistant is unavailable right now. Please try again or message us on WhatsApp.' } on any failure (empty reply, SDK error, network error). Never leaks SDK error details to the client.
+  - Embedded the full HPS system prompt verbatim (8 service groups, 3 CAC packages with "Request a Quote" pricing policy, 6-step CAC process, 5D framework, jurisdictions, contact details, BN:3301544, rules of engagement).
+- Verified TypeScript: `bunx tsc --noEmit` reports zero errors in src/app/api/chat/route.ts (remaining tsc errors are pre-existing in examples/ and skills/ folders, outside this task's scope — same situation Task 2-a reported).
+- Verified ESLint: `bunx eslint src/app/api/chat/route.ts` passes clean (no output).
+- Did NOT start the dev server, did NOT modify page.tsx/layout.tsx/globals.css/src/lib/db.ts/prisma/schema.prisma, did NOT install anything.
+
+Stage Summary:
+- New file: src/app/api/chat/route.ts — server-only Next.js 16 App Router route handler.
+- Endpoint contract (for the front-end dev building the floating HPS Assistant widget):
+  * GET  /api/chat -> 200 { ok: true, service: 'HPS Assistant' }
+  * POST /api/chat
+      Request:  { message: string (1–1500 chars, required),
+                  history?: Array<{ role: 'user' | 'assistant'; content: string }> }
+      200 { reply: string }                                     // success
+      400 { error: 'Message must be 1–1500 characters.' }       // bad message / bad JSON
+      429 { error: 'Too many requests. Please slow down and try again shortly.' }
+      500 { error: 'The assistant is unavailable right now. Please try again or message us on WhatsApp.' }
+- LLM: z-ai-web-dev-sdk v0.0.18, memoized ZAI.create(), chat.completions.create with thinking disabled; system prompt sent as first 'assistant' message; up to last 8 history entries forwarded.
+- Rate limited: 20 req/min/IP, in-memory Map, 429 on excess.
+- Safe error handling: SDK errors logged server-side, generic brand-friendly fallback returned to client; no SDK internals leaked.
+- TypeScript + ESLint clean for the new file. Ready to be wired up to the floating HPS Assistant chat widget by the next agent.
+
+---
+Task ID: 3-7
+Agent: main
+Task: Build all HPS section components, assemble page.tsx, run lint/dev, and self-verify with Agent Browser.
+
+Work Log:
+- Created `src/lib/hps-data.ts` as the single source of truth for all section content (solutions, framework steps, industries, why-cards, stories, CAC packages/steps/checklists/FAQs, service groups, values, service options, contact details).
+- Created `src/components/hps/reveal.tsx` — client Reveal wrapper replacing the original IntersectionObserver logic; respects prefers-reduced-motion via CSS.
+- Created 16 section components in `src/components/hps/`:
+  - `nav.tsx` — fixed nav with scroll-state styling, mobile drawer, body-scroll lock.
+  - `hero.tsx` — hero with grid backdrop, gold gradient headline, dual CTAs, BN tag.
+  - `trustbar.tsx` — diamond-bullet trust strip.
+  - `purpose.tsx` — "Why HPS Exists" with 12/3/1 stat panel.
+  - `solutions.tsx` — 6 solution cards with lucide icons + hover gold accent.
+  - `framework.tsx` — signature 5D Business Growth Framework stepper (auto-advance every 4.5s, click-to-activate, progress bar).
+  - `industries.tsx` — CSS marquee of 13 industries (pauses on hover).
+  - `why-hps.tsx` — 6 reasons cards with check icons.
+  - `stories.tsx` — 3 Challenge/Solution/Result cards on paper bg.
+  - `school-marketplace.tsx` — duo strip for Business School + Marketplace.
+  - `cac-section.tsx` — full CAC page: 3 packages (Business Name / LTD featured / NGO), 6-step process, 2 doc checklists, 5-question FAQ accordion, CTA strip. "Request a Quote" buttons dispatch a custom `hps:selectService` event that pre-selects the matching option in the contact form and smooth-scrolls to it.
+  - `services.tsx` — all 8 service groups with 12 service lines, anchor IDs for deep-linking.
+  - `about.tsx` — story, vision/mission, 8 guiding principles, ideal clients.
+  - `contact-section.tsx` — functional form posting to `/api/contact` with zod-validated fields, success state, toast feedback, WhatsApp fallback; reads `?service=` URL param and listens for `hps:selectService` events.
+  - `cta.tsx` — gradient CTA band.
+  - `footer.tsx` — 4-column footer with brand, solutions, company, get-started links + bottom bar.
+  - `chat-widget.tsx` — floating HPS Assistant (gold gradient FAB), chat panel with greeting, 4 suggestion chips, message bubbles, typing indicator, WhatsApp error fallback, posts to `/api/chat` with conversation history.
+- Assembled `src/app/page.tsx` as a server component that composes all sections inside a `min-h-screen flex flex-col` wrapper (sticky-footer pattern) with `<main className="flex-1">` and `<Footer />` after it.
+- Updated `eslint.config.mjs` to ignore `upload/`, `download/`, `mini-services/` folders.
+- Fixed lint: removed unused eslint-disable in framework.tsx, simplified reveal.tsx reduced-motion branch (CSS handles visibility so no setState needed).
+- `bun run lint` → clean (0 errors, 0 warnings).
+- Started dev server with double-fork setsid detachment so it survives across bash sessions. Confirmed: `✓ Ready in 944ms`, no compile errors.
+- Agent Browser verification (all passed):
+  - Page loads with correct title and all 16 sections render (verified via interactive snapshot).
+  - No console errors, no page errors.
+  - FAQ accordion expands/collapses correctly (`expanded=true` after click).
+  - 5D Framework: clicking a stage activates it.
+  - CAC "Request a Quote" button smooth-scrolls to contact form AND pre-selects the matching service in the dropdown (verified `get value` = "CAC Registration (Business Name)").
+  - Contact form: filled all fields, clicked Send → `POST /api/contact 201`, Prisma INSERT visible in dev log, success state "Thank you — message received." displayed, API count incremented.
+  - Chat widget: opened via FAB, clicked suggestion chip "How do I register a business with CAC?" → `POST /api/chat 200` in 2.6s, LLM returned an on-brand response mentioning the 3 CAC packages, 6-step process, TIN guidance, and WhatsApp link.
+  - Mobile viewport (375×812): content fits with no horizontal overflow, nav collapses to MENU button, mobile drawer opens with all nav links.
+  - Sticky nav: confirmed `position: fixed` and `top: 0` after scrolling.
+  - Sticky footer: confirmed footer is at the bottom of the page (`footerRectBottom` ≈ `bodyHeight`); layout uses `min-h-screen flex flex-col` + `flex-1` main so footer sticks on short pages too.
+  - VLM (vision model) verification of screenshots: all 5 desktop checks passed (dark theme, gold logo, gold gradient headline, dual CTAs, professional layout) and all 4 mobile checks passed (responsive, collapsed nav, readable hero, clean layout).
+
+Stage Summary:
+- Production-ready HPS website live at http://localhost:3000 (port 3000).
+- All 5 original static pages consolidated into one rich, anchor-navigable single-page app at `/`.
+- Brand identity preserved exactly: dark ink (#0F151C) + slate (#18212B) + gold (#C9A13B) + Archivo/Public Sans/IBM Plex Mono fonts.
+- Two genuine backend capabilities added beyond the static source:
+  1. Functional contact form (Prisma + SQLite, zod validation, rate limiting) — replaces Formspree placeholder.
+  2. AI-powered HPS Assistant chatbot (z-ai-web-dev-sdk LLM) — answers visitor questions about services, CAC packages, process; steers to consultation/WhatsApp.
+- Signature 5D Business Growth Framework preserved as interactive element.
+- BN:3301544 visible in hero, contact, chat footer, and page footer.
+- Zero lint errors, zero console errors, all core flows verified end-to-end in the browser.
