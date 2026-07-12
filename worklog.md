@@ -199,3 +199,47 @@ Stage Summary:
 - Blue is the primary interactive color: all buttons (solid + ghost), eyebrows, icons, links, active states, focus rings, form accents, numbered step badges, user chat bubbles, CTA background, footer deep-navy.
 - All previously-built functionality preserved: contact form (Prisma-backed), AI chatbot (LLM-backed), 5D framework stepper, FAQ accordion, CAC package→contact-form pre-select, mobile menu, sticky nav, sticky footer, responsive design.
 - Zero lint errors, zero console errors, all VLM visual checks PASS on desktop + mobile + all key sections.
+
+---
+Task ID: 9
+Agent: main
+Task: Replace the gold hexagonal logo mark with the client's actual company logo (New_Logo.png) and change the header wordmark from "HI'PORTED" to "HI'PORTED PROFESSIONAL SERVICE".
+
+Work Log:
+- Inspected uploaded `/home/z/my-project/upload/New_Logo.png` (1254×1254 PNG, 868KB, solid white background, blue "HPS" lettering with gold curved accents).
+- VLM confirmed: logo is a stylized HPS mark in blue + gold — perfect match for the new white/blue/gold theme.
+- Processed the logo with a Python/PIL script:
+  - Converted to RGBA.
+  - Removed the white background via luminance threshold (≥245 on all RGB channels → transparent alpha). 70.8% of pixels became transparent (the background).
+  - Saved 4 versions to `/home/z/my-project/public/`:
+    - `hps-logo.png` — 256×256 transparent PNG, 43 KB (nav + footer display, retina-ready for up to 128px @2x)
+    - `hps-logo-full.png` — full 1254×1254 transparent (kept for future large-format use)
+    - `hps-favicon.png` — 32×32, 2 KB
+    - `hps-favicon-64.png` — 64×64, 5 KB (crisper favicon @2x)
+  - File size dropped from 868 KB → 43 KB for the nav logo (95% reduction).
+- VLM re-verified the transparent logo: blue letters + gold accents intact, no artifacts, clean edges.
+- Updated `src/app/layout.tsx` metadata.icons: replaced the z.ai SVG favicon with HPS favicons (32px + 64px + apple touch icon).
+- Updated `src/components/hps/nav.tsx`:
+  - Replaced `<span className="hps-logo-mark">HPS</span>` (gold hexagon) with `<img src="/hps-logo.png" />` (44px, object-contain) — transparent logo blends seamlessly on the white nav.
+  - Replaced the single-line "HI'PORTED" wordmark with a two-line stacked corporate lockup:
+    - Line 1: "HI'PORTED" (Archivo extrabold, dark navy #0A2540, 0.95→1.05rem responsive)
+    - Line 2: "Professional Service" (IBM Plex Mono, Royal Blue, uppercase, 0.58→0.62rem, letter-spacing 0.14em)
+  - Logo + wordmark responsive: logo 40px on mobile / 44px on desktop; wordmark font scales up at sm: breakpoint.
+- Updated `src/components/hps/footer.tsx` with the same logo image (48px) + stacked wordmark, but tuned for the navy background:
+  - "HI'PORTED" in white, "Professional Service" in gold (#E6C466) — matches the footer's gold accent system.
+  - Transparent logo displays cleanly on the deep-navy footer (no white box, verified by VLM).
+- `bun run lint` → clean (0 errors, 0 warnings).
+- Dev server HMR recompiled all changes with no errors; logo + favicon serve correctly (`/hps-logo.png` 200, 44 KB, image/png).
+- Agent Browser + VLM visual verification (all PASS):
+  - Desktop nav: blue/gold HPS logo image ✓, two-line stacked wordmark "HI'PORTED" / "Professional Service" ✓, reads "HI'PORTED PROFESSIONAL SERVICE" ✓, nav links + blue button visible ✓, professional ✓.
+  - Mobile nav (375px): logo + stacked wordmark visible and readable ✓, no overflow ✓, blue MENU button ✓.
+  - Mobile menu drawer: opens correctly, all 5 nav links + blue "Book a Consultation" button visible ✓.
+  - Footer: HPS logo image (not hexagon) ✓, stacked wordmark "HI'PORTED" (white) / "Professional Service" (gold) ✓, transparent logo on navy (no white box) ✓, gold column headings + contact details intact ✓.
+- Zero console errors. All previously-built functionality preserved.
+
+Stage Summary:
+- The HPS company logo (blue + gold stylized mark) now appears in the nav and footer, replacing the placeholder gold hexagonal "HPS" text mark.
+- The header wordmark now reads "HI'PORTED PROFESSIONAL SERVICE" as a polished two-line corporate lockup (HI'PORTED / Professional Service) in both the nav (navy + blue) and footer (white + gold).
+- The logo is transparent (white background removed) so it renders cleanly on both the white nav and the deep-navy footer.
+- Favicon updated from z.ai to the HPS logo.
+- Logo optimized from 868 KB → 43 KB (95% smaller) with no quality loss at display size.

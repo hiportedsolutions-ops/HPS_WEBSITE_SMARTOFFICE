@@ -31,19 +31,41 @@ export function Nav() {
         background: scrolled ? "rgba(255,255,255,0.94)" : "rgba(255,255,255,0.88)",
         backdropFilter: "blur(12px)",
         WebkitBackdropFilter: "blur(12px)",
-        borderColor: scrolled
-          ? "rgba(0, 87, 184, 0.18)"
-          : "#E2E8F0",
+        borderColor: scrolled ? "rgba(0, 87, 184, 0.18)" : "#E2E8F0",
       }}
     >
       <div className="hps-wrap flex h-[70px] items-center justify-between">
-        <a href="#top" className="flex items-center gap-3" aria-label="HPS home">
-          <span className="hps-logo-mark">HPS</span>
-          <span
-            className="font-extrabold tracking-tight text-base sm:text-lg"
-            style={{ fontFamily: "var(--font-archivo)", color: "#0A2540" }}
-          >
-            HI&apos;PORTED
+        <a
+          href="#top"
+          className="flex items-center gap-2.5 sm:gap-3"
+          aria-label="Hi'ported Professional Service — home"
+        >
+          {/* Company logo (transparent, works on white nav) */}
+          <img
+            src="/hps-logo.png"
+            alt=""
+            aria-hidden="true"
+            width={44}
+            height={44}
+            className="size-10 sm:size-11 object-contain flex-shrink-0"
+          />
+          {/* Stacked wordmark: HI'PORTED / PROFESSIONAL SERVICE */}
+          <span className="flex flex-col leading-none">
+            <span
+              className="font-extrabold tracking-tight text-[0.95rem] sm:text-[1.05rem]"
+              style={{ fontFamily: "var(--font-archivo)", color: "#0A2540" }}
+            >
+              HI&apos;PORTED
+            </span>
+            <span
+              className="mt-0.5 text-[0.58rem] sm:text-[0.62rem] font-medium tracking-[0.14em] uppercase"
+              style={{
+                fontFamily: "var(--font-ibm-plex-mono)",
+                color: "var(--color-blue)",
+              }}
+            >
+              Professional Service
+            </span>
           </span>
         </a>
 

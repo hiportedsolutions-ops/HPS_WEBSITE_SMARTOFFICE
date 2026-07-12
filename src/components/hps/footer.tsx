@@ -39,14 +39,32 @@ export function Footer() {
             <a
               href="#top"
               className="flex items-center gap-3"
-              aria-label="HPS home"
+              aria-label="Hi'ported Professional Service — home"
             >
-              <span className="hps-logo-mark">HPS</span>
-              <span
-                className="font-extrabold tracking-tight text-base sm:text-lg text-white"
-                style={{ fontFamily: "var(--font-archivo)" }}
-              >
-                HI&apos;PORTED
+              <img
+                src="/hps-logo.png"
+                alt=""
+                aria-hidden="true"
+                width={48}
+                height={48}
+                className="size-12 object-contain flex-shrink-0"
+              />
+              <span className="flex flex-col leading-none">
+                <span
+                  className="font-extrabold tracking-tight text-[1.05rem] text-white"
+                  style={{ fontFamily: "var(--font-archivo)" }}
+                >
+                  HI&apos;PORTED
+                </span>
+                <span
+                  className="mt-0.5 text-[0.62rem] font-medium tracking-[0.14em] uppercase"
+                  style={{
+                    fontFamily: "var(--font-ibm-plex-mono)",
+                    color: "#E6C466",
+                  }}
+                >
+                  Professional Service
+                </span>
               </span>
             </a>
             <p className="text-[#9FB2C9] text-[0.92rem] mt-4 mb-4 max-w-[300px]">

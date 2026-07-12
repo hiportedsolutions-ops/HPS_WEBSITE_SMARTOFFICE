@@ -42,6 +42,14 @@ export const metadata: Metadata = {
     "HPS",
   ],
   authors: [{ name: "Hi'ported Professional Services" }],
+  icons: {
+    icon: [
+      { url: "/hps-favicon.png", sizes: "32x32", type: "image/png" },
+      { url: "/hps-favicon-64.png", sizes: "64x64", type: "image/png" },
+    ],
+    shortcut: "/hps-favicon.png",
+    apple: "/hps-favicon.png",
+  },
   openGraph: {
     title: "Hi'ported Professional Services",
     description:
