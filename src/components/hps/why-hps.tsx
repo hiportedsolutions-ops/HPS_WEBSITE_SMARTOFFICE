@@ -9,7 +9,7 @@ export function WhyHPS() {
         <Reveal className="max-w-[680px] mb-12">
           <div className="hps-eyebrow">Why Clients Choose HPS</div>
           <h2 className="text-[clamp(1.9rem,3.6vw,2.7rem)] font-extrabold mb-4">
-            More than problem-solvers — growth partners
+            More than problem-solver, we are your growth partner
           </h2>
         </Reveal>
 

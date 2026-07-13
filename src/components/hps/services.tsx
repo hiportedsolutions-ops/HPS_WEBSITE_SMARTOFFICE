@@ -26,7 +26,7 @@ export function Services() {
             <span className="gold-text">One growth partner.</span>
           </h1>
           <p className="text-[var(--color-steel)] text-[1.08rem] max-w-[640px]">
-            Everything an organization needs to start, run and grow — delivered
+            Everything an organization needs to start, run and grow, delivered
             by professionals who combine accounting expertise with modern
             technology.
           </p>

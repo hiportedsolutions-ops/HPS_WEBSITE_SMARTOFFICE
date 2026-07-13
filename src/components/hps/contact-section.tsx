@@ -128,7 +128,7 @@ export function ContactSection() {
             Let&apos;s talk about <span className="gold-text">your business.</span>
           </h1>
           <p className="text-[var(--color-steel)] text-[1.08rem] max-w-[640px]">
-            Book a free consultation — tell us where you are and where you want to
+            Book a free consultation, tell us where you are and where you want to
             go, and we&apos;ll recommend a clear path. No obligation.
           </p>
         </Reveal>
@@ -188,7 +188,7 @@ export function ContactSection() {
                   WhatsApp
                 </strong>
                 <span className="text-[0.94rem] text-[var(--color-steel)]">
-                  Fastest response — usually within business hours
+                  Fastest response, usually within business hours
                 </span>
               </div>
             </div>
@@ -236,7 +236,7 @@ export function ContactSection() {
                     style={{ color: "var(--color-blue)" }}
                   />
                   <h3 className="text-[1.4rem] font-extrabold mb-2 text-[#0A2540]">
-                    Thank you — message received.
+                    Thank you, message received.
                   </h3>
                   <p className="text-[var(--color-steel)] mb-6">
                     We respond within one business day. For anything urgent,

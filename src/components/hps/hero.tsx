@@ -15,13 +15,13 @@ export function Hero() {
         <div className="max-w-[820px]">
           <div className="hps-eyebrow">Business Growth &amp; Enterprise Solutions</div>
           <h1 className="text-[clamp(2.5rem,5.6vw,4.3rem)] font-extrabold my-0 mb-6">
-            <span className="block">Building Businesses.</span>
-            <span className="block gold-text">Creating Opportunities.</span>
-            <span className="block">Sustaining Success.</span>
+            <span className="block">Building Businesses,</span>
+            <span className="block gold-text">Creating Opportunities</span>
+            <span className="block">and Sustaining Success.</span>
           </h1>
           <p className="text-[1.05rem] sm:text-[1.14rem] text-[var(--color-steel)] max-w-[620px] mb-9">
             Hi&apos;ported Professional Services helps entrepreneurs, SMEs, NGOs,
-            churches, schools and corporations build sustainable businesses —
+            churches, schools and corporations build sustainable businesses,
             through accounting, audit, business registration, automation, and
             strategic advisory.
           </p>
@@ -44,7 +44,7 @@ export function Hero() {
           color: "rgba(90,101,114,0.6)",
         }}
       >
-        RC — {HPS_CONTACT.bn} · GARKI, ABUJA
+        RC: {HPS_CONTACT.bn} · GARKI ABUJA-NIGERIA
       </span>
     </header>
   );

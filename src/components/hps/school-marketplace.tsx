@@ -19,7 +19,7 @@ export function SchoolMarketplace() {
               </h3>
               <p className="text-[var(--color-steel)] text-[0.98rem] mb-6">
                 Practical certification programmes, professional courses and
-                corporate training — accounting, internal audit, entrepreneurship,
+                corporate training, including accounting, internal audit, entrepreneurship,
                 AI for business, data analytics and Excel. Built for real-world
                 application.
               </p>
@@ -34,8 +34,8 @@ export function SchoolMarketplace() {
               </h3>
               <p className="text-[var(--color-steel)] text-[0.98rem] mb-6">
                 Business plan templates, financial models, internal control
-                checklists, tax calendars and digital business tools —
-                professional resources you can put to work today.
+                checklists, tax calendars and digital business tools.
+                Professional resources you can put to work today.
               </p>
               <a href="#contact" className="btn-ghost">
                 Visit Marketplace

@@ -34,8 +34,8 @@ export function CACSection() {
             / CAC REGISTRATIONS
           </p>
           <h1 className="text-[clamp(2.1rem,4.4vw,3.2rem)] font-extrabold mb-4 max-w-[760px]">
-            Register your business with CAC —{" "}
-            <span className="gold-text">properly, and without stress.</span>
+            Register your business with CAC,{" "}
+            <span className="gold-text">properly and without stress.</span>
           </h1>
           <p className="text-[var(--color-steel)] text-[1.08rem] max-w-[640px] mb-8">
             From name search to certificate, HPS handles the entire Corporate
@@ -43,7 +43,12 @@ export function CACSection() {
             paperwork, follow-up and compliance.
           </p>
           <div className="flex flex-wrap gap-4">
-            <a href="#contact" className="btn-gold">
+            <a
+              href="https://forms.gle/LinpnZVRbeSxGFuP6"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-gold"
+            >
               Start My Registration
             </a>
             <a
@@ -128,26 +133,16 @@ export function CACSection() {
                 ))}
               </ul>
               <a
-                href="#contact"
+                href={p.formUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 className={
                   p.featured
                     ? "btn-gold text-center"
                     : "btn-ghost text-center"
                 }
-                data-service={p.serviceParam}
-                onClick={(e) => {
-                  e.preventDefault();
-                  window.dispatchEvent(
-                    new CustomEvent("hps:selectService", {
-                      detail: p.serviceParam,
-                    })
-                  );
-                  document.getElementById("contact")?.scrollIntoView({
-                    behavior: "smooth",
-                  });
-                }}
               >
-                Request a Quote
+                Start My Registration
               </a>
             </Reveal>
           ))}
@@ -278,11 +273,16 @@ export function CACSection() {
             Your business, <span className="gold-text">legally established.</span>
           </h2>
           <p className="text-[var(--color-steel)] max-w-[520px] mx-auto mb-9">
-            Send us your two preferred names and we&apos;ll run the search — the
+            Send us your two preferred names and we&apos;ll run the search, the
             first step is free.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <a href="#contact" className="btn-gold">
+            <a
+              href="https://forms.gle/LinpnZVRbeSxGFuP6"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-gold"
+            >
               Start My Registration
             </a>
             <a

@@ -39,7 +39,7 @@ export function Footer() {
             <a
               href="#top"
               className="flex items-center gap-3"
-              aria-label="Hi'ported Professional Service — home"
+              aria-label="Hi'ported Professional Service, home"
             >
               <img
                 src="/hps-logo.png"
@@ -140,7 +140,7 @@ export function Footer() {
             }}
           >
             © 2026 HI&apos;PORTED PROFESSIONAL SERVICES · {HPS_CONTACT.bn} ·
-            GARKI, ABUJA
+            GARKI ABUJA-NIGERIA
           </span>
           <span
             style={{
@@ -150,7 +150,7 @@ export function Footer() {
               color: "rgba(159,178,201,0.7)",
             }}
           >
-            BUILDING BUSINESSES · CREATING OPPORTUNITIES · SUSTAINING SUCCESS
+            BUILDING BUSINESSES, CREATING OPPORTUNITIES AND SUSTAINING SUCCESS
           </span>
         </div>
       </div>

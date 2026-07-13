@@ -243,3 +243,67 @@ Stage Summary:
 - The logo is transparent (white background removed) so it renders cleanly on both the white nav and the deep-navy footer.
 - Favicon updated from z.ai to the HPS logo.
 - Logo optimized from 868 KB → 43 KB (95% smaller) with no quality loss at display size.
+
+---
+Task ID: 10
+Agent: main
+Task: Apply 11 content edits — remove all em-dashes (decorative + text), update tagline wording, fix Accounting tag, rewrite Industries heading+desc, rewrite Why-HPS heading, point CAC "Start My Registration" buttons to Google Forms, and update business address everywhere.
+
+Work Log:
+- `src/lib/hps-data.ts`:
+  - HPS_CONTACT.tagline → "Building Businesses, Creating Opportunities and Sustaining Success."
+  - HPS_CONTACT.address → "Suit No. B2 Halima Plaza, Behind Old Sahad Store, Balangan Street, Area 11 Garki Abuja-Nigeria." (also corrected "Balanga" → "Balangan")
+  - HPS_CONTACT.hours → en-dashes converted to hyphens ("Mon-Fri · 9:00-17:00 WAT")
+  - SOLUTIONS Accounting tags: "REPORTING" → "FINANCIAL REPORTING"
+  - SOLUTIONS Business Registration desc: removed em-dash
+  - FRAMEWORK_STEPS: removed em-dashes from Discover/Design/Deploy/Develop descriptions
+  - WHY_HPS: removed em-dashes from Technology-Driven + End-to-End Solutions descriptions
+  - VALUES: removed em-dashes from Integrity/Innovation/Continuous Learning descriptions
+  - SERVICE_GROUPS: removed em-dashes from registration/advisory/tech descriptions
+  - CAC_STEPS: removed em-dashes from steps 1 + 5
+  - CAC_FAQS: removed em-dashes from answers 2/4/5 + question 3
+  - STORIES: removed em-dash from result 3
+  - CAC_PACKAGES: added `formUrl` field per package (Business Name → Enxqq43wjRYiDx4PA; LTD → LinpnZVRbeSxGFuP6; NGO → LinpnZVRbeSxGFuP6)
+- `src/app/layout.tsx`: metadata.title em-dash → pipe; tagline updated to commas+and
+- `src/app/globals.css`: removed `.hps-eyebrow::before` decorative rule (the gold dash before every eyebrow)
+- `src/components/hps/hero.tsx`: 3-line headline now "Building Businesses," / "Creating Opportunities" (gold) / "and Sustaining Success."; body em-dash → comma; reg-tag "RC: BN:3301544 · GARKI ABUJA-NIGERIA"
+- `src/components/hps/purpose.tsx`: removed em-dashes in purpose-points + body
+- `src/components/hps/solutions.tsx`: removed em-dash in section desc; aria-label em-dash → comma
+- `src/components/hps/industries.tsx`: heading → "Local relevance with International reach."; desc → "From startups in Nigeria to organizations expanding into the UK and US, we understand..."
+- `src/components/hps/why-hps.tsx`: heading → "More than problem-solver, we are your growth partner"
+- `src/components/hps/school-marketplace.tsx`: removed em-dashes in both descriptions
+- `src/components/hps/cac-section.tsx`:
+  - h1 em-dash removed: "Register your business with CAC, properly and without stress."
+  - Hero "Start My Registration" → external link https://forms.gle/LinpnZVRbeSxGFuP6 (target=_blank)
+  - 3 package buttons: replaced onClick event-dispatch logic with direct `<a href={p.formUrl} target="_blank">Start My Registration</a>` (label changed from "Request a Quote")
+  - Bottom CTA "Start My Registration" → same Google Form link
+  - CTA strip body em-dash → comma
+- `src/components/hps/services.tsx`: removed em-dash in hero desc
+- `src/components/hps/about.tsx`: removed em-dashes in hero h1 + 2 story paragraphs
+- `src/components/hps/contact-section.tsx`: removed em-dashes in 3 strings (consultation desc, WhatsApp label, success heading)
+- `src/components/hps/cta.tsx`: removed the two decorative gold rule spans around the eyebrow text
+- `src/components/hps/chat-widget.tsx`: greeting "Hello — I'm" → "Hello, I'm"; network error em-dash → comma
+- `src/components/hps/footer.tsx`: aria-label em-dash → comma; location "GARKI, ABUJA" → "GARKI ABUJA-NIGERIA"; tagline "BUILDING BUSINESSES · CREATING OPPORTUNITIES · SUSTAINING SUCCESS" → "BUILDING BUSINESSES, CREATING OPPORTUNITIES AND SUSTAINING SUCCESS"
+- `bun run lint` → clean (0 errors)
+- Dev server HMR recompiled all changes cleanly; homepage HTTP 200.
+- Agent Browser verification (all PASS):
+  - Page title: "Hi'ported Professional Services | Building Businesses, Creating Opportunities and Sustaining Success." (no em-dash, new tagline)
+  - Hero: eyebrow has NO decorative dash before it ✓; headline reads "Building Businesses, / Creating Opportunities / and Sustaining Success." ✓; no em-dashes ✓
+  - CAC packages: 3 cards each with "Start My Registration" button ✓; Business Name → Enxqq43wjRYiDx4PA ✓; LTD → LinpnZVRbeSxGFuP6 ✓; NGO → LinpnZVRbeSxGFuP6 ✓; hero + bottom CTA → LinpnZVRbeSxGFuP6 ✓; all open in new tab
+  - Industries heading: "Local relevance with International reach." ✓
+  - Why HPS heading: "More than problem-solver, we are your growth partner" ✓
+  - Accounting Solutions tag: "FINANCIAL REPORTING" ✓
+  - Address (contact + footer): "Suit No. B2 Halima Plaza, Behind Old Sahad Store, Balangan Street, Area 11 Garki Abuja-Nigeria." ✓
+  - Footer tagline: "BUILDING BUSINESSES, CREATING OPPORTUNITIES AND SUSTAINING SUCCESS" ✓
+  - Chat greeting: "Hello, I'm the HPS Assistant..." (no em-dash) ✓
+  - Full-page em-dash scan: "NO em-dashes in visible text" ✓
+  - Zero console errors
+
+Stage Summary:
+- All 11 requested edits applied and verified.
+- Every em-dash (—) in user-visible text and aria-labels removed (replaced with commas, colons, periods, or restructured); only developer code comments retain em-dashes (invisible to end users).
+- Decorative gold dash/rule before section eyebrows removed globally.
+- Tagline updated everywhere (hero headline, page title, footer bar) to "Building Businesses, Creating Opportunities and Sustaining Success."
+- CAC "Start My Registration" buttons (hero, 3 packages, bottom CTA) now link directly to the client's Google Forms in new tabs (Business Name gets its own form; LTD/NGO/hero/bottom share the other form).
+- Business address updated to "Suit No. B2 Halima Plaza, Behind Old Sahad Store, Balangan Street, Area 11 Garki Abuja-Nigeria." across contact section, footer, and hero reg-tag.
+- Zero lint errors, zero console errors, zero em-dashes in visible page text.

@@ -42,7 +42,7 @@ export function About() {
             / ABOUT HPS
           </p>
           <h1 className="text-[clamp(2.1rem,4.4vw,3.2rem)] font-extrabold mb-4 max-w-[760px]">
-            A business growth partner —{" "}
+            A business growth partner,{" "}
             <span className="gold-text">not just a service provider.</span>
           </h1>
           <p className="text-[var(--color-steel)] text-[1.08rem] max-w-[640px]">
@@ -63,15 +63,15 @@ export function About() {
               <span className="gold-text">enterprise solutions.</span>
             </h2>
             <p className="text-[var(--color-steel)] mb-[18px]">
-              HPS began with a simple observation: too many good businesses fail
-              — not because the idea was weak, but because the systems around it
+              HPS began with a simple observation: too many good businesses fail,
+              not because the idea was weak, but because the systems around it
               were. Poor records, missed compliance, no strategy, no structure.
             </p>
             <p className="text-[var(--color-steel)] mb-[18px]">
               We built HPS to close that gap. Today we combine practical business
               knowledge, accounting expertise, technology and strategic advisory
               to help organizations improve performance, strengthen compliance
-              and grow for the long term — in Nigeria and internationally.
+              and grow for the long term, in Nigeria and internationally.
             </p>
             <p className="text-[var(--color-steel)]">
               We don&apos;t just solve business problems. We help entrepreneurs

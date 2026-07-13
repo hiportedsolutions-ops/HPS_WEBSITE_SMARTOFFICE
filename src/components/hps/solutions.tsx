@@ -33,7 +33,7 @@ export function Solutions() {
             End-to-end support for every stage of growth
           </h2>
           <p className="text-[var(--color-steel)] text-[1.06rem]">
-            Not just services — integrated business solutions designed to
+            Not just services, integrated business solutions designed to
             strengthen compliance, improve performance and position you for
             long-term success.
           </p>
@@ -64,7 +64,7 @@ export function Solutions() {
                 {anchor ? (
                   <a
                     href={anchor}
-                    aria-label={`${s.title} — learn more`}
+                    aria-label={`${s.title}, learn more`}
                     className="absolute inset-0"
                   />
                 ) : null}

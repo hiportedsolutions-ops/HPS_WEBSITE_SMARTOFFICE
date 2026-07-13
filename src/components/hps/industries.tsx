@@ -16,11 +16,11 @@ export function Industries() {
         <Reveal className="max-w-[680px] mb-12">
           <div className="hps-eyebrow">Industries We Serve</div>
           <h2 className="text-[clamp(1.9rem,3.6vw,2.7rem)] font-extrabold mb-4">
-            Local relevance. International reach.
+            Local relevance with International reach.
           </h2>
           <p className="text-[#5A6572] text-[1.06rem]">
-            From startups in Abuja to organizations expanding into the UK and US
-            — we understand the realities of the sectors we serve.
+            From startups in Nigeria to organizations expanding into the UK and
+            US, we understand the realities of the sectors we serve.
           </p>
         </Reveal>
 

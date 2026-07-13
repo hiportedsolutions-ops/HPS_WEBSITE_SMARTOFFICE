@@ -68,7 +68,7 @@ export function Stories() {
         </div>
 
         <p className="mt-8 text-[0.85rem] text-[#5A6572] italic">
-          Success stories are illustrative placeholders — replaced with real,
+          Success stories are illustrative placeholders, replaced with real,
           client-approved case studies when available.
         </p>
       </div>

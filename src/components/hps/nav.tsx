@@ -38,7 +38,7 @@ export function Nav() {
         <a
           href="#top"
           className="flex items-center gap-2.5 sm:gap-3"
-          aria-label="Hi'ported Professional Service — home"
+          aria-label="Hi'ported Professional Service, home"
         >
           {/* Company logo (transparent, works on white nav) */}
           <img

@@ -17,7 +17,7 @@ export function Purpose() {
           </p>
           <p className="text-[var(--color-steel)]">
             Whether you are starting out, scaling operations, or preparing for
-            international expansion — we provide the professional support needed
+            international expansion, we provide the professional support needed
             to achieve measurable results.
           </p>
         </Reveal>
@@ -40,7 +40,7 @@ export function Purpose() {
               12
             </strong>
             <small className="text-[var(--color-steel)] text-[0.92rem]">
-              Integrated service lines — from registration to AI-driven
+              Integrated service lines, from registration to AI-driven
               automation
             </small>
           </div>
@@ -79,7 +79,7 @@ export function Purpose() {
               1
             </strong>
             <small className="text-[var(--color-steel)] text-[0.92rem]">
-              Partner for the full journey — from idea to sustainable enterprise
+              Partner for the full journey, from idea to sustainable enterprise
             </small>
           </div>
         </Reveal>

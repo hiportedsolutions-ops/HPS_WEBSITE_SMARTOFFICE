@@ -13,7 +13,7 @@ export function CTA() {
       <div className="hps-wrap">
         <Reveal>
           <div
-            className="inline-flex items-center gap-3 mb-[18px]"
+            className="mb-[18px]"
             style={{
               fontFamily: "var(--font-ibm-plex-mono)",
               fontSize: "0.78rem",
@@ -22,23 +22,7 @@ export function CTA() {
               color: "#E6C466",
             }}
           >
-            <span
-              style={{
-                width: 34,
-                height: 1,
-                background: "#E6C466",
-                display: "inline-block",
-              }}
-            />
             From Vision to Sustainable Success
-            <span
-              style={{
-                width: 34,
-                height: 1,
-                background: "#E6C466",
-                display: "inline-block",
-              }}
-            />
           </div>
           <h2 className="text-[clamp(2rem,4.2vw,3rem)] font-extrabold mb-4 text-white">
             Ready to build{" "}

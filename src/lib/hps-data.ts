@@ -2,16 +2,16 @@
 // Brand: Hi'ported Professional Services (HPS) — BN:3301544
 
 export const HPS_CONTACT = {
-  tagline: "Building Businesses. Creating Opportunities. Sustaining Success.",
+  tagline: "Building Businesses, Creating Opportunities and Sustaining Success.",
   shortName: "Hi'ported Professional Services",
   bn: "BN:3301544",
   address:
-    "Halima Plaza, Behind Old Sahad Store, Balanga Street, Area 11, Garki, Abuja",
+    "Suit No. B2 Halima Plaza, Behind Old Sahad Store, Balangan Street, Area 11 Garki Abuja-Nigeria.",
   email: "hiported@gmail.com",
   phones: ["0811 611 2447", "0703 768 2721"],
   phoneTels: ["+2348116112447", "+2347037682721"],
   whatsapp: "https://wa.me/2348116112447",
-  hours: "Mon–Fri · 9:00–17:00 WAT",
+  hours: "Mon-Fri · 9:00-17:00 WAT",
 };
 
 export const NAV_LINKS = [
@@ -41,12 +41,12 @@ export const SOLUTIONS = [
     icon: "calculator",
     title: "Accounting Solutions",
     desc: "Reliable financial management that gives you clarity and control.",
-    tags: ["BOOKKEEPING", "REPORTING", "PAYROLL", "TAX", "BUDGETS"],
+    tags: ["BOOKKEEPING", "FINANCIAL REPORTING", "PAYROLL", "TAX", "BUDGETS"],
   },
   {
     icon: "landmark",
     title: "Business Registration",
-    desc: "Legally establish and maintain your business — locally and internationally.",
+    desc: "Legally establish and maintain your business, locally and internationally.",
     tags: ["NIGERIA (CAC)", "UNITED KINGDOM", "UNITED STATES", "COMPLIANCE"],
     anchor: "cac",
   },
@@ -74,22 +74,22 @@ export const FRAMEWORK_STEPS = [
   {
     n: "STAGE 01",
     title: "Discover",
-    desc: "We study your business, market and numbers to understand exactly where you are — and where the opportunity lies.",
+    desc: "We study your business, market and numbers to understand exactly where you are, and where the opportunity lies.",
   },
   {
     n: "STAGE 02",
     title: "Design",
-    desc: "We develop practical, tailored solutions — strategy, structure, systems and compliance built for your context.",
+    desc: "We develop practical, tailored solutions: strategy, structure, systems and compliance built for your context.",
   },
   {
     n: "STAGE 03",
     title: "Deploy",
-    desc: "We implement the systems: accounting setups, automation, registration, controls — done properly, end to end.",
+    desc: "We implement the systems: accounting setups, automation, registration, controls, done properly, end to end.",
   },
   {
     n: "STAGE 04",
     title: "Develop",
-    desc: "We train your team so the capability stays in your organization — not just with your consultants.",
+    desc: "We train your team so the capability stays in your organization, not just with your consultants.",
   },
   {
     n: "STAGE 05",
@@ -121,7 +121,7 @@ export const WHY_HPS = [
   },
   {
     title: "Technology-Driven",
-    desc: "Cloud accounting, automation and AI built into our service delivery — not bolted on as an afterthought.",
+    desc: "Cloud accounting, automation and AI built into our service delivery, not bolted on as an afterthought.",
   },
   {
     title: "Faith-Centered Integrity",
@@ -137,7 +137,7 @@ export const WHY_HPS = [
   },
   {
     title: "End-to-End Solutions",
-    desc: "From registration to reporting to training — one partner for the entire journey.",
+    desc: "From registration to reporting to training, one partner for the entire journey.",
   },
 ];
 
@@ -163,7 +163,7 @@ export const STORIES = [
     solution:
       "UK company registration with full documentation and cross-border advisory support.",
     result:
-      "International invoicing and banking within weeks — and a platform for global growth.",
+      "International invoicing and banking within weeks, and a platform for global growth.",
   },
 ];
 
@@ -180,6 +180,7 @@ export const CAC_PACKAGES = [
     ],
     featured: false,
     serviceParam: "business-name",
+    formUrl: "https://forms.gle/Enxqq43wjRYiDx4PA",
   },
   {
     name: "Limited Company (LTD)",
@@ -194,6 +195,7 @@ export const CAC_PACKAGES = [
     ],
     featured: true,
     serviceParam: "ltd",
+    formUrl: "https://forms.gle/LinpnZVRbeSxGFuP6",
   },
   {
     name: "NGO / Incorporated Trustees",
@@ -207,13 +209,14 @@ export const CAC_PACKAGES = [
     ],
     featured: false,
     serviceParam: "ngo",
+    formUrl: "https://forms.gle/LinpnZVRbeSxGFuP6",
   },
 ];
 
 export const CAC_STEPS = [
   {
     title: "Free consultation",
-    desc: "We confirm the right structure for your goals — business name, LTD or incorporated trustees.",
+    desc: "We confirm the right structure for your goals: business name, LTD or incorporated trustees.",
   },
   {
     title: "Name search & reservation",
@@ -229,7 +232,7 @@ export const CAC_STEPS = [
   },
   {
     title: "Follow-up & queries",
-    desc: "If CAC raises any query, we resolve it — you don't chase anyone.",
+    desc: "If CAC raises any query, we resolve it. You don't chase anyone.",
   },
   {
     title: "Certificate delivery",
@@ -269,19 +272,19 @@ export const CAC_FAQS = [
   },
   {
     q: "What is the difference between a Business Name and a Limited Company?",
-    a: "A business name is simpler and cheaper but does not separate you legally from the business. A limited company (LTD) is a separate legal entity — it protects your personal assets, looks more credible to banks and corporate clients, and is required for many contracts and grants. We'll advise you on which fits your situation during the free consultation.",
+    a: "A business name is simpler and cheaper but does not separate you legally from the business. A limited company (LTD) is a separate legal entity. It protects your personal assets, looks more credible to banks and corporate clients, and is required for many contracts and grants. We'll advise you on which fits your situation during the free consultation.",
   },
   {
-    q: "Can I register from outside Abuja — or outside Nigeria?",
+    q: "Can I register from outside Abuja, or outside Nigeria?",
     a: "Yes. The entire process is handled remotely nationwide, and we regularly register companies for Nigerians in the diaspora. Everything can be done via WhatsApp and email.",
   },
   {
     q: "What happens after registration?",
-    a: "We guide you through obtaining your TIN, opening a corporate bank account, and staying compliant — including annual returns filing so your company is never marked inactive. HPS can also handle your bookkeeping and tax registration as your business grows.",
+    a: "We guide you through obtaining your TIN, opening a corporate bank account, and staying compliant, including annual returns filing so your company is never marked inactive. HPS can also handle your bookkeeping and tax registration as your business grows.",
   },
   {
     q: "Can HPS also register my company in the UK or US?",
-    a: "Yes. We provide UK company registration and US LLC registration with full documentation support — ideal if you serve international clients or need foreign invoicing and banking. Ask us about it during your consultation.",
+    a: "Yes. We provide UK company registration and US LLC registration with full documentation support, ideal if you serve international clients or need foreign invoicing and banking. Ask us about it during your consultation.",
   },
 ];
 
@@ -289,7 +292,7 @@ export const SERVICE_GROUPS = [
   {
     id: "registration",
     title: "Business Registration & Corporate Compliance",
-    desc: "Legally establish and maintain your business — in Nigeria and internationally.",
+    desc: "Legally establish and maintain your business, in Nigeria and internationally.",
     services: [
       "CAC Business Name Registration",
       "Company Incorporation (LTD)",
@@ -347,7 +350,7 @@ export const SERVICE_GROUPS = [
   {
     id: "advisory",
     title: "Business Advisory & SME Development",
-    desc: "Better strategic decisions — from startup to scale.",
+    desc: "Better strategic decisions, from startup to scale.",
     services: [
       "Business Strategy Development",
       "Business Plan Development",
@@ -363,7 +366,7 @@ export const SERVICE_GROUPS = [
   {
     id: "tech",
     title: "Automation, AI & Digital Business Solutions",
-    desc: "Technology that eliminates inefficiency and enforces accountability — including our Smart Office workflow and approval automation system.",
+    desc: "Technology that eliminates inefficiency and enforces accountability, including our Smart Office workflow and approval automation system.",
     services: [
       "Business Automation",
       "Smart Office Solutions",
@@ -407,7 +410,7 @@ export const SERVICE_GROUPS = [
 export const VALUES = [
   {
     title: "Integrity",
-    desc: "We do the right thing — even when no one is watching. Faith-centered honesty guides every engagement.",
+    desc: "We do the right thing, even when no one is watching. Faith-centered honesty guides every engagement.",
   },
   {
     title: "Professionalism",
@@ -415,7 +418,7 @@ export const VALUES = [
   },
   {
     title: "Innovation",
-    desc: "Automation, AI and cloud tools built into how we deliver — not bolted on.",
+    desc: "Automation, AI and cloud tools built into how we deliver, not bolted on.",
   },
   {
     title: "Excellence",
@@ -431,7 +434,7 @@ export const VALUES = [
   },
   {
     title: "Continuous Learning",
-    desc: "We teach what we practise — and keep learning ourselves.",
+    desc: "We teach what we practise, and keep learning ourselves.",
   },
   {
     title: "Affordability",

@@ -26,7 +26,7 @@ const ibmPlexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Hi'ported Professional Services — Building Businesses. Creating Opportunities. Sustaining Success.",
+  title: "Hi'ported Professional Services | Building Businesses, Creating Opportunities and Sustaining Success.",
   description:
     "HPS is a business growth and enterprise solutions company in Garki, Abuja helping entrepreneurs, SMEs, NGOs and institutions with accounting, audit, business registration in Nigeria, UK & US, automation and corporate training.",
   keywords: [

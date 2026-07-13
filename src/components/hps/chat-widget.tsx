@@ -20,7 +20,7 @@ const SUGGESTIONS = [
 const GREETING: Msg = {
   role: "assistant",
   content:
-    "Hello — I'm the HPS Assistant. I can help you find the right service, understand our CAC registration packages, or guide you toward booking a free consultation. What would you like to know?",
+    "Hello, I'm the HPS Assistant. I can help you find the right service, understand our CAC registration packages, or guide you toward booking a free consultation. What would you like to know?",
 };
 
 export function ChatWidget() {
@@ -78,7 +78,7 @@ export function ChatWidget() {
       ]);
     } catch {
       setError(
-        "Network error — please check your connection or message us on WhatsApp."
+        "Network error, please check your connection or message us on WhatsApp."
       );
     } finally {
       setLoading(false);
