@@ -307,3 +307,250 @@ Stage Summary:
 - CAC "Start My Registration" buttons (hero, 3 packages, bottom CTA) now link directly to the client's Google Forms in new tabs (Business Name gets its own form; LTD/NGO/hero/bottom share the other form).
 - Business address updated to "Suit No. B2 Halima Plaza, Behind Old Sahad Store, Balangan Street, Area 11 Garki Abuja-Nigeria." across contact section, footer, and hero reg-tag.
 - Zero lint errors, zero console errors, zero em-dashes in visible page text.
+
+---
+Task ID: 11
+Agent: main
+Task: Rebuild the "Our Business Growth Framework" section as a 3D interconnected motion-art diagram, based on the client's reference image — a central "5D Principle" hub with 5 principles (Discover, Design, Deploy, Develop, Dominate) orbiting in a pentagonal pattern, connected by golden rods, gently rotating, each principle clickable to reveal how it works.
+
+Work Log:
+- Analyzed the client's reference image (`ChatGPT Image Jul 14, 2026, 08_11_14 PM.png`) with VLM: a centralized radial diagram — deep-blue central hub with gold "D" + "THE 5D PRINCIPLE" label, 5 white circular nodes with gold borders arranged in a pentagonal orbital pattern, each with a numbered blue badge, uppercase title, and golden icon; golden 3D rods connecting hub to nodes.
+- Enhanced `FRAMEWORK_STEPS` data in `src/lib/hps-data.ts`: added `num` (1-5), `short` (one-line summary), and `icon` (search/pen-tool/rocket/users/trophy) fields to each principle.
+- Created new component `src/components/hps/framework-3d.tsx`:
+  - **Central hub**: circular, deep-blue radial gradient background, 4px gold metallic border (via layered box-shadows), large gold-gradient "D" letter, white "The 5D Principle" label in IBM Plex Mono.
+  - **5 orbital nodes**: positioned via CSS transforms using pentagonal angles (-90°, -18°, 54°, 126°, 198°) at 37.8% orbit radius. Each node is a white circle with a 3px gold border, a blue number badge (1-5) on top with gold border, a lucide icon (Search/PenTool/Rocket/Users/Trophy), and the principle title in uppercase Archivo. Active state: node fills deep blue, border turns bright gold, gains a glow halo, scales up on hover.
+  - **Golden connecting rods**: rendered as an SVG overlay with a gold linear gradient stroke, drop-shadow filter for 3D sheen. Rods connect the hub edge to each node edge. Active rod becomes fully opaque.
+  - **Rotation animation**: the entire orbital ring gently rotates 360° over 60s (`hpsOrbit` keyframes). Each node inner wrapper counter-rotates (`hpsCounter` keyframes) so labels stay upright while the ring spins. When a node is clicked, `animationPlayState` is set to `paused` so users can read comfortably.
+  - **Click interaction**: clicking any node sets it active — the node highlights (blue fill + gold glow), the connecting rod brightens, and a detail panel on the right shows the principle's stage number, title, gold accent rule, full description, and a "← CLOSE" button. When nothing is active, the panel shows a 5D Principle intro with the "DISCOVER → DESIGN → DEPLOY → DEVELOP → DOMINATE" sequence.
+  - **Accessibility**: each node is a real `<button>` with `aria-pressed` and descriptive `aria-label` ("Discover principle — click to see how it works"). Focus-visible ring on keyboard nav. Respects `prefers-reduced-motion` via `useSyncExternalStore` (disables both rotation and counter-rotation).
+  - **Responsive**: diagram scales with `min(560px, 92vw)` and uses `clamp()` for all inner sizes so it works from 375px mobile up to desktop. Layout switches from side-by-side (diagram + panel) on `lg+` to stacked (diagram top, panel below) on mobile.
+- Updated `src/app/page.tsx` to import from `framework-3d` instead of the old `framework`.
+- Fixed lint: replaced the `useEffect + setState` reduced-motion detection with `useSyncExternalStore` (the React-recommended pattern), eliminating the `react-hooks/set-state-in-effect` error.
+- `bun run lint` → clean (0 errors, 0 warnings).
+- Dev server compiled cleanly; homepage HTTP 200.
+- Agent Browser + VLM verification (all PASS):
+  - Desktop: central hub with deep-blue bg + gold border + gold "D" ✓; 5 nodes in pentagonal orbital pattern ✓; labels Discover/Design/Deploy/Develop/Dominate ✓; golden connecting rods ✓; blue number badges (1-5) ✓; detail panel with 5D Principle intro ✓; polished 3D motion-art look ✓.
+  - Click interaction: clicked Deploy node → node highlighted (blue fill + gold border + glow) ✓; detail panel updated to show "3 / STAGE 03 / Deploy / We implement the systems..." + CLOSE button ✓.
+  - Mobile (375px): diagram fully visible, no side cutoff ✓; central hub + nodes visible ✓; layout stacks vertically (diagram top, panel below) ✓; clean and usable ✓.
+  - Rotation: confirmed `hpsOrbit` animation (60s linear infinite) applied to the rotating ring element ✓.
+  - Zero console errors, zero page errors.
+
+Stage Summary:
+- The Business Growth Framework is now a striking 3D interconnected motion-art centerpiece — a gently rotating orbital diagram with a central "5D Principle" hub, 5 clickable principle nodes (Discover, Design, Deploy, Develop, Dominate) connected by golden rods, each revealing its full description in a side detail panel on click.
+- Matches the client's reference image aesthetic: deep-blue + metallic-gold, 3D depth via gradients/shadows/box-shadows, pentagonal orbital layout, numbered badges, golden icons.
+- Fully responsive (375px → desktop), accessible (real buttons, aria-pressed, focus rings, keyboard nav), and respects prefers-reduced-motion (rotation + counter-rotation both disabled).
+- The old flat 5-column stepper is replaced; the section keeps its id (`#framework`) so nav/footer anchor links still work.
+
+---
+Task ID: 12
+Agent: main
+Task: Replace the CSS-rebuilt 3D framework with the EXACT client reference image (`ChatGPT Image Jul 14, 2026, 08_11_56 PM.png`), make only the image revolve (rotating motion), keep all 5 nodes as interactive buttons, maintain motion/interactivity/accessibility, and improve responsiveness.
+
+Work Log:
+- Analyzed the exact reference image with VLM: central gold-rimmed hub with deep-blue inner circle + gold "D" + "THE 5D PRINCIPLE" label; 5 white circular nodes with gold borders, blue number badges, navy uppercase titles, and gold icons, arranged in a pentagonal orbital pattern; thick gold 3D rods connecting hub to nodes; subtle radial-gradient white background.
+- Retrieved exact pixel coordinates of each node center from the 1254×1254 image via VLM:
+  - DISCOVER (627, 180) → (50.0%, 14.4%)
+  - DESIGN (860, 345) → (68.6%, 27.5%)
+  - DEPLOY (860, 910) → (68.6%, 72.6%)
+  - DEVELOP (395, 910) → (31.5%, 72.6%)
+  - DOMINATE (395, 345) → (31.5%, 27.5%)
+  - Node diameter ≈ 240px (19% of image)
+- Processed the image with Python/PIL:
+  - Resized 1254×1254 → 800×800 (sufficient for display up to 600px @ 1.33x)
+  - Saved as WebP quality 92: **100 KB** (down from 1.5 MB original — 93% reduction)
+  - Saved to `/public/hps-framework-5d.webp`
+- Rewrote `src/components/hps/framework-3d.tsx`:
+  - **Exact image**: the WebP is displayed via `<img>` with `border-radius: 50%` (clips the white corners to a clean circle) and a drop-shadow for depth. `object-contain` + `select-none` + `draggable={false}`.
+  - **Revolving motion**: the image sits inside a rotating wrapper div (`hpsSpin` keyframes, 70s linear infinite). The 5 hotspot buttons are CHILDREN of this wrapper, so they rotate together with the image — always staying aligned with their nodes.
+  - **5 interactive hotspots**: each is a real `<button>` positioned absolutely over its node (using the exact % coordinates), sized at 19% of the container. Transparent by default; on hover shows a gold ring + subtle gold radial fill; when active shows a blue radial fill + 3px gold border + gold glow shadow. Each has `aria-pressed`, descriptive `aria-label`, and `sr-only` text.
+  - **Pulsing hint dots**: when idle, each hotspot shows a small gold dot pulsing (`hpsPulse` keyframes, staggered delays) to invite interaction. Hidden when reduced-motion or active.
+  - **Center "D" reset button**: a transparent button over the central hub that clears the active selection.
+  - **Pause behavior**: rotation pauses when (a) the mouse hovers the diagram, (b) a node is active/clicked, or (c) prefers-reduced-motion. Uses `shouldSpin = !reduced && active === null && !hovered`.
+  - **Detail panel**: same as before — shows the active principle's number badge, stage label, title, gold accent rule, short + full description, and CLOSE button. When idle, shows the 5D Principle intro with the sequence line.
+  - **More responsive**: container uses `width: min(600px, 92vw)` with `aspect-ratio: 1/1` (was 560px fixed square). All hotspot positions are % based, so they scale perfectly. Layout stacks vertically on mobile (flex-col → flex-row on lg).
+- `bun run lint` → clean (0 errors).
+- Dev server compiled cleanly; `/hps-framework-5d.webp` serves (200, 100 KB, image/webp); homepage HTTP 200.
+- Agent Browser + VLM verification (all PASS):
+  - Desktop: exact reference image displayed as a circle ✓; 5D hub with D Principle ✓; detail panel with intro ✓; pulsing gold hint dots on nodes ✓; matches reference image (gold + blue, 3D) ✓.
+  - Rotation: `hpsSpin` animation (70s, running) confirmed on the rotating element ✓.
+  - Click Deploy → node highlighted (gold ring + blue tint) ✓; detail panel showed "3 / STAGE 03 / Deploy" + descriptions ✓; rotation paused ✓.
+  - Click Dominate → node highlighted ✓; detail panel showed "5 / STAGE 05 / Dominate" + descriptions ✓.
+  - Mobile (375px): diagram fully visible, no cutoff ✓; reasonably sized ✓; vertical stack ✓; pulsing dots visible ✓; clean and usable ✓.
+  - Mobile click Discover → detail panel showed "1 / STAGE 01 / Discover" + descriptions ✓.
+  - Zero console errors throughout.
+
+Stage Summary:
+- The Business Growth Framework now uses the EXACT client reference image as the centerpiece (the gold-and-blue 5D Principle diagram with the central hub and 5 nodes), clipped to a clean circle.
+- The image gently revolves (360° / 70s) as the only motion. Rotation pauses on hover, on node click, and for reduced-motion users.
+- All 5 nodes (Discover, Design, Deploy, Develop, Dominate) are interactive button hotspots positioned precisely over the image's nodes. Clicking any node highlights it (gold ring + blue glow) and shows its full detail in the side panel. A center "D" button resets the selection.
+- Pulsing gold hint dots invite interaction; hover reveals gold rings on each node.
+- Fully responsive: 600px max on desktop, scales to 92vw on mobile, hotspots scale with the container, layout stacks vertically on small screens.
+- Image optimized from 1.5 MB → 100 KB WebP (93% reduction).
+- Accessible: real buttons, aria-pressed, descriptive aria-labels, sr-only text, focus-visible rings, keyboard-navigable, prefers-reduced-motion respected.
+- Zero lint errors, zero console errors.
+
+---
+Task ID: 13
+Agent: main
+Task: Two edits to the Business Growth Framework: (1) remove the large white-circle background and use the site's general (white) background, (2) make the central "D" hub stay STATIC while only the 5 nodes revolve around it.
+
+Work Log:
+- **Image reprocessing** (`/public/hps-framework-5d.webp`):
+  - Removed ALL white-ish pixels (R,G,B all > 235) from the original reference image, making the background fully transparent.
+  - This approach catches the white background, the subtle radial gradient, AND the node interiors — all become transparent. On the white page background, the nodes still appear white (page shows through), while the large background circle is completely gone.
+  - Gold borders (212,175,55), navy text, blue badges, and gold icons are all far from white and fully preserved. Anti-aliased gold edges blend smoothly to transparent.
+  - 67.1% of pixels removed; saved as 800×800 WebP with transparency (192 KB). VLM confirmed: transparent background, all diagram elements intact, no artifacts.
+- **Section background** (`framework-3d.tsx`):
+  - Removed `section-slate` class (#F6F8FB) from the section — now uses the default body background (#FFFFFF white), matching "the general background on the site."
+  - This creates a clean alternating pattern: Solutions (#F6F8FB) → Framework (white) → Industries (#F6F8FB).
+- **Image display**:
+  - Removed `border-radius: 50%` — no longer needed since the background is transparent (no white square/circle to clip).
+  - Kept `filter: drop-shadow()` which follows the alpha channel, giving depth to the diagram's visible shape only.
+  - Removed the decorative dashed orbit ring (no longer needed on transparent bg — the diagram provides its own visual structure).
+- **Static central hub overlay**:
+  - Added a CSS-built central hub as a SIBLING of the rotating ring (not a child), positioned absolutely at center with `z-index: 10`.
+  - Design: 32% of container size (fully covers the image's own ~29% rotating center hub), deep navy radial gradient (#0A4A9E → #0057B8 → #0A2540), 4px gold border (#D4AF37), layered box-shadows for 3D rim + glow, large gold-gradient "D" (Archivo extrabold, clamp 2-3.2rem), "The 5D Principle" label (white, IBM Plex Mono, uppercase, tracked).
+  - The hub is a `<button>` that resets the selection on click (replaces the old transparent center button).
+  - Because it's a sibling (not a child of the rotating ring), it does NOT rotate — it stays perfectly still while the image + hotspots revolve beneath/around it.
+  - The image's own center hub rotates underneath but is fully covered by the static overlay, so the "D" appears motionless.
+- `bun run lint` → clean (0 errors).
+- Dev server compiled cleanly; image serves (200, 192 KB); homepage HTTP 200.
+- Agent Browser + VLM verification (all PASS):
+  - **No white circle**: diagram sits directly on the page's white background with no visible white shape behind it ✓.
+  - **Static center**: took two screenshots 6 seconds apart; VLM confirmed the central "D" hub is in the SAME position and orientation in both (static), while the 5 nodes have MOVED to different positions (revolving) ✓.
+  - **Click interaction**: clicking "Deploy" shows its detail panel (stage 03, descriptions) ✓; clicking the center "D" hub resets to the intro panel ✓.
+  - **Mobile (375px)**: no white circle ✓; central hub visible and centered ✓; 5 nodes visible ✓; vertical stack (diagram top, panel bottom) ✓; clean, no cutoff ✓.
+  - Zero console errors.
+
+Stage Summary:
+- The large white-circle background is gone — the 5D diagram now floats directly on the site's white background, fully integrated with no visible white shape.
+- The central "D" hub (navy circle, gold border, gold "D", "The 5D Principle" label) is built with CSS and stays completely static — it does not rotate.
+- Only the 5 nodes (Discover, Design, Deploy, Develop, Dominate) and their connecting rods revolve around the static center, exactly as the user requested.
+- All previous functionality preserved: rotation (70s, pauses on hover/click/reduced-motion), 5 interactive hotspot buttons with gold highlight + glow on active, pulsing hint dots, detail panel with descriptions, click-to-reset via the center hub, full responsiveness, accessibility (real buttons, aria-pressed, focus rings, prefers-reduced-motion).
+- Zero lint errors, zero console errors.
+
+---
+Task ID: 14
+Agent: main
+Task: Four edits — (1) remove Thesis & Dissertation Guidance + Academic Editing from Research services, (2) fix office address to "Balanga Street", (3) update phone display to +234 prefix, (4) give the hero tagline an engaging corporate motion.
+
+Work Log:
+- `src/lib/hps-data.ts`:
+  - SERVICE_GROUPS research: removed "Thesis & Dissertation Guidance" and "Academic Editing". Research now has 4 services: Research Proposal Development, Data Analysis, Business & Technical Reports, Company Profiles & SOPs.
+  - HPS_CONTACT.address: "Balangan Street" → "Balanga Street" (corrected spelling); trailing period removed.
+  - HPS_CONTACT.phones: ["0811 611 2447", "0703 768 2721"] → ["+234 811 611 2447", "+234 703 768 2721"] (now displays full international format). phoneTels unchanged (already +2348116112447 / +2347037682721 for tel: links).
+- `src/components/hps/hero.tsx` — converted to a client component with a multi-layered engaging corporate motion:
+  - **Word-by-word reveal**: the 3-line tagline is split into 7 words, each animating in with `hpsWordUp` (fade + translateY + rotateX flip) at staggered delays (0.18s + index×0.12s). Words flow naturally across all 3 lines.
+  - **Gold shimmer sweep**: a continuous `hpsShimmer` animation sweeps a translucent white highlight across the gold "Creating Opportunities" line every 4.5s (background-position drift on a clipped gradient), giving the metallic text a living, light-catching quality.
+  - **Eyebrow gold sweep**: the "Business Growth & Enterprise Solutions" label has a `hpsSweep` animation that periodically sweeps a gold highlight across it (3.5s loop, starts at 1.2s).
+  - **Floating accent orbs**: two large blurred radial-gradient orbs (gold on the left at 0.38 opacity, blue on the right at 0.28 opacity) drift gently with `hpsFloat` (9s and 11s, reverse directions) — adds depth and corporate warmth behind the headline.
+  - **Staggered entrance**: eyebrow → headline words → body paragraph → CTA buttons → BN tag each fade up (`hpsFadeUp`) with increasing delays (0.6s → 1.6s), creating a polished, sequenced load.
+  - **Accessibility**: all motion disabled for `prefers-reduced-motion` via `useSyncExternalStore` (words appear instantly, orbs static, no sweeps/shimmers).
+  - Responsive: orbs use `min(px, vw)` so they scale on mobile; word spans use `inline-block` + `overflow-hidden` parents so the flip reveal is clean at all sizes.
+- `bun run lint` → clean (0 errors).
+- Dev server compiled cleanly; homepage HTTP 200.
+- Agent Browser + VLM verification (all PASS):
+  - Research services: "Thesis present: false | Academic Editing present: false" — removed correctly. Remaining: Data Analysis, Business & Technical Reports, Company Profiles & SOPs ✓.
+  - Phones (contact + footer): display "+234 811 611 2447" and "+234 703 768 2721" with correct tel: links to +2348116112447 / +2347037682721 ✓.
+  - Address: contains "Suit No. B2" + "Balanga Street" ✓.
+  - Hero motion: 3-line tagline visible ✓; "Creating Opportunities" in gold gradient ✓; gold orb (left) + blue orb (right) visible behind headline ✓; polished/engaging/premium ✓; eyebrow visible ✓.
+  - Animations confirmed via computed styles: 7 words with `hpsWordUp` (0.18s first delay) ✓; shimmer element present ✓; 2 floating orbs with `hpsFloat` ✓.
+  - Mobile (375px): tagline readable ✓; gold + blue glows visible ✓; CTA button visible ✓; no overflow ✓.
+  - Zero console errors.
+
+Stage Summary:
+- Research & Professional Writing now lists 4 services (Thesis & Academic Editing removed).
+- Office address corrected to "Suit No. B2 Halima Plaza, Behind Old Sahad Store, Balanga Street, Area 11 Garki Abuja-Nigeria" across contact section, footer, and hero tag.
+- Phone numbers now display in full international format "+234 811 611 2447" / "+234 703 768 2721" in both the contact section and footer (tel: links unchanged).
+- Hero tagline now has an engaging multi-layered corporate motion: word-by-word flip-in reveal (staggered), continuous gold shimmer sweep on "Creating Opportunities", periodic gold sweep on the eyebrow, two gently drifting gold + blue accent orbs behind the headline, and a sequenced fade-up entrance for all hero elements. Fully responsive and respects prefers-reduced-motion.
+- Zero lint errors, zero console errors.
+
+---
+Task ID: 15
+Agent: main
+Task: Two hero edits — (1) remove the top-right blue background/orb (restore white), (2) give the 3-line tagline a corporate bubble motion with each line appearing one after the other.
+
+Work Log:
+- `src/components/hps/hero.tsx` rewritten:
+  - **Blue orb removed**: deleted the floating blue orb div (top-right). Restored the hero background to the original clean white with subtle blue + gold radial glows (rgba(0,87,184,0.08) top-right, rgba(212,175,55,0.06) bottom-left). Top-right is now white as before.
+  - **Single gold orb kept**: the floating gold accent orb (left side) remains, drifting gently with `hpsFloat`.
+  - **Corporate bubble motion**: replaced the word-by-word reveal with a line-by-line bubble entrance. Each of the 3 lines ("Building Businesses,", "Creating Opportunities", "Sustaining Success.") now animates as a complete unit:
+    - **Entrance**: `hpsBubble` keyframe — scales up from 0.6 with a spring overshoot to 1.04, fades in from 0, and settles to natural size (cubic-bezier(0.34, 1.56, 0.64, 1) for a bouncy corporate pop).
+    - **Staggered timing**: line 1 at 0.3s, line 2 at 0.85s, line 3 at 1.4s — so each line appears one after the other (~0.55s apart).
+    - **Continuous life**: after entrance, each line gently bobs (`hpsBob`, 6-7.4s duration, staggered 2.2s/2.6s/3.0s start) so the hero stays alive without being distracting.
+  - **Middle line gold**: "Creating Opportunities" retains the gold-text gradient.
+  - **Sequenced entrance** for the rest: eyebrow (0.6s) → headline bubbles (0.3-1.4s) → body paragraph (2.2s) → CTAs (2.45s) → BN tag (2.7s).
+  - **Accessibility**: all motion (bubbles, bob, float, sweep) disabled for `prefers-reduced-motion` via `useSyncExternalStore`.
+- `bun run lint` → clean (0 errors).
+- Dev server compiled cleanly; homepage HTTP 200.
+- Agent Browser + VLM verification (all PASS):
+  - **No blue orb**: "floating orbs count: 1 | has blue orb: false" ✓. VLM confirmed top-right is white, clean background, gold glow on left only ✓.
+  - **3 lines with bubble entrance**: confirmed via computed styles — line1 `hpsBubble`(0.3s), line2 `hpsBubble`(0.85s), line3 `hpsBubble`(1.4s), all with `hpsBob` continuous float ✓.
+  - **Sequential appearance** (VLM on 4 timed screenshots): t=0.5s only Line 1 visible; t=1.2s Lines 1+2 visible, Line 3 hidden; t=1.8s all 3 visible; final all settled ✓ — lines appear one after the other exactly as requested.
+  - Zero console errors.
+
+Stage Summary:
+- Top-right blue background/orb removed — hero is back to clean white with the original subtle radial glows.
+- The 3-line tagline now has a corporate bubble motion: each full line pops into view as a bubble (spring scale-up + fade), appearing one after the other (0.3s → 0.85s → 1.4s), then gently bobs in place to keep the hero feeling alive.
+- Middle line "Creating Opportunities" remains in gold gradient.
+- All motion respects prefers-reduced-motion.
+- Zero lint errors, zero console errors.
+
+---
+Task ID: 16
+Agent: main
+Task: Increase the motion for the 3 tagline lines ("Building Businesses," / "Creating Opportunities" / "Sustaining Success.") in the hero.
+
+Work Log:
+- `src/components/hps/hero.tsx` — strengthened both the entrance and the continuous float:
+  - **Bubble entrance (`hpsBubble`)**: bigger pop — now scales from 0.4 (was 0.6) up to 1.12 overshoot (was 1.04), then settles through 0.97 to 1.0, with a larger translateY travel (0.9em up from 0.5em). Added a 4th keyframe step (75%) for a more pronounced bounce/settle.
+  - **Continuous bob (`hpsBob`)**: nearly doubled the speed — durations now 3.6s/4.1s/4.6s (was 6-7.4s). Doubled the travel — now moves 12px + 8px (was 6px). Added a ±0.5deg rotation swing on the bob peaks for a livelier, more organic motion. Float start delay reduced slightly (2.0s, was 2.2s).
+- `bun run lint` → clean (0 errors). Dev server compiled cleanly.
+- Agent Browser verification:
+  - Computed styles confirmed: all 3 lines use `hpsBubble` (0.9s) entrance + `hpsBob` (3.6s/4.1s/4.6s) continuous float.
+  - **Live transform measurement** at two time points 1.5s apart proved active motion: Line 1 translateY -3.8px → -5.7px; Line 2 -0.5px → -2.4px; Line 3 -0.3px → -10.5px (up to 10px travel in 1.5s, confirming the larger 12px travel and faster cycle). Off-diagonal matrix values confirmed the ±0.5deg rotation swing is active.
+  - Zero console errors.
+
+Stage Summary:
+- The 3 tagline lines now have noticeably increased motion: a bigger, bouncier bubble pop on entrance (scale 0.4 → 1.12 → 0.97 → 1.0) and a faster, wider continuous bob (12px travel, ~4s cycle, with a slight rotation swing). The hero feels more dynamic and engaging while remaining tasteful and corporate.
+- All motion still respects prefers-reduced-motion.
+- Zero lint errors, zero console errors.
+
+---
+Task ID: 17
+Agent: main
+Task: Create downloadable project files package for deployment.
+
+Work Log:
+- Created `.env.example` documenting the `DATABASE_URL` variable (portable `file:./db/custom.db` for local SQLite).
+- Rewrote `.gitignore` to exclude all build/runtime/sandbox artifacts: `.next/`, `node_modules/`, `db/*.db*`, `.env`, `dev.log`, `upload/`, `download/`, `mini-services/`, `examples/`, `skills/`, `.zscripts/`, `worklog.md`, `verify-*.png`, `next-env.d.ts`.
+- Created comprehensive `README.md` deployment guide (10 sections): tech stack, project structure tree, local quick-start (bun/npm/pnpm/yarn), production deployment (Vercel + self-hosted VPS/Docker/cPanel), database notes (SQLite → Turso/Postgres for production), features list, npm scripts, env vars, content customization, troubleshooting, license/ownership.
+- Removed unused `src/components/hps/framework.tsx` (replaced by `framework-3d.tsx` in Task 11).
+- Cleaned `package.json` for distribution: renamed project to `hps-website` v1.0.0, added description, cleaned scripts (removed sandbox-specific `tee dev.log` / `tee server.log` / standalone cp commands; `dev`/`build`/`start` now use standard portable `next` commands).
+- Built `hps-website-package.zip` (817 KB, 109 files) excluding: `node_modules/`, `.next/`, `.git/`, `db/*.db`, `dev.log`, `upload/`, `download/`, `mini-services/`, `examples/`, `skills/`, `.zscripts/`, `worklog.md`, `.env`, `next-env.d.ts`, `Caddyfile`, `bun.lock`.
+- Verified package integrity by extracting to /tmp and checking: 95 source files, 0 node_modules, 0 .next, 0 db files, 0 logs, 0 sandbox folders, 0 real .env. All 19 key files confirmed present (README, .env.example, package.json, prisma/schema.prisma, all API routes, all HPS components, all public assets).
+- Package placed at `/home/z/my-project/download/hps-website-package.zip` (downloadable).
+
+Stage Summary:
+- Complete deploy-ready project package created at `download/hps-website-package.zip` (817 KB, 109 files).
+- Contains: full source (src/), Prisma schema, public assets (logo, favicon, 5D framework diagram), config files (package.json, tsconfig, tailwind, postcss, eslint, next.config, components.json), .env.example, .gitignore, and a 10-section deployment README.
+- Excludes: all node_modules, build output, SQLite database, dev logs, sandbox-specific folders, real .env.
+- Package is self-contained — a developer can `unzip && bun install && cp .env.example .env && bun run db:push && bun run dev` to run locally, or push to Vercel/GitHub for production.
+
+---
+Task ID: 18
+Agent: main
+Task: Prepare production deployment instructions for both Vercel and Windows VPS with IIS; rebuild downloadable package to include the guide.
+
+Work Log:
+- Created `DEPLOYMENT.md` — a comprehensive deployment guide with two paths:
+  - **Path A: Vercel** — database setup (Turso hosted SQLite + PostgreSQL/Neon alternatives), push to GitHub, Vercel dashboard import, environment variables, auto-deploy, custom domain with auto HTTPS, and Vercel CLI alternative. ~10 min setup.
+  - **Path B: Windows VPS with IIS** — full self-hosting guide: prerequisites (Node.js, IIS, URL Rewrite, ARR, NSSM, Git), copy project, SQLite/PostgreSQL setup, `npm install && npm run build`, run Next.js as a Windows service via NSSM (auto-start on boot, log redirection), IIS reverse proxy config with `web.config` URL Rewrite rules, firewall rules (ports 80/443), HTTPS via win-acme (Let's Encrypt auto-renewal), DNS setup, production maintenance (updates, logs, scheduled DB backups), and a troubleshooting section.
+  - Includes a quick comparison table (Vercel vs VPS) and a recommendation to start with Vercel.
+- Rebuilt `download/hps-website-package.zip` (824 KB, now includes DEPLOYMENT.md alongside README.md). Placed a copy in `public/` so it's downloadable via the preview at `/hps-website-package.zip`.
+- Verified: zip serves HTTP 200 (824 KB); both README.md and DEPLOYMENT.md present in the package.
+
+Stage Summary:
+- Production deployment guide complete for both Vercel (recommended, ~10 min) and Windows VPS with IIS (self-hosting with NSSM service + IIS reverse proxy + Let's Encrypt HTTPS).
+- Updated downloadable package at `download/hps-website-package.zip` (824 KB) includes the new DEPLOYMENT.md.
+- Download available via preview at `/hps-website-package.zip`.

@@ -3,7 +3,7 @@ import { Hero } from "@/components/hps/hero";
 import { Trustbar } from "@/components/hps/trustbar";
 import { Purpose } from "@/components/hps/purpose";
 import { Solutions } from "@/components/hps/solutions";
-import { Framework } from "@/components/hps/framework";
+import { Framework } from "@/components/hps/framework-3d";
 import { Industries } from "@/components/hps/industries";
 import { WhyHPS } from "@/components/hps/why-hps";
 import { Stories } from "@/components/hps/stories";

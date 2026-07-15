@@ -2,13 +2,13 @@
 // Brand: Hi'ported Professional Services (HPS) — BN:3301544
 
 export const HPS_CONTACT = {
-  tagline: "Building Businesses, Creating Opportunities and Sustaining Success.",
+  tagline: "Building Businesses, Creating Opportunities & Sustaining Success.",
   shortName: "Hi'ported Professional Services",
   bn: "BN:3301544",
   address:
-    "Suit No. B2 Halima Plaza, Behind Old Sahad Store, Balangan Street, Area 11 Garki Abuja-Nigeria.",
+    "Suit No. B2 Halima Plaza, Behind Old Sahad Store, Balanga Street, Area 11 Garki Abuja-Nigeria",
   email: "hiported@gmail.com",
-  phones: ["0811 611 2447", "0703 768 2721"],
+  phones: ["+234 811 611 2447", "+234 703 768 2721"],
   phoneTels: ["+2348116112447", "+2347037682721"],
   whatsapp: "https://wa.me/2348116112447",
   hours: "Mon-Fri · 9:00-17:00 WAT",
@@ -73,28 +73,43 @@ export const SOLUTIONS = [
 export const FRAMEWORK_STEPS = [
   {
     n: "STAGE 01",
+    num: 1,
     title: "Discover",
+    short: "Understand your business deeply.",
     desc: "We study your business, market and numbers to understand exactly where you are, and where the opportunity lies.",
+    icon: "search",
   },
   {
     n: "STAGE 02",
+    num: 2,
     title: "Design",
+    short: "Develop practical, custom solutions.",
     desc: "We develop practical, tailored solutions: strategy, structure, systems and compliance built for your context.",
+    icon: "pen-tool",
   },
   {
     n: "STAGE 03",
+    num: 3,
     title: "Deploy",
+    short: "Implement systems and strategies effectively.",
     desc: "We implement the systems: accounting setups, automation, registration, controls, done properly, end to end.",
+    icon: "rocket",
   },
   {
     n: "STAGE 04",
+    num: 4,
     title: "Develop",
+    short: "Train, empower and strengthen your people.",
     desc: "We train your team so the capability stays in your organization, not just with your consultants.",
+    icon: "users",
   },
   {
     n: "STAGE 05",
+    num: 5,
     title: "Dominate",
+    short: "Achieve sustainable growth and lasting impact.",
     desc: "With systems running and people equipped, your business competes with confidence and grows sustainably.",
+    icon: "trophy",
   },
 ];
 
@@ -382,9 +397,7 @@ export const SERVICE_GROUPS = [
     desc: "Rigorous research and documentation for academics, institutions and professionals.",
     services: [
       "Research Proposal Development",
-      "Thesis & Dissertation Guidance",
       "Data Analysis",
-      "Academic Editing",
       "Business & Technical Reports",
       "Company Profiles & SOPs",
     ],

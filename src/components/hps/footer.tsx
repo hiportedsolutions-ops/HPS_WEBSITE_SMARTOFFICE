@@ -150,7 +150,7 @@ export function Footer() {
               color: "rgba(159,178,201,0.7)",
             }}
           >
-            BUILDING BUSINESSES, CREATING OPPORTUNITIES AND SUSTAINING SUCCESS
+            BUILDING BUSINESSES, CREATING OPPORTUNITIES & SUSTAINING SUCCESS
           </span>
         </div>
       </div>
