@@ -44,3 +44,7 @@ skills/
 worklog.md
 verify-*.png
 v-*.png
+
+# Never let a full source bundle sit in public/ — anything here is served
+# publicly at the site root (e.g. hiported.com/hps-website-package.zip).
+public/*.zip
