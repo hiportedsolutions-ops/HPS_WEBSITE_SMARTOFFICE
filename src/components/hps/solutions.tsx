@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
   Compass,
   Calculator,
@@ -46,7 +47,11 @@ export function Solutions() {
           {SOLUTIONS.map((s, i) => {
             const Icon = ICONS[s.icon] ?? Compass;
             const anchor =
-              "anchor" in s && s.anchor ? `#${s.anchor}` : undefined;
+              "href" in s && s.href
+                ? s.href
+                : "anchor" in s && s.anchor
+                  ? `#${s.anchor}`
+                  : undefined;
             return (
               <Reveal
                 key={s.title}
@@ -61,7 +66,13 @@ export function Solutions() {
                     background: "linear-gradient(90deg,#B8902E,#E6C466)",
                   }}
                 />
-                {anchor ? (
+                {anchor?.startsWith("/") ? (
+                  <Link
+                    href={anchor}
+                    aria-label={`${s.title}, learn more`}
+                    className="absolute inset-0"
+                  />
+                ) : anchor ? (
                   <a
                     href={anchor}
                     aria-label={`${s.title}, learn more`}

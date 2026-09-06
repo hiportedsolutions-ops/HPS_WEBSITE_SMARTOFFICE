@@ -1,0 +1,520 @@
+/*
+  Smart Office launch page — scoped styles.
+
+  Every rule is nested under `.smartoffice-page` (the page's single root
+  wrapper) so this stylesheet can never leak into the rest of the Hi'ported
+  site, even though it uses plain element selectors internally. Tailwind's
+  preflight (loaded globally in src/app/globals.css) already resets
+  margin/padding/box-sizing, so that reset is not repeated here.
+*/
+
+.smartoffice-page {
+  --so-green-950: #0b2f24;
+  --so-green-900: #0e3a2c;
+  --so-green-700: #1b5a43;
+  --so-green-100: #dce7df;
+  --so-paper: #f2f5f1;
+  --so-white: #ffffff;
+  --so-gold: #c6a02d;
+  --so-gold-dark: #a5851f;
+  --so-ink: #152820;
+  --so-muted: #5b6e63;
+  --so-line: #d8e0d9;
+  --so-stamp: #1e7a4f;
+  --so-error: #b3402f;
+  --so-radius: 10px;
+
+  font-family: var(--font-public-sans), system-ui, sans-serif;
+  color: var(--so-ink);
+  background: var(--so-paper);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.smartoffice-page h1,
+.smartoffice-page h2,
+.smartoffice-page h3 {
+  font-family: var(--font-zilla-slab), serif;
+  line-height: 1.15;
+}
+
+.smartoffice-page .mono {
+  font-family: var(--font-ibm-plex-mono), monospace;
+}
+
+.smartoffice-page .wrap {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.smartoffice-page .eyebrow {
+  font-family: var(--font-ibm-plex-mono), monospace;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--so-gold);
+  font-weight: 500;
+}
+
+.smartoffice-page section {
+  padding: 88px 0;
+}
+
+/* ---------- Header ---------- */
+.smartoffice-page .so-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(11, 47, 36, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.smartoffice-page .nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+.smartoffice-page .brand {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  background: var(--so-white);
+  padding: 6px 16px;
+  border-radius: 9px;
+}
+.smartoffice-page .logo-img {
+  height: 40px;
+  width: auto;
+  display: block;
+}
+.smartoffice-page .nav a.cta-small {
+  background: var(--so-gold);
+  color: var(--so-green-950);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 9px 18px;
+  border-radius: 8px;
+  transition: background 0.15s ease;
+}
+.smartoffice-page .nav a.cta-small:hover {
+  background: #d6b043;
+}
+
+/* ---------- Hero ---------- */
+.smartoffice-page .hero {
+  background: linear-gradient(170deg, var(--so-green-950) 0%, var(--so-green-900) 60%, #10422f 100%);
+  color: var(--so-white);
+  padding: 96px 0 104px;
+}
+.smartoffice-page .hero-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 64px;
+  align-items: center;
+}
+.smartoffice-page .hero h1 {
+  font-size: clamp(38px, 5vw, 58px);
+  font-weight: 700;
+  margin: 18px 0 20px;
+}
+.smartoffice-page .hero h1 em {
+  font-style: normal;
+  color: var(--so-gold);
+}
+.smartoffice-page .hero p.lead {
+  font-size: 18px;
+  color: var(--so-green-100);
+  max-width: 52ch;
+  margin-bottom: 32px;
+}
+.smartoffice-page .btn-gold {
+  display: inline-block;
+  background: var(--so-gold);
+  color: var(--so-green-950);
+  font-weight: 700;
+  font-size: 16px;
+  text-decoration: none;
+  padding: 15px 30px;
+  border-radius: 9px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+.smartoffice-page .btn-gold:hover {
+  background: #d6b043;
+  transform: translateY(-1px);
+}
+.smartoffice-page .hero-note {
+  margin-top: 14px;
+  font-size: 13px;
+  color: var(--so-green-100);
+  opacity: 0.75;
+}
+
+/* ---------- Signature: the audit trail card ---------- */
+.smartoffice-page .trail-card {
+  background: var(--so-white);
+  color: var(--so-ink);
+  border-radius: 14px;
+  padding: 26px 26px 20px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+.smartoffice-page .trail-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px solid var(--so-line);
+  padding-bottom: 12px;
+  margin-bottom: 6px;
+}
+.smartoffice-page .trail-head .memo-id {
+  font-size: 12px;
+  color: var(--so-muted);
+}
+.smartoffice-page .trail-head .memo-title {
+  font-family: var(--font-zilla-slab), serif;
+  font-weight: 600;
+  font-size: 16px;
+}
+.smartoffice-page .stage {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 0;
+  border-bottom: 1px dashed var(--so-line);
+  opacity: 0;
+  transform: translateY(6px);
+  animation: so-stage-in 0.5s ease forwards;
+}
+.smartoffice-page .stage:last-child {
+  border-bottom: none;
+}
+.smartoffice-page .stage .num {
+  width: 22px;
+  height: 22px;
+  flex: none;
+  border-radius: 50%;
+  border: 1.5px solid var(--so-line);
+  color: var(--so-muted);
+  font-size: 11px;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-ibm-plex-mono), monospace;
+}
+.smartoffice-page .stage .label {
+  font-size: 14px;
+  font-weight: 500;
+  flex: 1;
+}
+.smartoffice-page .stage .time {
+  font-size: 11px;
+  color: var(--so-muted);
+}
+.smartoffice-page .stage .stamp {
+  font-family: var(--font-ibm-plex-mono), monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--so-stamp);
+  border: 1.2px solid var(--so-stamp);
+  border-radius: 4px;
+  padding: 2px 7px;
+  transform: rotate(-3deg);
+  opacity: 0;
+  animation: so-stamp-in 0.35s ease forwards;
+}
+.smartoffice-page .stage:nth-child(2) { animation-delay: 0.2s; }
+.smartoffice-page .stage:nth-child(3) { animation-delay: 0.7s; }
+.smartoffice-page .stage:nth-child(4) { animation-delay: 1.2s; }
+.smartoffice-page .stage:nth-child(5) { animation-delay: 1.7s; }
+.smartoffice-page .stage:nth-child(6) { animation-delay: 2.2s; }
+.smartoffice-page .stage:nth-child(7) { animation-delay: 2.7s; }
+.smartoffice-page .stage:nth-child(2) .stamp { animation-delay: 0.55s; }
+.smartoffice-page .stage:nth-child(3) .stamp { animation-delay: 1.05s; }
+.smartoffice-page .stage:nth-child(4) .stamp { animation-delay: 1.55s; }
+.smartoffice-page .stage:nth-child(5) .stamp { animation-delay: 2.05s; }
+.smartoffice-page .stage:nth-child(6) .stamp { animation-delay: 2.55s; }
+.smartoffice-page .stage:nth-child(7) .stamp { animation-delay: 3.05s; }
+
+@keyframes so-stage-in {
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes so-stamp-in {
+  0% { opacity: 0; transform: rotate(-3deg) scale(1.6); }
+  100% { opacity: 1; transform: rotate(-3deg) scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .smartoffice-page .stage,
+  .smartoffice-page .stage .stamp {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- Problem / value section ---------- */
+.smartoffice-page .section-head {
+  max-width: 640px;
+  margin-bottom: 48px;
+}
+.smartoffice-page .section-head h2 {
+  font-size: clamp(28px, 3.4vw, 38px);
+  font-weight: 700;
+  margin: 14px 0 14px;
+}
+.smartoffice-page .section-head p {
+  color: var(--so-muted);
+  font-size: 17px;
+}
+.smartoffice-page .cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.smartoffice-page .card {
+  background: var(--so-white);
+  border: 1px solid var(--so-line);
+  border-radius: var(--so-radius);
+  padding: 26px;
+}
+.smartoffice-page .card h3 {
+  font-size: 19px;
+  margin: 14px 0 8px;
+}
+.smartoffice-page .card p {
+  font-size: 14.5px;
+  color: var(--so-muted);
+}
+.smartoffice-page .card .icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 11px;
+  background: var(--so-green-100);
+  display: grid;
+  place-items: center;
+}
+.smartoffice-page .card .icon svg {
+  width: 24px;
+  height: 24px;
+  stroke: var(--so-green-700);
+  stroke-width: 1.9;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.smartoffice-page .card .icon svg .fill-accent {
+  fill: var(--so-gold);
+  stroke: none;
+}
+
+/* ---------- Workflow strip ---------- */
+.smartoffice-page .workflow {
+  background: var(--so-green-950);
+  color: var(--so-white);
+}
+.smartoffice-page .workflow .section-head p {
+  color: var(--so-green-100);
+}
+.smartoffice-page .flow {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+  margin-top: 8px;
+}
+.smartoffice-page .flow .step {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 9px;
+  padding: 16px 12px;
+}
+.smartoffice-page .flow .step .s-num {
+  font-family: var(--font-ibm-plex-mono), monospace;
+  font-size: 11px;
+  color: var(--so-gold);
+  margin-bottom: 8px;
+}
+.smartoffice-page .flow .step .s-name {
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+/* ---------- Countdown + form ---------- */
+.smartoffice-page .launch {
+  background: var(--so-white);
+  border-top: 1px solid var(--so-line);
+  border-bottom: 1px solid var(--so-line);
+}
+.smartoffice-page .launch-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+.smartoffice-page .countdown {
+  display: flex;
+  gap: 14px;
+  margin: 26px 0 10px;
+}
+.smartoffice-page .cd-box {
+  background: var(--so-green-950);
+  color: var(--so-white);
+  border-radius: 10px;
+  min-width: 82px;
+  padding: 16px 10px;
+  text-align: center;
+}
+.smartoffice-page .cd-box .cd-val {
+  font-family: var(--font-zilla-slab), serif;
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1;
+}
+.smartoffice-page .cd-box .cd-lab {
+  font-family: var(--font-ibm-plex-mono), monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--so-green-100);
+  margin-top: 7px;
+}
+.smartoffice-page .launch-date-line {
+  font-size: 14px;
+  color: var(--so-muted);
+}
+
+.smartoffice-page .form-card {
+  background: var(--so-paper);
+  border: 1px solid var(--so-line);
+  border-radius: 14px;
+  padding: 32px;
+}
+.smartoffice-page .form-card h3 {
+  font-size: 22px;
+  margin-bottom: 6px;
+}
+.smartoffice-page .form-card > p {
+  font-size: 14.5px;
+  color: var(--so-muted);
+  margin-bottom: 22px;
+}
+.smartoffice-page .field {
+  margin-bottom: 16px;
+}
+.smartoffice-page .field label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.smartoffice-page .field input,
+.smartoffice-page .field select {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 15px;
+  font-family: inherit;
+  border: 1px solid var(--so-line);
+  border-radius: 8px;
+  background: var(--so-white);
+  color: var(--so-ink);
+}
+.smartoffice-page .field input:focus,
+.smartoffice-page .field select:focus {
+  outline: 2px solid var(--so-green-700);
+  outline-offset: 1px;
+  border-color: var(--so-green-700);
+}
+.smartoffice-page .btn-submit {
+  width: 100%;
+  background: var(--so-green-900);
+  color: var(--so-white);
+  font-weight: 700;
+  font-size: 16px;
+  padding: 14px;
+  border: none;
+  border-radius: 9px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.smartoffice-page .btn-submit:hover:not(:disabled) {
+  background: var(--so-green-700);
+}
+.smartoffice-page .btn-submit:disabled {
+  background: var(--so-muted);
+  cursor: wait;
+}
+.smartoffice-page .form-msg {
+  margin-top: 14px;
+  font-size: 14px;
+  border-radius: 8px;
+  padding: 12px 14px;
+}
+.smartoffice-page .form-msg.ok {
+  background: #e4f1e8;
+  color: var(--so-stamp);
+  border: 1px solid #bfdcc9;
+}
+.smartoffice-page .form-msg.err {
+  background: #f7e7e3;
+  color: var(--so-error);
+  border: 1px solid #e7c4bc;
+}
+.smartoffice-page .privacy-note {
+  margin-top: 12px;
+  font-size: 12px;
+  color: var(--so-muted);
+}
+
+/* ---------- Footer ---------- */
+.smartoffice-page .so-footer {
+  background: var(--so-green-950);
+  color: var(--so-green-100);
+  padding: 44px 0;
+}
+.smartoffice-page .foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.smartoffice-page .foot .small {
+  font-size: 13px;
+  opacity: 0.8;
+}
+.smartoffice-page .foot-logo {
+  display: inline-block;
+  background: var(--so-white);
+  padding: 8px 16px;
+  border-radius: 9px;
+}
+.smartoffice-page .foot-logo img {
+  height: 36px;
+  width: auto;
+  display: block;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .smartoffice-page .hero-grid,
+  .smartoffice-page .launch-grid {
+    grid-template-columns: 1fr;
+    gap: 44px;
+  }
+  .smartoffice-page .cards {
+    grid-template-columns: 1fr;
+  }
+  .smartoffice-page .flow {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .smartoffice-page section {
+    padding: 64px 0;
+  }
+  .smartoffice-page .countdown {
+    flex-wrap: wrap;
+  }
+}

@@ -55,6 +55,7 @@ export const SOLUTIONS = [
     title: "Automation & Technology",
     desc: "Embrace technology that eliminates inefficiency and enforces accountability.",
     tags: ["SMART OFFICE", "CLOUD ACCOUNTING", "AI INTEGRATION", "WORKFLOWS"],
+    href: "/smartoffice",
   },
   {
     icon: "bar-chart",
