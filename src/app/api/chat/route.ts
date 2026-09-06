@@ -34,7 +34,7 @@ ABOUT HPS:
 - Tagline: "Building Businesses, Creating Opportunities & Sustaining Success."
 - Location: Halima Plaza, Behind Old Sahad Store, Balanga Street, Area 11, Garki, Abuja
 - Phone: 0811 611 2447 / 0703 768 2721
-- Email: hiported@gmail.com
+- Email: hiported@gmail.com · mail@hiported.com
 - WhatsApp: https://wa.me/2348116112447
 - Hours: Mon–Fri, 9:00–17:00 WAT
 - Registration: BN:3301544

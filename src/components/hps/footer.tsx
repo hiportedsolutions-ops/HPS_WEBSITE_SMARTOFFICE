@@ -80,16 +80,23 @@ export function Footer() {
                   {HPS_CONTACT.address}
                 </span>
               </li>
-              <li className="flex gap-2.5 items-baseline">
-                <span className="text-[0.8rem]" style={{ color: "#E6C466" }}>
-                  ◆
-                </span>
-                <a
-                  href={`mailto:${HPS_CONTACT.email}`}
-                  className="text-[0.92rem] text-[#9FB2C9] hover:text-[#E6C466] transition-colors"
-                >
-                  {HPS_CONTACT.email}
-                </a>
+              <li className="flex flex-col gap-1">
+                {HPS_CONTACT.emails.map((email) => (
+                  <span key={email} className="flex gap-2.5 items-baseline">
+                    <span
+                      className="text-[0.8rem]"
+                      style={{ color: "#E6C466" }}
+                    >
+                      ◆
+                    </span>
+                    <a
+                      href={`mailto:${email}`}
+                      className="text-[0.92rem] text-[#9FB2C9] hover:text-[#E6C466] transition-colors"
+                    >
+                      {email}
+                    </a>
+                  </span>
+                ))}
               </li>
               <li className="flex gap-2.5 items-baseline">
                 <span className="text-[0.8rem]" style={{ color: "#E6C466" }}>

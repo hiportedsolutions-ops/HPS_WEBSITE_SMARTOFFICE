@@ -7,7 +7,7 @@ export const HPS_CONTACT = {
   bn: "BN:3301544",
   address:
     "Suit No. B2 Halima Plaza, Behind Old Sahad Store, Balanga Street, Area 11 Garki Abuja-Nigeria",
-  email: "hiported@gmail.com",
+  emails: ["hiported@gmail.com", "mail@hiported.com"],
   phones: ["+234 811 611 2447", "+234 703 768 2721"],
   phoneTels: ["+2348116112447", "+2347037682721"],
   whatsapp: "https://wa.me/2348116112447",

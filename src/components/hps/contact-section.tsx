@@ -167,12 +167,21 @@ export function ContactSection() {
               icon={<Mail className="size-4 mt-1" />}
               title="Email"
               value={
-                <a
-                  href={`mailto:${HPS_CONTACT.email}`}
-                  className="hover:text-[var(--color-blue)]"
-                >
-                  {HPS_CONTACT.email}
-                </a>
+                <>
+                  {HPS_CONTACT.emails.map((email, i) => (
+                    <span key={email}>
+                      <a
+                        href={`mailto:${email}`}
+                        className="hover:text-[var(--color-blue)]"
+                      >
+                        {email}
+                      </a>
+                      {i < HPS_CONTACT.emails.length - 1 && (
+                        <span className="text-[var(--color-steel)]"> · </span>
+                      )}
+                    </span>
+                  ))}
+                </>
               }
             />
             <div
