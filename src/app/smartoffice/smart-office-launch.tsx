@@ -6,9 +6,7 @@ import "./smartoffice.css";
 // Backend that stores early-access leads (Railway). Overridable via env so
 // the endpoint can change without a code edit.
 const API_URL =
-  process.env.NEXT_PUBLIC_SMART_OFFICE_LEADS_API ??
-  "https://smart-office-production.up.railway.app/api/leads";
-
+  process.env.NEXT_PUBLIC_SMART_OFFICE_LEADS_API ?? "/api/smartoffice-leads";
 // Launch date/time (local to the visitor's browser), matches the
 // originally supplied countdown. Month is 0-based: 9 = October.
 const LAUNCH_DATE = new Date(2026, 9, 1, 9, 0, 0);

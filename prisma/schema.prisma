@@ -45,3 +45,13 @@ model ContactInquiry {
   @@index([createdAt])
   @@index([status])
 }
+model SmartOfficeLead {
+  id           String   @id @default(cuid())
+  fullName     String
+  email        String   @unique
+  organization String?
+  role         String?
+  createdAt    DateTime @default(now())
+
+  @@index([createdAt])
+}
