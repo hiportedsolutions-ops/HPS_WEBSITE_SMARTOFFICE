@@ -73,6 +73,54 @@ function getClientIp(request: NextRequest): string {
 }
 
 // ---------------------------------------------------------------------------
+// Each request is also emailed to the Smart Office team (Brevo HTTPS API,
+// the same service the app uses). Needs BREVO_API_KEY and BREVO_FROM_EMAIL
+// (a sender verified in Brevo); LEADS_NOTIFY_EMAIL overrides the inbox.
+// A failed email never fails the request: the lead is already saved.
+// ---------------------------------------------------------------------------
+type Lead = { fullName: string; email: string; organization?: string; role?: string }
+
+const escapeHtml = (v: string) =>
+  v.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c] as string)
+
+async function notifyTeam(lead: Lead, repeat: boolean) {
+  const apiKey = process.env.BREVO_API_KEY?.trim()
+  const from = process.env.BREVO_FROM_EMAIL?.trim()
+  const to = process.env.LEADS_NOTIFY_EMAIL?.trim() || 'smartoffice@hiported.com'
+  if (!apiKey || !from) {
+    console.warn('[api/smartoffice-leads] BREVO_API_KEY or BREVO_FROM_EMAIL not set — team not emailed')
+    return
+  }
+  const rows: Array<[string, string]> = [
+    ['Name', lead.fullName],
+    ['Email', lead.email],
+    ['Organisation', lead.organization || '—'],
+    ['Role', lead.role || '—'],
+  ]
+  const org = lead.organization || lead.fullName
+  try {
+    const res = await fetch('https://api.brevo.com/v3/smtp/email', {
+      method: 'POST',
+      headers: { 'api-key': apiKey, 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({
+        sender: { name: 'Smart Office website', email: from },
+        to: [{ email: to }],
+        replyTo: { email: lead.email, name: lead.fullName },
+        subject: `${repeat ? 'Repeat request' : 'New request'}: ${org} — Smart Office`,
+        htmlContent:
+          `<p>${repeat ? 'Someone already on the list asked again' : 'A new institution asked to get started'} on hiported.com/smartoffice.</p>` +
+          `<table cellpadding="6">${rows.map(([k, v]) => `<tr><td><b>${k}</b></td><td>${escapeHtml(v)}</td></tr>`).join('')}</table>` +
+          '<p>Reply to this email to answer them directly.</p>',
+      }),
+      signal: AbortSignal.timeout(8000),
+    })
+    if (!res.ok) console.error('[api/smartoffice-leads] Brevo refused the email:', res.status, await res.text())
+  } catch (error) {
+    console.error('[api/smartoffice-leads] could not email the team:', error)
+  }
+}
+
+// ---------------------------------------------------------------------------
 // GET — health/admin check. Exposes only the total lead count.
 // ---------------------------------------------------------------------------
 export async function GET() {
@@ -128,6 +176,7 @@ export async function POST(request: NextRequest) {
       },
       select: { id: true },
     })
+    await notifyTeam(parsed.data, false)
 
     return NextResponse.json({ success: true, id: lead.id }, { status: 201 })
   } catch (error) {
@@ -136,6 +185,7 @@ export async function POST(request: NextRequest) {
       error instanceof Prisma.PrismaClientKnownRequestError &&
       error.code === 'P2002'
     ) {
+      await notifyTeam(parsed.data, true)
       return NextResponse.json(
         { error: 'This email is already on the list.' },
         { status: 409 },

@@ -518,3 +518,220 @@
     flex-wrap: wrap;
   }
 }
+
+/* ---------- Header links + Sign in ---------- */
+.smartoffice-page .so-links {
+  display: flex;
+  gap: 26px;
+}
+.smartoffice-page .so-links a {
+  color: var(--so-green-100);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+}
+.smartoffice-page .so-links a:hover {
+  color: var(--so-white);
+}
+.smartoffice-page .nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.smartoffice-page .nav a.cta-ghost {
+  color: var(--so-white);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+.smartoffice-page .nav a.cta-ghost:hover {
+  border-color: var(--so-white);
+}
+.smartoffice-page .hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.smartoffice-page .btn-outline {
+  display: inline-block;
+  color: var(--so-white);
+  font-weight: 600;
+  font-size: 16px;
+  text-decoration: none;
+  padding: 14px 26px;
+  border-radius: 9px;
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+}
+.smartoffice-page .btn-outline:hover {
+  border-color: var(--so-white);
+}
+
+/* ---------- Products ---------- */
+.smartoffice-page .products {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+.smartoffice-page .product {
+  background: var(--so-white);
+  border: 1px solid var(--so-line);
+  border-radius: var(--so-radius);
+  padding: 30px;
+}
+.smartoffice-page .product h3 {
+  font-size: 21px;
+  margin: 10px 0;
+}
+.smartoffice-page .product p {
+  font-size: 14.5px;
+  color: var(--so-muted);
+  margin-bottom: 14px;
+}
+.smartoffice-page .product ul,
+.smartoffice-page .promise {
+  list-style: none;
+  padding: 0;
+}
+.smartoffice-page .product li,
+.smartoffice-page .promise li {
+  position: relative;
+  padding-left: 22px;
+  font-size: 14px;
+  margin-bottom: 7px;
+}
+.smartoffice-page .product li::before,
+.smartoffice-page .promise li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 7px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--so-gold);
+}
+
+/* ---------- Who it's for ---------- */
+.smartoffice-page .who {
+  background: var(--so-white);
+  border-top: 1px solid var(--so-line);
+}
+.smartoffice-page .who-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.smartoffice-page .who-item {
+  border-top: 3px solid var(--so-green-700);
+  padding-top: 16px;
+}
+.smartoffice-page .who-item h3 {
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+.smartoffice-page .who-item p {
+  font-size: 14.5px;
+  color: var(--so-muted);
+}
+
+/* ---------- FAQ ---------- */
+.smartoffice-page .faq {
+  max-width: 820px;
+}
+.smartoffice-page .faq details {
+  border-bottom: 1px solid var(--so-line);
+  padding: 18px 0;
+}
+.smartoffice-page .faq summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 16.5px;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+.smartoffice-page .faq summary::-webkit-details-marker {
+  display: none;
+}
+.smartoffice-page .faq summary::after {
+  content: "+";
+  color: var(--so-gold-dark);
+  font-size: 20px;
+  line-height: 1;
+}
+.smartoffice-page .faq details[open] summary::after {
+  content: "–";
+}
+.smartoffice-page .faq details p {
+  margin-top: 10px;
+  color: var(--so-muted);
+  font-size: 15px;
+}
+
+/* ---------- Get started extras ---------- */
+.smartoffice-page .promise {
+  margin: 22px 0;
+}
+.smartoffice-page .contact p {
+  font-size: 14.5px;
+  margin-bottom: 6px;
+}
+.smartoffice-page .contact strong {
+  display: inline-block;
+  min-width: 62px;
+}
+.smartoffice-page .contact a,
+.smartoffice-page .existing a {
+  color: var(--so-green-700);
+  font-weight: 600;
+  text-decoration: none;
+}
+.smartoffice-page .contact a:hover,
+.smartoffice-page .existing a:hover {
+  text-decoration: underline;
+}
+.smartoffice-page .existing {
+  margin-top: 24px;
+  padding: 14px 16px;
+  border-radius: 9px;
+  background: var(--so-paper);
+  border: 1px solid var(--so-line);
+  font-size: 14.5px;
+}
+.smartoffice-page .so-footer a {
+  color: var(--so-white);
+  font-weight: 600;
+  text-decoration: none;
+}
+.smartoffice-page .foot-links {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 900px) {
+  .smartoffice-page .so-links {
+    display: none;
+  }
+  .smartoffice-page .products,
+  .smartoffice-page .who-grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 420px) {
+  .smartoffice-page .logo-img {
+    height: 30px;
+  }
+  .smartoffice-page .brand {
+    padding: 5px 10px;
+  }
+  .smartoffice-page .nav a.cta-ghost,
+  .smartoffice-page .nav a.cta-small {
+    padding: 8px 11px;
+    font-size: 13px;
+  }
+}

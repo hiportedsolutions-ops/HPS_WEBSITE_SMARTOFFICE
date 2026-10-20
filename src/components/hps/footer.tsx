@@ -6,6 +6,7 @@ const FOOTER_LINKS = {
     { label: "Accounting", href: "#solutions" },
     { label: "Business Registration", href: "#cac" },
     { label: "Automation & AI", href: "#solutions" },
+    { label: "Smart Office", href: "/smartoffice" },
     { label: "Research & Analytics", href: "#solutions" },
   ],
   Company: [

@@ -12,7 +12,7 @@ const zillaSlab = Zilla_Slab({
 export const metadata: Metadata = {
   title: "Smart Office | Every approval, accounted for — by Hi'ported",
   description:
-    "Smart Office is a compliance-centered workflow platform for universities and institutions: payment memos, internal audit review, budget control and a complete audit trail — in one system. Launching soon.",
+    "Smart Office is a compliance-centered workflow platform for universities and institutions: payment memos, internal audit review, budget control and a complete audit trail — in one system. Now live for universities and institutions.",
   keywords: [
     "Smart Office",
     "payment memo workflow",

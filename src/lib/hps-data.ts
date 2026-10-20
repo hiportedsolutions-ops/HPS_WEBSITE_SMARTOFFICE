@@ -16,6 +16,7 @@ export const HPS_CONTACT = {
 
 export const NAV_LINKS = [
   { href: "#solutions", label: "Solutions" },
+  { href: "/smartoffice", label: "Smart Office" },
   { href: "#cac", label: "CAC Registrations" },
   { href: "#services", label: "Services" },
   { href: "#about", label: "About HPS" },

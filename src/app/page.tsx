@@ -3,6 +3,7 @@ import { Hero } from "@/components/hps/hero";
 import { Trustbar } from "@/components/hps/trustbar";
 import { Purpose } from "@/components/hps/purpose";
 import { Solutions } from "@/components/hps/solutions";
+import { SmartOfficeSpotlight } from "@/components/hps/smart-office-spotlight";
 import { Framework } from "@/components/hps/framework-3d";
 import { Industries } from "@/components/hps/industries";
 import { WhyHPS } from "@/components/hps/why-hps";
@@ -28,6 +29,7 @@ export default function Home() {
         <Trustbar />
         <Purpose />
         <Solutions />
+        <SmartOfficeSpotlight />
         <Framework />
         <Industries />
         <WhyHPS />
