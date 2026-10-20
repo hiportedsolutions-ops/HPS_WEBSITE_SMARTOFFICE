@@ -36,6 +36,13 @@
 .smartoffice-page h3 {
   font-family: var(--font-zilla-slab), serif;
   line-height: 1.15;
+  color: var(--so-ink);
+}
+/* The site-wide heading colour (globals.css) is dark; headings on the
+   green sections must be light. */
+.smartoffice-page .hero h1,
+.smartoffice-page .workflow h2 {
+  color: var(--so-white);
 }
 
 .smartoffice-page .mono {
