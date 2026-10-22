@@ -742,3 +742,38 @@
     font-size: 13px;
   }
 }
+
+/* ---------- Health Check band (links to /smartoffice/health-check) ---------- */
+.smartoffice-page .hc-band {
+  background: var(--so-white);
+  border-bottom: 1px solid var(--so-line);
+  border-top: 4px solid var(--so-gold);
+}
+.smartoffice-page .hc-band-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding-top: 26px;
+  padding-bottom: 26px;
+}
+.smartoffice-page .hc-band strong {
+  display: block;
+  font-family: var(--font-zilla-slab), serif;
+  font-size: 22px;
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+.smartoffice-page .hc-band span {
+  color: var(--so-muted);
+  font-size: 15px;
+}
+.smartoffice-page .hc-band .btn-gold {
+  flex: none;
+}
+@media (max-width: 700px) {
+  .smartoffice-page .hc-band-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

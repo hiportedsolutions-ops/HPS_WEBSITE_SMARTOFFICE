@@ -48,3 +48,29 @@ CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 CREATE INDEX "ContactInquiry_createdAt_idx" ON "ContactInquiry"("createdAt");
 
 CREATE INDEX "ContactInquiry_status_idx" ON "ContactInquiry"("status");
+
+-- Added 22 Oct 2026: Payment Control Health Check submissions. The API also
+-- creates this table on first use (CREATE TABLE IF NOT EXISTS), so applying
+-- it here by hand is optional.
+CREATE TABLE IF NOT EXISTS "HealthCheck" (
+    "id" TEXT NOT NULL PRIMARY KEY,
+    "fullName" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "organization" TEXT NOT NULL,
+    "role" TEXT,
+    "phone" TEXT,
+    "sector" TEXT NOT NULL,
+    "staffBand" TEXT NOT NULL,
+    "paymentsBand" TEXT NOT NULL,
+    "answers" TEXT NOT NULL,
+    "score" INTEGER NOT NULL,
+    "grade" TEXT NOT NULL,
+    "exposureLow" REAL,
+    "exposureHigh" REAL,
+    "wantsWalkthrough" BOOLEAN NOT NULL DEFAULT true,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS "HealthCheck_createdAt_idx" ON "HealthCheck"("createdAt");
+
+CREATE INDEX IF NOT EXISTS "HealthCheck_email_idx" ON "HealthCheck"("email");

@@ -55,3 +55,27 @@ model SmartOfficeLead {
 
   @@index([createdAt])
 }
+// One row per completed Payment Control Health Check (/smartoffice/health-check).
+// Not unique on email: people retake it. `answers` is the raw JSON the score
+// was computed from, so any score can be recomputed later.
+model HealthCheck {
+  id               String   @id @default(cuid())
+  fullName         String
+  email            String
+  organization     String
+  role             String?
+  phone            String?
+  sector           String
+  staffBand        String
+  paymentsBand     String
+  answers          String
+  score            Int
+  grade            String
+  exposureLow      Float?
+  exposureHigh     Float?
+  wantsWalkthrough Boolean  @default(true)
+  createdAt        DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([email])
+}

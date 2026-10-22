@@ -1,0 +1,493 @@
+/*
+  Payment Control Health Check — scoped styles, layered on smartoffice.css.
+  Every rule sits under `.hc-page` (which is also `.smartoffice-page`), so it
+  reuses that page's tokens and never leaks into the rest of the site.
+*/
+
+.hc-page {
+  --hc-good: #1e7a4f;
+  --hc-mid: #c6a02d;
+  --hc-bad: #b3402f;
+}
+
+.hc-page .hc-hero {
+  padding: 88px 0 96px;
+}
+.hc-page .hc-areas-card .stage {
+  padding: 13px 0;
+}
+
+.hc-page button.btn-gold:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+.hc-page button.btn-outline {
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* ---------- Progress ---------- */
+.hc-page .hc-progress {
+  position: sticky;
+  top: 64px;
+  z-index: 40;
+  height: 4px;
+  background: var(--so-line);
+}
+.hc-page .hc-progress span {
+  display: block;
+  height: 100%;
+  background: var(--so-gold);
+  transition: width 0.3s ease;
+}
+
+/* ---------- Steps ---------- */
+.hc-page .hc-step {
+  padding: 56px 0 80px;
+  min-height: 70vh;
+}
+.hc-page .hc-narrow {
+  max-width: 780px;
+}
+.hc-page .hc-step h2 {
+  font-size: clamp(28px, 3.4vw, 38px);
+  margin: 12px 0 8px;
+}
+.hc-page .hc-sub {
+  color: var(--so-muted);
+  font-size: 16px;
+  margin-bottom: 28px;
+}
+
+.hc-page .hc-group {
+  border: none;
+  padding: 0;
+  margin: 0 0 28px;
+}
+.hc-page .hc-group legend,
+.hc-page .hc-q legend {
+  font-weight: 600;
+  font-size: 16.5px;
+  margin-bottom: 12px;
+}
+.hc-page .hc-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.hc-page .hc-chip,
+.hc-page .hc-answer {
+  font-family: inherit;
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--so-ink);
+  background: var(--so-white);
+  border: 1.5px solid var(--so-line);
+  border-radius: 9px;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.hc-page .hc-chip:hover,
+.hc-page .hc-answer:hover {
+  border-color: var(--so-green-700);
+}
+.hc-page .hc-chip.on {
+  background: var(--so-green-900);
+  border-color: var(--so-green-900);
+  color: var(--so-white);
+}
+
+.hc-page .hc-q {
+  border: 1px solid var(--so-line);
+  border-radius: var(--so-radius);
+  background: var(--so-white);
+  padding: 22px 24px;
+  margin: 0 0 16px;
+}
+.hc-page .hc-q legend {
+  float: left;
+  width: 100%;
+  display: flex;
+  gap: 12px;
+  line-height: 1.45;
+}
+.hc-page .hc-qnum {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1.5px solid var(--so-line);
+  color: var(--so-muted);
+  font-size: 12px;
+  display: grid;
+  place-items: center;
+  margin-top: -1px;
+}
+.hc-page .hc-answers {
+  clear: both;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding-left: 38px;
+}
+.hc-page .hc-answer.on.a2 {
+  background: var(--hc-good);
+  border-color: var(--hc-good);
+  color: var(--so-white);
+}
+.hc-page .hc-answer.on.a1 {
+  background: var(--hc-mid);
+  border-color: var(--hc-mid);
+  color: var(--so-green-950);
+}
+.hc-page .hc-answer.on.a0 {
+  background: var(--hc-bad);
+  border-color: var(--hc-bad);
+  color: var(--so-white);
+}
+
+.hc-page .hc-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 32px;
+}
+.hc-page .hc-back {
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--so-muted);
+  cursor: pointer;
+  padding: 10px 0;
+}
+.hc-page .hc-back:hover {
+  color: var(--so-ink);
+}
+.hc-page .hc-back-inline {
+  display: block;
+  margin: 6px auto 0;
+  font-size: 13.5px;
+}
+
+/* ---------- Score ---------- */
+.hc-page .hc-result-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 48px;
+  align-items: start;
+}
+.hc-page .hc-score {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+  margin: 18px 0 28px;
+}
+.hc-page .hc-dial {
+  width: 168px;
+  height: 168px;
+  flex: none;
+}
+.hc-page .hc-dial .track {
+  fill: none;
+  stroke: var(--so-line);
+  stroke-width: 10;
+}
+.hc-page .hc-dial .value {
+  fill: none;
+  stroke-width: 10;
+  stroke-linecap: round;
+  transition: stroke-dasharray 0.8s ease;
+}
+.hc-page .hc-dial .num {
+  font-family: var(--font-zilla-slab), serif;
+  font-weight: 700;
+  font-size: 38px;
+  fill: var(--so-ink);
+}
+.hc-page .hc-dial .of {
+  font-family: var(--font-ibm-plex-mono), monospace;
+  font-size: 11px;
+  fill: var(--so-muted);
+}
+.hc-page .g-strong .value { stroke: var(--hc-good); }
+.hc-page .g-moderate .value { stroke: var(--hc-mid); }
+.hc-page .g-weak .value,
+.hc-page .g-critical .value { stroke: var(--hc-bad); }
+
+.hc-page .hc-grade {
+  font-family: var(--font-zilla-slab), serif;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 1.15;
+}
+.hc-page .g-strong .hc-grade { color: var(--hc-good); }
+.hc-page .g-moderate .hc-grade { color: var(--so-gold-dark); }
+.hc-page .g-weak .hc-grade,
+.hc-page .g-critical .hc-grade { color: var(--hc-bad); }
+.hc-page .hc-score p {
+  color: var(--so-muted);
+  font-size: 15px;
+  margin: 6px 0 14px;
+  max-width: 46ch;
+}
+.hc-page .hc-exposure {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+  background: var(--so-white);
+  border: 1px solid var(--so-line);
+  border-left: 4px solid var(--hc-bad);
+  border-radius: 8px;
+  padding: 10px 14px;
+}
+.hc-page .hc-exposure .mono {
+  width: 100%;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--so-muted);
+}
+.hc-page .hc-exposure strong {
+  font-family: var(--font-zilla-slab), serif;
+  font-size: 24px;
+}
+.hc-page .hc-exposure span:last-child {
+  color: var(--so-muted);
+  font-size: 14px;
+}
+
+/* ---------- Area bars ---------- */
+.hc-page .hc-bars {
+  display: grid;
+  gap: 14px;
+  background: var(--so-white);
+  border: 1px solid var(--so-line);
+  border-radius: var(--so-radius);
+  padding: 22px 24px;
+}
+.hc-page .hc-bar-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14.5px;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+.hc-page .hc-bar-track {
+  height: 8px;
+  border-radius: 4px;
+  background: var(--so-paper);
+  overflow: hidden;
+}
+.hc-page .hc-bar-track span {
+  display: block;
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.6s ease;
+}
+.hc-page .hc-bar-track .good { background: var(--hc-good); }
+.hc-page .hc-bar-track .mid { background: var(--hc-mid); }
+.hc-page .hc-bar-track .bad { background: var(--hc-bad); }
+
+.hc-page .hc-check {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 14px;
+  margin: 4px 0 16px;
+  cursor: pointer;
+}
+.hc-page .hc-check input {
+  margin-top: 4px;
+  accent-color: var(--so-green-700);
+}
+
+/* ---------- Report ---------- */
+.hc-page .hc-report-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.hc-page .hc-date {
+  font-size: 12px;
+  color: var(--so-muted);
+}
+.hc-page .hc-h2 {
+  margin-top: 48px !important;
+  margin-bottom: 18px !important;
+}
+.hc-page .hc-gaps {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 14px;
+}
+.hc-page .hc-gap {
+  background: var(--so-white);
+  border: 1px solid var(--so-line);
+  border-radius: var(--so-radius);
+  padding: 20px 24px;
+}
+.hc-page .hc-gap-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+.hc-page .hc-gap-area {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--so-gold-dark);
+}
+.hc-page .hc-gap-ans {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 2px 9px;
+  border-radius: 20px;
+}
+.hc-page .hc-gap-ans.a0 { background: #f6e1dd; color: var(--hc-bad); }
+.hc-page .hc-gap-ans.a1 { background: #f5edd2; color: var(--so-gold-dark); }
+.hc-page .hc-gap h3 {
+  font-size: 18px;
+  margin: 8px 0 10px;
+}
+.hc-page .hc-risk,
+.hc-page .hc-fix {
+  font-size: 14.5px;
+  margin-top: 6px;
+}
+.hc-page .hc-risk b,
+.hc-page .hc-fix b {
+  display: inline-block;
+  min-width: 96px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.hc-page .hc-risk b { color: var(--hc-bad); }
+.hc-page .hc-fix b { color: var(--hc-good); }
+
+.hc-page .hc-cta {
+  margin-top: 40px;
+  background: linear-gradient(170deg, var(--so-green-950) 0%, var(--so-green-900) 100%);
+  color: var(--so-green-100);
+  border-radius: 14px;
+  padding: 32px;
+}
+.hc-page .hc-cta h2 {
+  color: var(--so-white);
+  margin-top: 0;
+}
+.hc-page .hc-cta p {
+  max-width: 60ch;
+}
+.hc-page .hc-cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.hc-page .hc-share {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+  padding: 16px 20px;
+  border: 1px solid var(--so-line);
+  border-radius: 9px;
+  background: var(--so-white);
+  font-size: 14.5px;
+}
+.hc-page .hc-share div {
+  display: flex;
+  gap: 16px;
+}
+.hc-page .hc-share a {
+  color: var(--so-green-700);
+  font-weight: 600;
+  text-decoration: none;
+}
+.hc-page .hc-share a:hover {
+  text-decoration: underline;
+}
+.hc-page .hc-method {
+  margin-top: 28px;
+  font-size: 13px;
+  color: var(--so-muted);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .hc-page .hc-result-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+}
+@media (max-width: 560px) {
+  .hc-page .hc-step {
+    padding: 36px 0 56px;
+  }
+  .hc-page .wrap {
+    padding: 0 16px;
+  }
+  .hc-page .hc-q {
+    padding: 18px 16px;
+  }
+  .hc-page .hc-answers {
+    grid-template-columns: 1fr;
+    padding-left: 0;
+    margin-top: 4px;
+  }
+  .hc-page .hc-score {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .hc-page .hc-dial {
+    width: 136px;
+    height: 136px;
+  }
+  .hc-page .hc-cta {
+    padding: 24px 20px;
+  }
+}
+
+/* ---------- Print: the report becomes the PDF ---------- */
+@media print {
+  .hc-page .so-header,
+  .hc-page .so-footer,
+  .hc-page .hc-cta-actions,
+  .hc-page .hc-share {
+    display: none !important;
+  }
+  .hc-page {
+    background: #fff;
+  }
+  .hc-page .hc-step {
+    padding: 0;
+    min-height: 0;
+  }
+  .hc-page .hc-gap,
+  .hc-page .hc-bars {
+    break-inside: avoid;
+  }
+  .hc-page .hc-cta {
+    background: none;
+    color: var(--so-ink);
+    border: 1px solid var(--so-line);
+  }
+  .hc-page .hc-cta h2 {
+    color: var(--so-ink);
+  }
+}

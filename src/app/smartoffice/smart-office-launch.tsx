@@ -268,6 +268,7 @@ export function SmartOfficeLaunch() {
             <a href="#workflow">How it works</a>
             <a href="#who">Who it&apos;s for</a>
             <a href="#faq">FAQ</a>
+            <a href="/smartoffice/health-check">Health Check</a>
           </nav>
           <div className="nav-actions">
             <a className="cta-ghost" href={APP_URL}>
@@ -327,6 +328,22 @@ export function SmartOfficeLaunch() {
           </div>
         </div>
       </section>
+
+      {/* ================= HEALTH CHECK BAND ================= */}
+      <div className="hc-band">
+        <div className="wrap hc-band-inner">
+          <div>
+            <strong>How safe are your organisation&apos;s payments?</strong>
+            <span>
+              Take the free 5-minute Payment Control Health Check and get your control score and
+              the gaps to close first.
+            </span>
+          </div>
+          <a className="btn-gold" href="/smartoffice/health-check">
+            Take the Health Check
+          </a>
+        </div>
+      </div>
 
       {/* ================= PRODUCTS ================= */}
       <section id="products">
