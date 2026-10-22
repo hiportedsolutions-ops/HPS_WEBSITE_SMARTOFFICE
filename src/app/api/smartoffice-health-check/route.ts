@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { db } from '@/lib/db'
+import { ensureHealthCheckTable } from '@/lib/health-check-db'
+import { teamRecipients } from '@/lib/notify'
 import {
   ANSWER_LABELS,
   PAYMENT_BANDS,
@@ -63,48 +65,13 @@ function getClientIp(request: NextRequest): string {
 }
 
 // ---------------------------------------------------------------------------
-// The table is created on first use, so a new deploy works against Turso
-// without a manual migration (the same DDL is in prisma/turso-init.sql).
-// ---------------------------------------------------------------------------
-let tableReady: Promise<void> | null = null
-
-function ensureTable(): Promise<void> {
-  tableReady ??= (async () => {
-    await db.$executeRawUnsafe(`CREATE TABLE IF NOT EXISTS "HealthCheck" (
-      "id" TEXT NOT NULL PRIMARY KEY,
-      "fullName" TEXT NOT NULL,
-      "email" TEXT NOT NULL,
-      "organization" TEXT NOT NULL,
-      "role" TEXT,
-      "phone" TEXT,
-      "sector" TEXT NOT NULL,
-      "staffBand" TEXT NOT NULL,
-      "paymentsBand" TEXT NOT NULL,
-      "answers" TEXT NOT NULL,
-      "score" INTEGER NOT NULL,
-      "grade" TEXT NOT NULL,
-      "exposureLow" REAL,
-      "exposureHigh" REAL,
-      "wantsWalkthrough" BOOLEAN NOT NULL DEFAULT true,
-      "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
-    )`)
-    await db.$executeRawUnsafe(`CREATE INDEX IF NOT EXISTS "HealthCheck_createdAt_idx" ON "HealthCheck"("createdAt")`)
-    await db.$executeRawUnsafe(`CREATE INDEX IF NOT EXISTS "HealthCheck_email_idx" ON "HealthCheck"("email")`)
-  })().catch((error) => {
-    tableReady = null
-    throw error
-  })
-  return tableReady
-}
-
-// ---------------------------------------------------------------------------
 // Email (Brevo HTTPS API). Needs BREVO_API_KEY and BREVO_FROM_EMAIL; a failed
 // email never fails the request, because the result is already saved.
 // ---------------------------------------------------------------------------
 const escapeHtml = (v: string) =>
   v.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c] as string)
 
-async function sendEmail(msg: { to: string; toName?: string; replyTo?: { email: string; name: string }; subject: string; html: string }) {
+async function sendEmail(msg: { to: Array<{ email: string; name?: string }>; replyTo?: { email: string; name: string }; subject: string; html: string }) {
   const apiKey = process.env.BREVO_API_KEY?.trim()
   const from = process.env.BREVO_FROM_EMAIL?.trim()
   if (!apiKey || !from) {
@@ -117,7 +84,7 @@ async function sendEmail(msg: { to: string; toName?: string; replyTo?: { email: 
       headers: { 'api-key': apiKey, 'Content-Type': 'application/json', Accept: 'application/json' },
       body: JSON.stringify({
         sender: { name: 'Smart Office', email: from },
-        to: [{ email: msg.to, name: msg.toName }],
+        to: msg.to,
         replyTo: msg.replyTo,
         subject: msg.subject,
         htmlContent: msg.html,
@@ -221,7 +188,7 @@ export async function POST(request: NextRequest) {
   const result = scoreAnswers(answers, c.paymentsBand)
 
   try {
-    await ensureTable()
+    await ensureHealthCheckTable()
     const row = await db.healthCheck.create({
       data: {
         fullName: c.fullName,
@@ -244,14 +211,13 @@ export async function POST(request: NextRequest) {
 
     await Promise.all([
       sendEmail({
-        to: process.env.LEADS_NOTIFY_EMAIL?.trim() || 'smartoffice@hiported.com',
+        to: teamRecipients(),
         replyTo: { email: c.email, name: c.fullName },
         subject: `Health Check ${result.score}/100${c.wantsWalkthrough ? ' · wants walkthrough' : ''}: ${c.organization}`,
         html: teamEmail(c, result),
       }),
       sendEmail({
-        to: c.email,
-        toName: c.fullName,
+        to: [{ email: c.email, name: c.fullName }],
         replyTo: { email: 'smartoffice@hiported.com', name: 'Smart Office' },
         subject: `Your Payment Control Health Check: ${result.score}/100 (${result.grade})`,
         html: respondentEmail(c, result),

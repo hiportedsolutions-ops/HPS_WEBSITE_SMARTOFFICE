@@ -74,3 +74,9 @@ CREATE TABLE IF NOT EXISTS "HealthCheck" (
 CREATE INDEX IF NOT EXISTS "HealthCheck_createdAt_idx" ON "HealthCheck"("createdAt");
 
 CREATE INDEX IF NOT EXISTS "HealthCheck_email_idx" ON "HealthCheck"("email");
+
+-- Added 23 Oct 2026: follow-up tracking for /smartoffice/leads. The API adds
+-- these on first use too (src/lib/health-check-db.ts).
+ALTER TABLE "HealthCheck" ADD COLUMN "status" TEXT NOT NULL DEFAULT 'new';
+ALTER TABLE "HealthCheck" ADD COLUMN "notes" TEXT;
+ALTER TABLE "HealthCheck" ADD COLUMN "statusUpdatedAt" DATETIME;

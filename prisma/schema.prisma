@@ -75,6 +75,10 @@ model HealthCheck {
   exposureHigh     Float?
   wantsWalkthrough Boolean  @default(true)
   createdAt        DateTime @default(now())
+  // Follow-up tracking on /smartoffice/leads: new, contacted, demo booked, won, lost.
+  status           String    @default("new")
+  notes            String?
+  statusUpdatedAt  DateTime?
 
   @@index([createdAt])
   @@index([email])

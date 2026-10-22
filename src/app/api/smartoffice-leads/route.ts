@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { Prisma } from '@prisma/client'
 import { db } from '@/lib/db'
+import { teamRecipients } from '@/lib/notify'
 
 // ---------------------------------------------------------------------------
 // Input validation schema — matches the /smartoffice early-access form.
@@ -75,7 +76,7 @@ function getClientIp(request: NextRequest): string {
 // ---------------------------------------------------------------------------
 // Each request is also emailed to the Smart Office team (Brevo HTTPS API,
 // the same service the app uses). Needs BREVO_API_KEY and BREVO_FROM_EMAIL
-// (a sender verified in Brevo); LEADS_NOTIFY_EMAIL overrides the inbox.
+// (a sender verified in Brevo); recipients come from src/lib/notify.ts.
 // A failed email never fails the request: the lead is already saved.
 // ---------------------------------------------------------------------------
 type Lead = { fullName: string; email: string; organization?: string; role?: string }
@@ -86,7 +87,6 @@ const escapeHtml = (v: string) =>
 async function notifyTeam(lead: Lead, repeat: boolean) {
   const apiKey = process.env.BREVO_API_KEY?.trim()
   const from = process.env.BREVO_FROM_EMAIL?.trim()
-  const to = process.env.LEADS_NOTIFY_EMAIL?.trim() || 'smartoffice@hiported.com'
   if (!apiKey || !from) {
     console.warn('[api/smartoffice-leads] BREVO_API_KEY or BREVO_FROM_EMAIL not set — team not emailed')
     return
@@ -104,7 +104,7 @@ async function notifyTeam(lead: Lead, repeat: boolean) {
       headers: { 'api-key': apiKey, 'Content-Type': 'application/json', Accept: 'application/json' },
       body: JSON.stringify({
         sender: { name: 'Smart Office website', email: from },
-        to: [{ email: to }],
+        to: teamRecipients(),
         replyTo: { email: lead.email, name: lead.fullName },
         subject: `${repeat ? 'Repeat request' : 'New request'}: ${org} — Smart Office`,
         htmlContent:
